@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    DoodleBtnPage(
+                    DoodleBtnWidget(
                       text: '玩法說明',
                     ),
                     TextButton(

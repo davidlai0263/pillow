@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:pillow/route_config.dart';
 import 'logic.dart';
 
 
-class DoodleBtnPage extends StatelessWidget {
+class DoodleBtnWidget extends StatelessWidget {
   final Color backgroundColor;
   final Color borderColor;
   final double borderWidth;
@@ -16,7 +14,7 @@ class DoodleBtnPage extends StatelessWidget {
   final double outWidth;
   final double outHeight;
 
-  DoodleBtnPage({
+  DoodleBtnWidget({
     Key? key,
     this.backgroundColor = const Color(0xFFFFFFFF),
     this.borderColor = const Color(0xff404040),
