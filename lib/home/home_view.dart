@@ -79,34 +79,32 @@ Widget bottom() {
   return LayoutBuilder(builder: (context, BoxConstraints constraints) {
     final w = constraints.maxWidth;
     final h = constraints.maxHeight;
-    return Stack(children: [
+    return Stack(alignment: Alignment.bottomCenter, children: [
       Image.asset(
         'assets/under.png',
         width: w,
         height: h * 0.9,
         fit: BoxFit.cover,
       ),
-      Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                onPressed: () {
-                  Get.toNamed(RouteConfig.rules);
-                },
-                child: Text('玩法說明')),
-            ElevatedButton(
-                onPressed: () {
-                  Get.toNamed(RouteConfig.bus);
-                },
-                child: Text('公車時刻')),
-            ElevatedButton(
-                onPressed: () {
-                  Get.toNamed(RouteConfig.lobby);
-                },
-                child: Text('開始遊戲'))
-          ],
-        ),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ElevatedButton(
+              onPressed: () {
+                Get.toNamed(RouteConfig.rules);
+              },
+              child: Text('玩法說明')),
+          ElevatedButton(
+              onPressed: () {
+                Get.toNamed(RouteConfig.bus);
+              },
+              child: Text('公車時刻')),
+          ElevatedButton(
+              onPressed: () {
+                Get.toNamed(RouteConfig.lobby);
+              },
+              child: Text('開始遊戲'))
+        ],
       ),
     ]);
   });
