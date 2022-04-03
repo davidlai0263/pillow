@@ -90,10 +90,11 @@ Widget bottom() {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           ElevatedButton(
-              onPressed: () {
-                Get.toNamed(RouteConfig.rules);
-              },
-              child: Text('玩法說明')),
+            onPressed: () {
+              Get.toNamed(RouteConfig.rules);
+            },
+            child: Text('玩法說明'),
+          ),
           ElevatedButton(
               onPressed: () {
                 Get.toNamed(RouteConfig.bus);
