@@ -21,63 +21,60 @@ class HomePage extends StatelessWidget {
           maxHeight: MediaQuery.of(context).size.height),
       designSize: const Size(390, 844),
       context: context,
-
     );
-    return Scaffold(
-      body: SizedBox(
-        width: size.width,
-        height: size.height,
-        child: Stack(
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
           alignment: Alignment.center,
           children: [
             Positioned(
               bottom: 0,
               child: ConstrainedBox(
-                constraints:
-                    BoxConstraints(maxHeight: size.height * 0.4, maxWidth: 750),
+                constraints: BoxConstraints(
+                    maxHeight: size.height * 0.4.h, maxWidth: 750.w),
                 child: Image.asset(
                   'assets/images/under.png',
-                  width: size.width,
+                  width: size.width.w,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             Positioned(
-                top: size.height * 0.05,
+                top: 0,
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                      minHeight: size.height * 0.55, maxWidth: 750),
+                      minHeight: size.height * 0.5.h, maxWidth: 750.w),
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
                       Image.asset(
                         'assets/images/head.png',
-                        height: size.height * 0.3,
-                        width: size.width,
+                        height: size.height * 0.3.h,
+                        width: size.width * 0.9.w,
                       ),
                       Positioned(
-                          right: size.width * 0.05,
-                          top: size.height * 0.08,
+                          right: 0,
+                          top: 60.h,
                           child: Image.asset(
                             'assets/images/pillow.png',
-                            width: size.width * 0.225,
-                            height: size.height * 0.225,
+                            width: 110.w,
+                            height: 110.h,
                           )),
                       Positioned(
                           left: 0,
-                          bottom: 0,
+                          bottom: 40.h,
                           child: Image.asset(
                             'assets/images/pillow.png',
-                            width: size.width * 0.265,
-                            height: size.height * 0.265,
+                            width: 100.w,
+                            height: 100.h,
                           ))
                     ],
                   ),
                 )),
             Positioned(
-              top: size.height * 0.5,
+              top: 380.h,
               child: ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: size.height * 0.4),
+                constraints: BoxConstraints(maxHeight: size.height * 0.4.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -87,46 +84,18 @@ class HomePage extends StatelessWidget {
                       },
                       text: '玩法說明',
                     ),
-                    TextButton(
-                        onPressed: () {
-                          Get.toNamed(RouteConfig.rules);
-                        },
-                        style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 32.0, vertical: 16.0),
-                            primary: Colors.black,
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16)),
-                            side: const BorderSide(
-                              color: Color(0xff404040),
-                              width: 4.0,
-                            )),
-                        child: const Text(
-                          '公車時刻',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        )),
-                    TextButton(
-                        onPressed: () {
-                          Get.toNamed(RouteConfig.rules);
-                        },
-                        style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 32.0, vertical: 16.0),
-                            primary: Colors.black,
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16)),
-                            side: const BorderSide(
-                              color: Color(0xff404040),
-                              width: 4.0,
-                            )),
-                        child: const Text(
-                          '開始遊戲',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        )),
+                    DoodleBtnWidget(
+                      onTapCallback: () {
+                        Get.toNamed(RouteConfig.rules);
+                      },
+                      text: '公車課表',
+                    ),
+                    DoodleBtnWidget(
+                      onTapCallback: () {
+                        Get.toNamed(RouteConfig.rules);
+                      },
+                      text: '開始遊戲',
+                    ),
                   ],
                 ),
               ),
