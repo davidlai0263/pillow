@@ -26,6 +26,8 @@ class RouteConfig {
     GetPage(
       name: rules,
       page: () => RulesPage(),
+      transition: Transition.circularReveal,
+      transitionDuration: const Duration(milliseconds: 150),
     ),
     GetPage(
       name: bus,
