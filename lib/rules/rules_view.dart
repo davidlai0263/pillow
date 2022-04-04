@@ -13,7 +13,6 @@ class RulesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -21,7 +20,7 @@ class RulesPage extends StatelessWidget {
           children: [
             Image.asset(
               'assets/images/background.png',
-              width: size.width.w,
+              width: 1.sw,
               fit: BoxFit.cover,
             ),
             Positioned(
@@ -48,13 +47,14 @@ class RulesPage extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 0.45.sh,
+                bottom: 0.46.sh,
                 child: ConstrainedBox(
                     constraints: BoxConstraints(
-                        maxHeight: 0.35.sh,),
+                      maxHeight: 0.35.sh,
+                    ),
                     child: Image.asset(
                       'assets/images/map.png',
-                      width: 0.9.sw,
+                      width: 0.85.sw,
                       fit: BoxFit.contain,
                     ))),
             Positioned(
@@ -77,7 +77,8 @@ class RulesPage extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 20.sp,
                               fontWeight: FontWeight.w500,
-                              letterSpacing: 4)),
+                              letterSpacing: 4.sp,
+                              height: 1.5)),
                     ),
                   ),
                 )),

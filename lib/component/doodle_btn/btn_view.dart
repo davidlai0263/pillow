@@ -23,7 +23,7 @@ class DoodleBtnWidget extends StatelessWidget {
       required this.onTapCallback,
       this.backgroundColor = const Color(0xFFFFFFFF),
       this.borderColor = const Color(0xff404040),
-      this.borderWidth = 3.5,
+      this.borderWidth = 3.25,
       this.borderRadius = 16.0,
       this.facWidth = 0.365,
       this.facHeight = 0.088,
@@ -64,15 +64,15 @@ class DoodleBtnWidget extends StatelessWidget {
             right: 0,
             bottom: 0,
             child: Container(
-              width: (facWidth.sw - 5),
-              height: (facHeight.sh - 6),
+              width: (facWidth.sw - 5.h),
+              height: (facHeight.sh - 6.h),
               decoration: BoxDecoration(
                 image: const DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage('assets/images/slash.png')),
                 color: backgroundColor,
                 border: Border.all(
-                  width: borderWidth,
+                  width: borderWidth.r,
                   color: borderColor,
                 ),
                 borderRadius: BorderRadius.all(
@@ -88,8 +88,8 @@ class DoodleBtnWidget extends StatelessWidget {
                   : Alignment.topLeft,
               duration: const Duration(milliseconds: 95),
               child: Container(
-                width: (facWidth.sw - 5),
-                height: (facHeight.sh - 6),
+                width: (facWidth.sw - 5.h),
+                height: (facHeight.sh - 6.h),
                 child: Center(
                   child: isText
                       ? Text(
@@ -108,7 +108,7 @@ class DoodleBtnWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: backgroundColor,
                   border: Border.all(
-                    width: borderWidth,
+                    width: borderWidth.r,
                     color: borderColor,
                   ),
                   borderRadius: BorderRadius.all(
