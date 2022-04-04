@@ -90,12 +90,11 @@ class HomePage extends StatelessWidget {
                       },
                       text: '公車課表',
                     ),
-                    DoodleBtnWidget(
-                      onTapCallback: () {
-                        Get.toNamed(RouteConfig.rules);
-                      },
-                      text: '開始遊戲',
-                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          Get.toNamed(RouteConfig.rules);
+                        },
+                        child: const Text('Test'))
                   ],
                 ),
               ),
