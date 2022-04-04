@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:pillow/component/doodle_btn/btn_view.dart';
 import 'package:pillow/route_config.dart';
@@ -15,7 +14,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     ScreenUtil.init(
       BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width,
@@ -32,11 +30,11 @@ class HomePage extends StatelessWidget {
               bottom: 0,
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxHeight: 300.h
+                  maxHeight: 0.35.sh
                 ),
                 child: Image.asset(
                   'assets/images/under.png',
-                  width: 390.w,
+                  width: 1.sw,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -45,37 +43,19 @@ class HomePage extends StatelessWidget {
                 top: 0,
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                      minHeight: 450.h),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
+                      minHeight: 0.45.sh),
+                  child: Center(
+                    child:
                       Image.asset(
                         'assets/images/head.png',
-                        width: 390.w,
+                        width: 1.sw,
                       ),
-                      Positioned(
-                          right: 0,
-                          top: 75.h,
-                          child: Image.asset(
-                            'assets/images/pillow.png',
-                            width: 115.w,
-                            height: 115.h,
-                          )),
-                      Positioned(
-                          left: 0,
-                          bottom: 50.h,
-                          child: Image.asset(
-                            'assets/images/pillow.png',
-                            width: 100.w,
-                            height: 100.h,
-                          ))
-                    ],
                   ),
                 )),
             Positioned(
-              top: 380.h,
+              top: 0.4.sh,
               child: ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: size.height * 0.4.h),
+                constraints: BoxConstraints(maxHeight: 0.45.sh),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -85,18 +65,22 @@ class HomePage extends StatelessWidget {
                         Get.toNamed(RouteConfig.rules);
                       },
                       text: '玩法說明',
+                      isText: true,
                     ),
                     DoodleBtnWidget(
                       onTapCallback: () {
                         Get.toNamed(RouteConfig.rules);
                       },
                       text: '公車課表',
+                      isText: true,
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          Get.toNamed(RouteConfig.rules);
-                        },
-                        child: const Text('Test'))
+                    DoodleBtnWidget(
+                      onTapCallback: () {
+                        Get.toNamed(RouteConfig.rules);
+                      },
+                      text: '開始遊戲',
+                      isText: true,
+                    ),
                   ],
                 ),
               ),

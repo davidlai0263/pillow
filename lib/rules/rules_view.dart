@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pillow/component/doodle_btn/btn_view.dart';
 
 import 'rules_logic.dart';
 
@@ -23,70 +24,63 @@ class RulesPage extends StatelessWidget {
               width: size.width.w,
               fit: BoxFit.cover,
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Positioned(
-                  top: 100,
-                  child: ConstrainedBox(
+            Positioned(
+              top: 27.5.h,
+              left: 10.w,
+              child: DoodleBtnWidget(
+                onTapCallback: () {
+                  Get.offAllNamed('/home');
+                },
+                facWidth: 0.245,
+                facHeight: 0.07,
+                isText: false,
+              ),
+            ),
+            Positioned(
+              top: 20.h,
+              right: 110.w,
+              child: DoodleBtnWidget(
+                onTapCallback: () {},
+                facWidth: 0.365,
+                facHeight: 0.085,
+                text: '使用說明',
+                activation: false,
+              ),
+            ),
+            Positioned(
+              bottom: 0.45.sh,
+                child: ConstrainedBox(
                     constraints: BoxConstraints(
-                        maxHeight: size.height * 0.3.h, maxWidth: 750.w),
-                    child: Stack(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/images/how.png',
-                              width: 120.w,
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            TextButton(
-                                onPressed: () {
-                                  Get.offAllNamed('/home');
-                                },
-                                child: Image.asset(
-                                  'assets/images/back.png',
-                                  width: 80.w,
-                                  fit: BoxFit.fill,
-                                )),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Positioned(
-                    child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                            maxHeight: size.height * 0.3.h, maxWidth: 750.w),
-                        child: Image.asset(
-                          'assets/images/map.png',
-                          width: size.width.w,
-                          fit: BoxFit.contain,
-                        ))),
-                Positioned(
-                    child: Container(
+                        maxHeight: 0.35.sh,),
+                    child: Image.asset(
+                      'assets/images/map.png',
+                      width: 0.9.sw,
+                      fit: BoxFit.contain,
+                    ))),
+            Positioned(
+                bottom: 0.1.sw,
+                child: Container(
                   constraints: BoxConstraints(
-                      maxHeight: size.height * 0.4.h, maxWidth: 750.w),
+                    maxHeight: 0.35.sh,
+                  ),
+                  width: 0.8.sw,
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(12.r)),
                     color: Colors.yellow.shade300.withOpacity(0.6),
                   ),
-                  width: size.width * 0.8,
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    child: Text(
-                        '本程式中有提供地圖可以查看地點，到指定地點後會自動跳出挑戰及提示，依照提示指示回答問題若正確的話可以獲得轉盤機會隨機獲得積分，積分可累積並於地圖頁面點選兌換，可依照不同的積分兌換優惠或獎品。',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, letterSpacing: 4)),
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.all(12.0.r),
+                      child: Text(
+                          '本程式中有提供地圖可以查看地點，到指定地點後會自動跳出挑戰及提示，依照提示指示回答問題若正確的話可以獲得轉盤機會隨機獲得積分，積分可累積並於地圖頁面點選兌換，可依照不同的積分兌換優惠或獎品。',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 4)),
+                    ),
                   ),
-                ))
-              ],
-            ),
+                )),
           ],
         ),
       ),

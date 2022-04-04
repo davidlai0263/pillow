@@ -9,42 +9,63 @@ class DoodleBtnWidget extends StatelessWidget {
   final Color borderColor;
   final double borderWidth;
   final double borderRadius;
+  final double facWidth;
+  final double facHeight;
   final String text;
+  final double textSize;
+  final IconData icon;
+  final double iconSize;
+  final bool isText;
+  final bool activation;
 
-  DoodleBtnWidget({
-    Key? key,
-    this.backgroundColor = const Color(0xFFFFFFFF),
-    this.borderColor = const Color(0xff404040),
-    this.borderWidth = 3.5,
-    this.borderRadius = 16.0,
-    required this.text,
-    required this.onTapCallback,
-  }) : super(key: key);
+  DoodleBtnWidget(
+      {Key? key,
+      required this.onTapCallback,
+      this.backgroundColor = const Color(0xFFFFFFFF),
+      this.borderColor = const Color(0xff404040),
+      this.borderWidth = 3.5,
+      this.borderRadius = 16.0,
+      this.facWidth = 0.365,
+      this.facHeight = 0.088,
+      this.text = '',
+      this.textSize = 25.0,
+      this.icon = Icons.arrow_back_rounded,
+      this.iconSize = 42.0,
+      this.isText = true,
+      this.activation = true})
+      : super(key: key);
 
   final logic = Get.put(DoodleBtnWidgetLogic());
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: (tapDown) {
-        logic.tap();
-      },
-      onTapUp: (tapUp) {
-        logic.tap();
-      },
-      onTapCancel: () {
-        logic.tap();
-      },
+      onTapDown: activation
+          ? (tapDown) {
+              logic.tap();
+            }
+          : null,
+      onTapUp: activation
+          ? (tapUp) {
+              logic.tap();
+              onTapCallback();
+            }
+          : null,
+      onTapCancel: activation
+          ? () {
+              logic.tap();
+            }
+          : null,
       child: SizedBox(
-        width: 160.w / 1.15.w,
-        height: 80.h,
+        width: facWidth.sw,
+        height: facHeight.sh,
         child: Stack(alignment: Alignment.topLeft, children: <Widget>[
           Positioned(
             right: 0,
             bottom: 0,
             child: Container(
-              width: 155.w / 1.15.w,
-              height: 74.h,
+              width: (facWidth.sw - 5),
+              height: (facHeight.sh - 6),
               decoration: BoxDecoration(
                 image: const DecorationImage(
                     fit: BoxFit.cover,
@@ -55,7 +76,7 @@ class DoodleBtnWidget extends StatelessWidget {
                   color: borderColor,
                 ),
                 borderRadius: BorderRadius.all(
-                  Radius.circular(borderRadius),
+                  Radius.circular(borderRadius.r),
                 ),
               ),
             ),
@@ -67,17 +88,22 @@ class DoodleBtnWidget extends StatelessWidget {
                   : Alignment.topLeft,
               duration: const Duration(milliseconds: 95),
               child: Container(
-                width: 155.w / 1.15.w,
-                height: 74.h,
+                width: (facWidth.sw - 5),
+                height: (facHeight.sh - 6),
                 child: Center(
-                  child: Text(
-                    text,
-                    style: const TextStyle(
-                      color: Color(0xFF000000),
-                      fontSize: 26.0,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
+                  child: isText
+                      ? Text(
+                          text,
+                          style: TextStyle(
+                            color: const Color(0xFF000000),
+                            fontSize: textSize.sp,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        )
+                      : Icon(
+                          icon,
+                          size: iconSize.r,
+                        ),
                 ),
                 decoration: BoxDecoration(
                   color: backgroundColor,
@@ -86,7 +112,7 @@ class DoodleBtnWidget extends StatelessWidget {
                     color: borderColor,
                   ),
                   borderRadius: BorderRadius.all(
-                    Radius.circular(borderRadius),
+                    Radius.circular(borderRadius.r),
                   ),
                 ),
               ),
