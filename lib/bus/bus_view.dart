@@ -13,6 +13,7 @@ class BusPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BusLogic logic = Get.put(BusLogic());
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -61,33 +62,25 @@ class BusPage extends StatelessWidget {
                         DoodleBtnWidget(
                           tag: '755_go_am',
                           onTapCallback: () {},
-                          facWidth: 0.24,
-                          facHeight: 0.125,
+                          facWidth: 0.3,
+                          facHeight: 0.09,
                           text: '755去程-上午(往大礁溪橋)',
                           textSize: 16,
                         ),
                         DoodleBtnWidget(
                           tag: '755_go_pm',
                           onTapCallback: () {},
-                          facWidth: 0.24,
-                          facHeight: 0.125,
+                          facWidth: 0.3,
+                          facHeight: 0.09,
                           text: '755去程-下午(往大礁溪橋)',
                           textSize: 16,
                         ),
                         DoodleBtnWidget(
                           tag: '755_back_am',
                           onTapCallback: () {},
-                          facWidth: 0.24,
-                          facHeight: 0.125,
-                          text: '755回程-上午(往宜蘭轉運站2)',
-                          textSize: 16,
-                        ),
-                        DoodleBtnWidget(
-                          tag: '755_back_pm',
-                          onTapCallback: () {},
-                          facWidth: 0.24,
-                          facHeight: 0.125,
-                          text: '755回程-下午(往宜蘭轉運站2)',
+                          facWidth: 0.3,
+                          facHeight: 0.09,
+                          text: '755回程-上午(往轉運站2)',
                           textSize: 16,
                         ),
                       ],
@@ -95,35 +88,56 @@ class BusPage extends StatelessWidget {
                     Row(
                       children: [
                         DoodleBtnWidget(
-                          tag: 'green15_go_am',
+                          tag: '755_back_pm',
                           onTapCallback: () {},
-                          facWidth: 0.24,
-                          facHeight: 0.125,
-                          text: '綠15去程-上午(往大礁溪橋)',
+                          facWidth: 0.3,
+                          facHeight: 0.09,
+                          text: '755回程-下午(往轉運站2)',
                           textSize: 16,
                         ),
                         DoodleBtnWidget(
+                          tag: 'bus_tag',
+                          onTapCallback: () {},
+                          facWidth: 0.3,
+                          facHeight: 0.09,
+                          text: '公車',
+                          textSize: 16,
+                          activation: false,
+                        ),
+                        DoodleBtnWidget(
+                          tag: 'green15_go_am',
+                          onTapCallback: () {},
+                          facWidth: 0.3,
+                          facHeight: 0.09,
+                          text: '綠15去程-上午(往大礁溪橋)',
+                          textSize: 16,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        DoodleBtnWidget(
                           tag: 'green15_go_pm',
                           onTapCallback: () {},
-                          facWidth: 0.24,
-                          facHeight: 0.125,
+                          facWidth: 0.3,
+                          facHeight: 0.09,
                           text: '綠15去程-上午(往大礁溪橋)',
                           textSize: 16,
                         ),
                         DoodleBtnWidget(
                           tag: 'green15_back_am',
                           onTapCallback: () {},
-                          facWidth: 0.24,
-                          facHeight: 0.125,
-                          text: '綠15去程-上午(往宜蘭轉運站2)',
+                          facWidth: 0.3,
+                          facHeight: 0.09,
+                          text: '綠15回程-上午(往轉運站2)',
                           textSize: 16,
                         ),
                         DoodleBtnWidget(
                           tag: 'green15_back_pm',
                           onTapCallback: () {},
-                          facWidth: 0.24,
-                          facHeight: 0.125,
-                          text: '綠15去程-上午(往宜蘭轉運站2)',
+                          facWidth: 0.3,
+                          facHeight: 0.09,
+                          text: '綠15回程-下午(往轉運站2)',
                           textSize: 16,
                         ),
                       ],
@@ -131,67 +145,8 @@ class BusPage extends StatelessWidget {
                   ],
                 ),
               )),
-          // Padding(
-          //   padding: EdgeInsets.only(top: 10.h),
-          //   child: Column(
-          //     children: [
-          //       Padding(
-          //         padding: EdgeInsets.only(top: 10.h),
-          //         child: Row(
-          //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //           children: [
-          //             SizedBox(
-          //                 width: size.width * 0.225,
-          //                 child: ElevatedButton(
-          //                     onPressed: () {},
-          //                     child: Text('755去程-上午\n(往大礁溪橋)'))),
-          //             SizedBox(
-          //                 width: size.width * 0.225,
-          //                 child: ElevatedButton(
-          //                     onPressed: () {},
-          //                     child: Text('755去程-上午\n(往大礁溪橋)'))),
-          //             SizedBox(
-          //                 width: size.width * 0.225,
-          //                 child: ElevatedButton(
-          //                     onPressed: () {},
-          //                     child: Text('755去程-上午\n(往大礁溪橋)'))),
-          //             SizedBox(
-          //                 width: size.width * 0.225,
-          //                 child: ElevatedButton(
-          //                     onPressed: () {},
-          //                     child: Text('755去程-上午\n(往大礁溪橋)'))),
-          //           ],
-          //         ),
-          //       ),
-          //       Padding(
-          //         padding: EdgeInsets.only(top: 10.h),
-          //         child: Container(
-          //           constraints: BoxConstraints(
-          //               maxHeight: size.height * 0.4.h, maxWidth: 750.w),
-          //           decoration: BoxDecoration(
-          //             borderRadius:
-          //                 const BorderRadius.all(Radius.circular(10.0)),
-          //             color: Colors.yellow.shade300.withOpacity(0.6),
-          //           ),
-          //           width: size.width * 0.8,
-          //           child: const Padding(
-          //             padding:
-          //                 EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          //             child: Text(
-          //                 '※錦普觀光梨園為單邊設站(僅有去程)\n※755路公車未達地點之交通方式\n橘子咖啡：於枕頭山下車後步行6分鐘\n　　　　　或於錦普觀光梨園下車後步行8分鐘。\n波的農場: 於頭份村下車後步行6分鐘\n豬龍寨: 於望龍埤下車後步行9分鐘',
-          //                 textAlign: TextAlign.start,
-          //                 style: TextStyle(
-          //                     fontSize: 12,
-          //                     fontWeight: FontWeight.w500,
-          //                     letterSpacing: 4)),
-          //           ),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
           Positioned(
-              bottom: 0.9.sw,
+              bottom: 0.85.sw,
               child: Container(
                 constraints: BoxConstraints(
                   maxHeight: 0.35.sh,
