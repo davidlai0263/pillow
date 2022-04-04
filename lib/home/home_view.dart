@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
               bottom: 0,
               child: ConstrainedBox(
                 constraints:
-                    BoxConstraints(maxHeight: size.height * 0.3, maxWidth: 750),
+                    BoxConstraints(maxHeight: size.height * 0.4, maxWidth: 750),
                 child: Image.asset(
                   'assets/under.png',
                   width: size.width,
@@ -66,11 +66,9 @@ class HomePage extends StatelessWidget {
                   ),
                 )),
             Positioned(
-              top: size.height * 0.52,
+              top: size.height * 0.5,
               child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: size.height * 0.4
-                ),
+                constraints: BoxConstraints(maxHeight: size.height * 0.4),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
