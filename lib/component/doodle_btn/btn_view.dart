@@ -36,15 +36,15 @@ class DoodleBtnWidget extends StatelessWidget {
         logic.tap();
       },
       child: SizedBox(
-        width: 160.w,
-        height: 80.w,
+        width: 160.w / 1.15.w,
+        height: 80.h,
         child: Stack(alignment: Alignment.topLeft, children: <Widget>[
           Positioned(
             right: 0,
             bottom: 0,
             child: Container(
-              width: 155.w,
-              height: 74.w,
+              width: 155.w / 1.15.w,
+              height: 74.h,
               decoration: BoxDecoration(
                 image: const DecorationImage(
                     fit: BoxFit.cover,
@@ -67,14 +67,14 @@ class DoodleBtnWidget extends StatelessWidget {
                   : Alignment.topLeft,
               duration: const Duration(milliseconds: 95),
               child: Container(
-                width: 155.w,
-                height: 74.w,
+                width: 155.w / 1.15.w,
+                height: 74.h,
                 child: Center(
                   child: Text(
                     text,
-                    style: TextStyle(
-                      color: const Color(0xFF000000),
-                      fontSize: 26.0.sp,
+                    style: const TextStyle(
+                      color: Color(0xFF000000),
+                      fontSize: 26.0,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
