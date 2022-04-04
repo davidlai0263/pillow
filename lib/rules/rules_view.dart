@@ -27,8 +27,9 @@ class RulesPage extends StatelessWidget {
               top: 27.5.h,
               left: 10.w,
               child: DoodleBtnWidget(
+                tag: '返回',
                 onTapCallback: () {
-                  Get.offAllNamed('/home');
+                  Get.back();
                 },
                 facWidth: 0.245,
                 facHeight: 0.07,
