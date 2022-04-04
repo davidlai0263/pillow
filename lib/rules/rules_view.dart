@@ -20,7 +20,7 @@ class RulesPage extends StatelessWidget {
         body: Stack(
           children: [
             Image.asset(
-              'assets/background.png',
+              'assets/images/background.png',
               width: w,
               fit: BoxFit.cover,
             ),
@@ -36,7 +36,7 @@ class RulesPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              'assets/how.png',
+                              'assets/images/how.png',
                               width: w * 0.3,
                             )
                           ],
@@ -48,7 +48,7 @@ class RulesPage extends StatelessWidget {
                                   Get.offAllNamed('/home');
                                 },
                                 child: Image.asset(
-                                  'assets/back.png',
+                                  'assets/images/back.png',
                                   height: h*0.07,
                                   width: w * 0.2,
                                   fit: BoxFit.fill,
@@ -62,7 +62,7 @@ class RulesPage extends StatelessWidget {
                 Expanded(
                     flex: 5,
                     child: Image.asset(
-                      'assets/map.png',
+                      'assets/images/map.png',
                       width : w,
                       fit: BoxFit.contain,
                     )),

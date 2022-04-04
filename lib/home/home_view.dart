@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pillow/doodle_btn/view.dart';
+import 'package:pillow/component/doodle_btn/btn_view.dart';
 import 'package:pillow/route_config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'home_logic.dart';
 
@@ -14,6 +15,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    ScreenUtil.init(
+      BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width,
+          maxHeight: MediaQuery.of(context).size.height),
+      designSize: const Size(390, 844),
+      context: context,
+
+    );
     return Scaffold(
       body: SizedBox(
         width: size.width,
@@ -27,7 +36,7 @@ class HomePage extends StatelessWidget {
                 constraints:
                     BoxConstraints(maxHeight: size.height * 0.3, maxWidth: 750),
                 child: Image.asset(
-                  'assets/under.png',
+                  'assets/images/under.png',
                   width: size.width,
                   fit: BoxFit.cover,
                 ),
@@ -42,7 +51,7 @@ class HomePage extends StatelessWidget {
                     alignment: Alignment.center,
                     children: [
                       Image.asset(
-                        'assets/head.png',
+                        'assets/images/head.png',
                         height: size.height * 0.3,
                         width: size.width,
                       ),
@@ -50,7 +59,7 @@ class HomePage extends StatelessWidget {
                           right: size.width * 0.05,
                           top: size.height * 0.08,
                           child: Image.asset(
-                            'assets/pillow.png',
+                            'assets/images/pillow.png',
                             width: size.width * 0.225,
                             height: size.height * 0.225,
                           )),
@@ -58,7 +67,7 @@ class HomePage extends StatelessWidget {
                           left: 0,
                           bottom: 0,
                           child: Image.asset(
-                            'assets/pillow.png',
+                            'assets/images/pillow.png',
                             width: size.width * 0.265,
                             height: size.height * 0.265,
                           ))
@@ -75,6 +84,9 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     DoodleBtnWidget(
+                      onTapCallback: () {
+                        Get.toNamed(RouteConfig.rules);
+                      },
                       text: '玩法說明',
                     ),
                     TextButton(
