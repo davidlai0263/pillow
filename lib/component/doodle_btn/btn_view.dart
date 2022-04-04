@@ -16,7 +16,7 @@ class DoodleBtnWidget extends StatelessWidget {
     this.backgroundColor = const Color(0xFFFFFFFF),
     this.borderColor = const Color(0xff404040),
     this.borderWidth = 3.5,
-    this.borderRadius = 18.0,
+    this.borderRadius = 16.0,
     required this.text,
     required this.onTapCallback,
   }) : super(key: key);
@@ -26,32 +26,29 @@ class DoodleBtnWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTapDown: (tapDown) {
-      //   onTapDown.value = true;
-      //
-      // },
-      // onTapUp: (tapUp) {
-      //   onTapDown.value = false;
-      //   onTapCallback;
-      // },
-      // onTapCancel: () {
-      //   onTapDown.value = false;
-      // },
+      onTapDown: (tapDown) {
+        logic.tap();
+      },
+      onTapUp: (tapUp) {
+        logic.tap();
+      },
+      onTapCancel: () {
+        logic.tap();
+      },
       child: SizedBox(
-        width: ScreenUtil().setWidth(160),
-        height: ScreenUtil().setHeight(80),
-        child: Stack(
-            alignment: Alignment.topLeft,
-            children: <Widget>[
+        width: 160.w,
+        height: 80.w,
+        child: Stack(alignment: Alignment.topLeft, children: <Widget>[
           Positioned(
             right: 0,
             bottom: 0,
             child: Container(
-              width: ScreenUtil().setWidth(156),
-              height: ScreenUtil().setHeight(74),
+              width: 155.w,
+              height: 74.w,
               decoration: BoxDecoration(
                 image: const DecorationImage(
-                    fit: BoxFit.cover, image: AssetImage('assets/images/slash.png')),
+                    fit: BoxFit.cover,
+                    image: AssetImage('assets/images/slash.png')),
                 color: backgroundColor,
                 border: Border.all(
                   width: borderWidth,
@@ -63,28 +60,35 @@ class DoodleBtnWidget extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            width: ScreenUtil().setWidth(156),
-            height: ScreenUtil().setHeight(74),
-            child: Center(
-              child: Text(
-                text,
-                style: const TextStyle(
-                    color: Color(0xFF000000),
-                    fontSize: 28.0,
-                    fontWeight: FontWeight.w900,
+          Obx(
+            () => AnimatedAlign(
+              alignment: logic.onTapDown.value
+                  ? Alignment.bottomRight
+                  : Alignment.topLeft,
+              duration: const Duration(milliseconds: 95),
+              child: Container(
+                width: 155.w,
+                height: 74.w,
+                child: Center(
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                      color: const Color(0xFF000000),
+                      fontSize: 26.0.sp,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
                 ),
-                // textScaleFactor: 1.0,
-              ),
-            ),
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              border: Border.all(
-                width: borderWidth,
-                color: borderColor,
-              ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(borderRadius),
+                decoration: BoxDecoration(
+                  color: backgroundColor,
+                  border: Border.all(
+                    width: borderWidth,
+                    color: borderColor,
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(borderRadius),
+                  ),
+                ),
               ),
             ),
           ),
