@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'btn_logic.dart';
 
 class DoodleBtnWidget extends StatelessWidget {
+  final String? tag;
   final Function onTapCallback;
   final Color backgroundColor;
   final Color borderColor;
@@ -18,8 +21,9 @@ class DoodleBtnWidget extends StatelessWidget {
   final bool isText;
   final bool activation;
 
-  DoodleBtnWidget(
+  const DoodleBtnWidget(
       {Key? key,
+      this.tag,
       required this.onTapCallback,
       this.backgroundColor = const Color(0xFFFFFFFF),
       this.borderColor = const Color(0xff404040),
@@ -35,10 +39,9 @@ class DoodleBtnWidget extends StatelessWidget {
       this.activation = true})
       : super(key: key);
 
-  final logic = Get.put(DoodleBtnWidgetLogic());
-
   @override
   Widget build(BuildContext context) {
+    final logic = Get.put(DoodleBtnWidgetLogic(), tag: tag);
     return GestureDetector(
       onTapDown: activation
           ? (tapDown) {
@@ -81,43 +84,45 @@ class DoodleBtnWidget extends StatelessWidget {
               ),
             ),
           ),
-          Obx(
-            () => AnimatedAlign(
-              alignment: logic.onTapDown.value
-                  ? Alignment.bottomRight
-                  : Alignment.topLeft,
-              duration: const Duration(milliseconds: 95),
-              child: Container(
-                width: (facWidth.sw - 5),
-                height: (facHeight.sh - 6),
-                child: Center(
-                  child: isText
-                      ? Text(
-                          text,
-                          style: TextStyle(
-                            color: const Color(0xFF000000),
-                            fontSize: textSize.sp,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        )
-                      : Icon(
-                          icon,
-                          size: iconSize.r,
-                        ),
-                ),
-                decoration: BoxDecoration(
-                  color: backgroundColor,
-                  border: Border.all(
-                    width: borderWidth,
-                    color: borderColor,
+          GetBuilder<DoodleBtnWidgetLogic>(
+              tag: tag,
+              builder: (logic) {
+                return AnimatedAlign(
+                  alignment: logic.onTapDown
+                      ? Alignment.bottomRight
+                      : Alignment.topLeft,
+                  duration: const Duration(milliseconds: 95),
+                  child: Container(
+                    width: (facWidth.sw - 5),
+                    height: (facHeight.sh - 6),
+                    child: Center(
+                      child: isText
+                          ? Text(
+                              text,
+                              style: TextStyle(
+                                color: const Color(0xFF000000),
+                                fontSize: textSize.sp,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            )
+                          : Icon(
+                              icon,
+                              size: iconSize.r,
+                            ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: backgroundColor,
+                      border: Border.all(
+                        width: borderWidth,
+                        color: borderColor,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(borderRadius.r),
+                      ),
+                    ),
                   ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(borderRadius.r),
-                  ),
-                ),
-              ),
-            ),
-          ),
+                );
+              })
         ]),
       ),
     );

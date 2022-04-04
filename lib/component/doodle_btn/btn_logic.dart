@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 
 class DoodleBtnWidgetLogic extends GetxController {
-  var onTapDown = false.obs;
+  bool onTapDown = false;
   void tap() {
-    onTapDown.value =! onTapDown.value;
+    onTapDown = !onTapDown;
+    update();
   }
 }

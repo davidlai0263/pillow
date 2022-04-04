@@ -29,9 +29,7 @@ class HomePage extends StatelessWidget {
             Positioned(
               bottom: 0,
               child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: 0.35.sh
-                ),
+                constraints: BoxConstraints(maxHeight: 0.35.sh),
                 child: Image.asset(
                   'assets/images/under.png',
                   width: 1.sw,
@@ -42,14 +40,12 @@ class HomePage extends StatelessWidget {
             Positioned(
                 top: 0,
                 child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                      minHeight: 0.45.sh),
+                  constraints: BoxConstraints(minHeight: 0.45.sh),
                   child: Center(
-                    child:
-                      Image.asset(
-                        'assets/images/head.png',
-                        width: 1.sw,
-                      ),
+                    child: Image.asset(
+                      'assets/images/head.png',
+                      width: 1.sw,
+                    ),
                   ),
                 )),
             Positioned(
@@ -60,7 +56,7 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     DoodleBtnWidget(
-                      key: const ObjectKey('玩法說明'),
+                      tag: '玩法說明',
                       onTapCallback: () {
                         Get.toNamed(RouteConfig.rules);
                       },
@@ -68,6 +64,7 @@ class HomePage extends StatelessWidget {
                       isText: true,
                     ),
                     DoodleBtnWidget(
+                      tag: '公車課表',
                       onTapCallback: () {
                         Get.toNamed(RouteConfig.rules);
                       },
@@ -75,6 +72,7 @@ class HomePage extends StatelessWidget {
                       isText: true,
                     ),
                     DoodleBtnWidget(
+                      tag: '開始遊戲',
                       onTapCallback: () {
                         Get.toNamed(RouteConfig.rules);
                       },

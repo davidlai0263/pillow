@@ -28,8 +28,9 @@ class RulesPage extends StatelessWidget {
               top: 27.5.h,
               left: 10.w,
               child: DoodleBtnWidget(
+                tag: '返回',
                 onTapCallback: () {
-                  Get.offAllNamed('/home');
+                  Get.back();
                 },
                 facWidth: 0.245,
                 facHeight: 0.07,
@@ -48,10 +49,11 @@ class RulesPage extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 0.45.sh,
+                bottom: 0.45.sh,
                 child: ConstrainedBox(
                     constraints: BoxConstraints(
-                        maxHeight: 0.35.sh,),
+                      maxHeight: 0.35.sh,
+                    ),
                     child: Image.asset(
                       'assets/images/map.png',
                       width: 0.9.sw,
