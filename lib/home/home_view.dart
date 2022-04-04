@@ -64,17 +64,17 @@ class HomePage extends StatelessWidget {
                       isText: true,
                     ),
                     DoodleBtnWidget(
-                      tag: '公車課表',
+                      tag: '公車時刻',
                       onTapCallback: () {
-                        Get.toNamed(RouteConfig.rules);
+                        Get.toNamed(RouteConfig.bus);
                       },
-                      text: '公車課表',
+                      text: '公車時刻',
                       isText: true,
                     ),
                     DoodleBtnWidget(
                       tag: '開始遊戲',
                       onTapCallback: () {
-                        Get.toNamed(RouteConfig.rules);
+                        Get.toNamed(RouteConfig.lobby);
                       },
                       text: '開始遊戲',
                       isText: true,
