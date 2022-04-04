@@ -32,6 +32,8 @@ class RouteConfig {
     GetPage(
       name: bus,
       page: () => BusPage(),
+      transition: Transition.circularReveal,
+      transitionDuration: const Duration(milliseconds: 150),
     ),
     GetPage(
       name: lobby,

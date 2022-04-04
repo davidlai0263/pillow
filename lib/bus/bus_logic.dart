@@ -7,4 +7,8 @@ class BusLogic extends GetxController {
   final List sheets = [
     'one','two','three','four','five','six','seven','eight'
   ];
+  RxString busSheet = 'one'.obs;
+  void setBusSheet(int id){
+    busSheet.value = sheets[id];
+  }
 }
