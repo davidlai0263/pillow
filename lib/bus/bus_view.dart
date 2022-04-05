@@ -159,8 +159,8 @@ class BusPage extends StatelessWidget {
                         colorBuilder: (b) =>
                             b ? Colors.green.shade300 : Colors.grey,
                         iconBuilder: (value) => value
-                            ? Icon(Icons.arrow_forward_ios)
-                            : Icon(Icons.arrow_back_ios),
+                            ? Icon(Icons.arrow_forward_ios_outlined)
+                            : Icon(Icons.arrow_back_ios_outlined),
                         textBuilder: (value) => value
                             ? Center(child: Text('去程'))
                             : Center(child: Text('回程')),
@@ -192,7 +192,7 @@ class BusPage extends StatelessWidget {
                             : Colors.blueAccent.shade700,
                         iconBuilder: (value) => value
                             ? Icon(Icons.wb_sunny_outlined)
-                            : Icon(Icons.nightlight_outlined),
+                            : Icon(Icons.nightlight_outlined, color: Colors.white,),
                         textBuilder: (value) => value
                             ? Center(child: Text('上午'))
                             : Center(child: Text('下午')),
