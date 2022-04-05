@@ -90,7 +90,7 @@ class BusPage extends StatelessWidget {
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: 12.0.w),
                           backgroundColor:
-                              Colors.yellow.shade300.withOpacity(0.9),
+                              Colors.yellow.shade300.withOpacity(0.85),
                           content: Center(
                             child: RichText(
                                 text: TextSpan(
