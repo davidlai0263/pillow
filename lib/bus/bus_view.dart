@@ -23,7 +23,7 @@ class BusPage extends StatelessWidget {
         children: [
           Image.asset(
             'assets/images/background.png',
-            width: size.width.w,
+            width: 1.sw,
             fit: BoxFit.cover,
           ),
           Positioned(
