@@ -89,7 +89,7 @@ class DoodleBtnWidget extends StatelessWidget {
                   alignment: logic.onTapDown
                       ? Alignment.bottomRight
                       : Alignment.topLeft,
-                  duration: const Duration(milliseconds: 95),
+                  duration: const Duration(milliseconds: 100),
                   child: Container(
                     width: (facWidth.sw - 5.h),
                     height: (facHeight.sh - 6.h),
@@ -101,6 +101,7 @@ class DoodleBtnWidget extends StatelessWidget {
                                 color: const Color(0xFF000000),
                                 fontSize: textSize.sp,
                                 fontWeight: FontWeight.w900,
+                                height: 1.25.sp
                               ),
                             )
                           : Icon(

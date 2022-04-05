@@ -45,6 +45,7 @@ class HomePage extends StatelessWidget {
                     child: Image.asset(
                       'assets/images/head.png',
                       width: 1.sw,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 )),
@@ -64,11 +65,11 @@ class HomePage extends StatelessWidget {
                       isText: true,
                     ),
                     DoodleBtnWidget(
-                      tag: '公車課表',
+                      tag: '公車時刻',
                       onTapCallback: () {
-                        Get.toNamed(RouteConfig.rules);
+                        Get.toNamed(RouteConfig.bus);
                       },
-                      text: '公車課表',
+                      text: '公車時刻',
                       isText: true,
                     ),
                     DoodleBtnWidget(

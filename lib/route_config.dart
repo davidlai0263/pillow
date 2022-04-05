@@ -27,11 +27,11 @@ class RouteConfig {
       name: rules,
       page: () => RulesPage(),
       transition: Transition.circularReveal,
-      transitionDuration: const Duration(milliseconds: 150),
     ),
     GetPage(
       name: bus,
       page: () => BusPage(),
+      transition: Transition.circularReveal,
     ),
     GetPage(
       name: lobby,
