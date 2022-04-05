@@ -21,71 +21,67 @@ class HomePage extends StatelessWidget {
       designSize: const Size(390, 844),
       context: context,
     );
-    return SafeArea(
-      child: Scaffold(
-        body: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              bottom: 0,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: 0.35.sh),
-                child: Image.asset(
-                  'assets/images/under.png',
-                  width: 1.sw,
-                  fit: BoxFit.cover,
-                ),
+    return Scaffold(
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            bottom: 0,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: 0.35.sh),
+              child: Image.asset(
+                'assets/images/under.png',
+                width: 1.sw,
+                fit: BoxFit.cover,
               ),
             ),
-            Positioned(
-                top: 0,
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: 0.45.sh),
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/head.png',
-                      width: 1.sw,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                )),
-            Positioned(
-              top: 0.4.sh,
+          ),
+          Positioned(
+              top: 40.h,
               child: ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: 0.45.sh),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    DoodleBtnWidget(
-                      tag: '玩法說明',
-                      onTapCallback: () {
-                        Get.toNamed(RouteConfig.rules);
-                      },
-                      text: '玩法說明',
-                      isText: true,
-                    ),
-                    DoodleBtnWidget(
-                      tag: '公車時刻',
-                      onTapCallback: () {
-                        Get.toNamed(RouteConfig.bus);
-                      },
-                      text: '公車時刻',
-                      isText: true,
-                    ),
-                    DoodleBtnWidget(
-                      tag: '開始遊戲',
-                      onTapCallback: () {
-                        Get.toNamed(RouteConfig.lobby);
-                      },
-                      text: '開始遊戲',
-                      isText: true,
-                    ),
-                  ],
+                constraints: BoxConstraints(minHeight: 0.45.sh),
+                child: Image.asset(
+                  'assets/images/head.png',
+                  width: 1.sw,
+                  fit: BoxFit.contain,
                 ),
+              )),
+          Positioned(
+            top: 350.h,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: 0.45.sh),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  DoodleBtnWidget(
+                    tag: '玩法說明',
+                    onTapCallback: () {
+                      Get.toNamed(RouteConfig.rules);
+                    },
+                    text: '玩法說明',
+                    isText: true,
+                  ),
+                  DoodleBtnWidget(
+                    tag: '公車時刻',
+                    onTapCallback: () {
+                      Get.toNamed(RouteConfig.bus);
+                    },
+                    text: '公車時刻',
+                    isText: true,
+                  ),
+                  DoodleBtnWidget(
+                    tag: '開始遊戲',
+                    onTapCallback: () {
+                      Get.toNamed(RouteConfig.lobby);
+                    },
+                    text: '開始遊戲',
+                    isText: true,
+                  ),
+                ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
