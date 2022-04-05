@@ -37,6 +37,8 @@ dependencies:
   get:
   shared_preferences: ^2.0.13
   flutter_screenutil: ^5.3.1
+  geolocator: ^8.2.0
+  map_launcher: ^2.2.1+1
 
 dev_dependencies:
   flutter_test:
