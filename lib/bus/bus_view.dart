@@ -82,8 +82,10 @@ class BusPage extends StatelessWidget {
                     onTapUpCallback: () {
                       Get.defaultDialog(
                           title: '路線說明',
-                          titleStyle: TextStyle(fontSize: 20.sp, height: 1.7.sp),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 10.0.w),
+                          titleStyle:
+                              TextStyle(fontSize: 20.sp, height: 1.7.sp),
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 10.0.w),
                           backgroundColor:
                               Colors.yellow.shade300.withOpacity(0.9),
                           content: SizedBox(
@@ -155,8 +157,16 @@ class BusPage extends StatelessWidget {
                           ? const Icon(Icons.arrow_forward_ios_outlined)
                           : const Icon(Icons.arrow_back_ios_outlined),
                       textBuilder: (value) => value
-                          ? const Center(child: Text('去程', style: TextStyle(fontWeight: FontWeight.bold),))
-                          : const Center(child: Text('回程', style: TextStyle(fontWeight: FontWeight.bold),)),
+                          ? const Center(
+                              child: Text(
+                              '去程',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ))
+                          : const Center(
+                              child: Text(
+                              '回程',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )),
                     ),
                     SizedBox(
                       width: 0.1.sw,
@@ -179,8 +189,16 @@ class BusPage extends StatelessWidget {
                           ? const Icon(Icons.wb_sunny_outlined)
                           : const Icon(Icons.nightlight_outlined),
                       textBuilder: (value) => value
-                          ? const Center(child: Text('上午', style: TextStyle(fontWeight: FontWeight.bold),))
-                          : const Center(child: Text('下午', style: TextStyle(fontWeight: FontWeight.bold),)),
+                          ? const Center(
+                              child: Text(
+                              '上午',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ))
+                          : const Center(
+                              child: Text(
+                              '下午',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )),
                     ),
                   ],
                 );
@@ -222,6 +240,6 @@ class BusPage extends StatelessWidget {
               },
             ))
       ],
-    );
+    ));
   }
 }

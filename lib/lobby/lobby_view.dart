@@ -140,6 +140,7 @@ class LobbyPage extends StatelessWidget {
                                 TextSpan(
                                     text: map.address,
                                     style: const TextStyle(
+                                      color: Color(0xff50acff),
                                         decoration:
                                         TextDecoration.underline),
                                     recognizer: TapGestureRecognizer()
