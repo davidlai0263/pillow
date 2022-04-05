@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
                     DoodleBtnWidget(
                       tag: '開始遊戲',
                       onTapCallback: () {
-                        Get.toNamed(RouteConfig.rules);
+                        Get.toNamed(RouteConfig.lobby);
                       },
                       text: '開始遊戲',
                       isText: true,
