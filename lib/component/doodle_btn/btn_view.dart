@@ -48,8 +48,8 @@ class DoodleBtnWidget extends StatelessWidget {
           : null,
       onTapUp: activation
           ? (tapUp) {
-              logic.tap();
               onTapCallback();
+              logic.tap();
             }
           : null,
       onTapCancel: activation
