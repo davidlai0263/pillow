@@ -69,7 +69,7 @@ class LobbyPage extends StatelessWidget {
             left: 10.w,
             child: DoodleBtnWidget(
               tag: '返回',
-              onTapCallback: () {
+              onTapUpCallback: () {
                 Get.back();
               },
               facWidth: 0.245,
@@ -81,7 +81,7 @@ class LobbyPage extends StatelessWidget {
             top: 50.h,
             right: 10.w,
             child: DoodleBtnWidget(
-              onTapCallback: () {
+              onTapUpCallback: () {
                 Get.toNamed(RouteConfig.store);
               },
               facWidth: 0.365,
