@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   DoodleBtnWidget(
                     tag: '玩法說明',
-                    onTapCallback: () {
+                    onTapUpCallback: () {
                       Get.toNamed(RouteConfig.rules);
                     },
                     text: '玩法說明',
@@ -63,7 +63,7 @@ class HomePage extends StatelessWidget {
                   ),
                   DoodleBtnWidget(
                     tag: '公車時刻',
-                    onTapCallback: () {
+                    onTapUpCallback: () {
                       Get.toNamed(RouteConfig.bus);
                     },
                     text: '公車時刻',
@@ -71,7 +71,7 @@ class HomePage extends StatelessWidget {
                   ),
                   DoodleBtnWidget(
                     tag: '開始遊戲',
-                    onTapCallback: () {
+                    onTapUpCallback: () {
                       Get.toNamed(RouteConfig.lobby);
                     },
                     text: '開始遊戲',

@@ -11,9 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class LobbyPage extends StatelessWidget {
   final logic = Get.put(LobbyLogic());
-  final state = Get
-      .find<LobbyLogic>()
-      .state;
+  final state = Get.find<LobbyLogic>().state;
 
   Future openMapsSheet(context, String title, String description,
       Coords coords) async {
@@ -25,26 +23,24 @@ class LobbyPage extends StatelessWidget {
         builder: (BuildContext context) {
           return SafeArea(
             child: SingleChildScrollView(
-              child: Container(
-                child: Wrap(
-                  children: <Widget>[
-                    for (var map in availableMaps)
-                      ListTile(
-                        onTap: () =>
-                            map.showMarker(
-                              title: title,
-                              description: description,
-                              coords: coords,
-                            ),
-                        title: Text(map.mapName),
-                        leading: SvgPicture.asset(
-                          map.icon,
-                          height: 30.0,
-                          width: 30.0,
-                        ),
+              child: Wrap(
+                children: <Widget>[
+                  for (var map in availableMaps)
+                    ListTile(
+                      onTap: () =>
+                          map.showMarker(
+                            title: title,
+                            description: description,
+                            coords: coords,
+                          ),
+                      title: Text(map.mapName),
+                      leading: SvgPicture.asset(
+                        map.icon,
+                        height: 30.0,
+                        width: 30.0,
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
             ),
           );
@@ -73,7 +69,7 @@ class LobbyPage extends StatelessWidget {
             left: 10.w,
             child: DoodleBtnWidget(
               tag: '返回',
-              onTapCallback: () {
+              onTapUpCallback: () {
                 Get.back();
               },
               facWidth: 0.245,
@@ -85,7 +81,7 @@ class LobbyPage extends StatelessWidget {
             top: 50.h,
             right: 10.w,
             child: DoodleBtnWidget(
-              onTapCallback: () {
+              onTapUpCallback: () {
                 Get.toNamed(RouteConfig.store);
               },
               facWidth: 0.365,

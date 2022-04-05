@@ -28,7 +28,7 @@ class RulesPage extends StatelessWidget {
             left: 10.w,
             child: DoodleBtnWidget(
               tag: '返回',
-              onTapCallback: () {
+              onTapUpCallback: () {
                 Get.back();
               },
               facWidth: 0.245,
@@ -40,7 +40,7 @@ class RulesPage extends StatelessWidget {
             top: 50.h,
             right: 110.w,
             child: DoodleBtnWidget(
-              onTapCallback: () {},
+              onTapUpCallback: () {},
               facWidth: 0.365,
               facHeight: 0.085,
               text: '使用說明',
