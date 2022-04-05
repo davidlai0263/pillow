@@ -43,5 +43,27 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-</dict>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>comgooglemaps</string>
+        <string>baidumap</string>
+        <string>iosamap</string>
+        <string>waze</string>
+        <string>yandexmaps</string>
+        <string>yandexnavi</string>
+        <string>citymapper</string>
+        <string>mapswithme</string>
+        <string>osmandmaps</string>
+        <string>dgis</string>
+        <string>qqmap</string>
+        <string>here-location</string>
+    </array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to location when open.</string>
+    <key>NSLocationTemporaryUsageDescriptionDictionary</key>
+    <dict>
+        <key>YourPurposeKey</key>
+        <string>The example App requires temporary access to the device&apos;s precise location.</string>
+    </dict>
+    </dict>
 </plist>
