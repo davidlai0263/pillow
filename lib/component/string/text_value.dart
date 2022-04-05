@@ -14,13 +14,13 @@ class MapText {
 }
 
 List<MapText> map = [
-  MapText(name: '橘之鄉蜜餞形象館：', address: '宜蘭市梅洲二路33號\n', coords: Coords(24.779808803734046, 121.73738721695392)),
-  MapText(name: '菌寶貝博物館：', address: '宜蘭市梅洲一路22號\n', coords: Coords(24.77640271738918, 121.73555029441034)),
-  MapText(name: '錦普觀光果園：', address: '員山鄉枕山路106之2號\n', coords: Coords(24.774493274006407, 121.71939904797722)),
-  MapText(name: '橘子咖啡：', address: '員山鄉枕山一村19號3樓\n', coords: Coords(24.770486301953973, 121.7217789979351)),
-  MapText(name: '波的農場：', address: '員山鄉枕山路27-58號\n', coords: Coords(24.76709515585064, 121.71367964582487)),
-  MapText(name: '枕頭山休閒農業區：', address: '員山鄉坡城路18號\n', coords: Coords(24.77712052001219, 121.7094674676997)),
-  MapText(name: '望龍埤：', address: '員山鄉枕山村坡城路18-6號\n', coords: Coords(24.77681363114111, 121.69919400812579)),
-  MapText(name: '豬龍寨 波的波可窯烤披薩：', address: '員山鄉坡城路38號\n', coords: Coords(24.774123135436902, 121.69944150957194)),
-  MapText(name: '蘭陽老媽媽手工黑豆醬油：', address: '員山鄉坡城路68號', coords: Coords(24.780786943500036, 121.69628421884292)),
+  MapText(name: '橘之鄉蜜餞形象館', address: '宜蘭市梅洲二路33號\n', coords: Coords(24.779700827190386, 121.73737709970993)),
+  MapText(name: '菌寶貝博物館', address: '宜蘭市梅洲一路22號\n', coords: Coords(24.776330226928373, 121.73557099969801)),
+  MapText(name: '錦普觀光果園', address: '員山鄉枕山路106之2號\n', coords: Coords(24.77442922677484, 121.71931199970724)),
+  MapText(name: '橘子咖啡', address: '員山鄉枕山一村19號3樓\n', coords: Coords(24.770515510275263, 121.72187556424285)),
+  MapText(name: '波的農場', address: '員山鄉枕山路27-58號\n', coords: Coords(24.766929526206386, 121.71347579969992)),
+  MapText(name: '枕頭山休閒農業區', address: '員山鄉坡城路18號\n', coords: Coords(24.77683352854019, 121.70945272211732)),
+  MapText(name: '望龍埤', address: '員山鄉枕山村坡城路18-6號\n', coords: Coords(24.7766009598442, 121.69909332587137)),
+  MapText(name: '豬龍寨 波的波可窯烤披薩', address: '員山鄉坡城路38號\n', coords: Coords(24.773902982480593, 121.69935042452838)),
+  MapText(name: '蘭陽老媽媽手工黑豆醬油', address: '員山鄉坡城路68號', coords: Coords(24.78053106277951, 121.6962255999825)),
 ];

@@ -7,17 +7,49 @@ import 'package:pillow/route_config.dart';
 import '../component/doodle_btn/btn_view.dart';
 import 'lobby_logic.dart';
 import 'package:map_launcher/map_launcher.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LobbyPage extends StatelessWidget {
   final logic = Get.put(LobbyLogic());
-  final state = Get.find<LobbyLogic>().state;
+  final state = Get
+      .find<LobbyLogic>()
+      .state;
 
-  Future openMapsSheet(String name, Coords coords) async {
+  Future openMapsSheet(context, String title, String description,
+      Coords coords) async {
     try {
       final availableMaps = await MapLauncher.installedMaps;
-      return availableMaps.map((element) {
-        element.showMarker(coords: coords, title: name);
-      }).toList();
+
+      showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SafeArea(
+            child: SingleChildScrollView(
+              child: Container(
+                child: Wrap(
+                  children: <Widget>[
+                    for (var map in availableMaps)
+                      ListTile(
+                        onTap: () =>
+                            map.showMarker(
+                              title: title,
+                              description: description,
+                              coords: coords,
+                            ),
+                        title: Text(map.mapName),
+                        leading: SvgPicture.asset(
+                          map.icon,
+                          height: 30.0,
+                          width: 30.0,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
     } catch (e) {
       debugPrint('$e');
     }
@@ -103,22 +135,26 @@ class LobbyPage extends StatelessWidget {
                             height: 1.5,
                           ),
                           children: map
-                              .map((map) => TextSpan(children: [
-                                    TextSpan(
-                                        text: map.name,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                    TextSpan(
-                                        text: map.address,
-                                        style: const TextStyle(
-                                            decoration:
-                                                TextDecoration.underline),
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () => openMapsSheet(
-                                                map.name,
-                                                map.coords,
-                                              ))
-                                  ]))
+                              .map((map) =>
+                              TextSpan(children: [
+                                TextSpan(
+                                    text: '${map.name}：',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold)),
+                                TextSpan(
+                                    text: map.address,
+                                    style: const TextStyle(
+                                        decoration:
+                                        TextDecoration.underline),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () =>
+                                          openMapsSheet(
+                                            context,
+                                            map.name,
+                                            map.address,
+                                            map.coords,
+                                          ))
+                              ]))
                               .toList(),
                         ),
                       )),
