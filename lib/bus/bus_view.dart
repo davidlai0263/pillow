@@ -222,6 +222,6 @@ class BusPage extends StatelessWidget {
               },
             ))
       ],
-    ));
+    );
   }
 }
