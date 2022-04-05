@@ -154,18 +154,18 @@ class BusPage extends StatelessWidget {
                       colorBuilder: (b) =>
                           b ? Colors.green.shade300 : Colors.grey,
                       iconBuilder: (value) => value
-                          ? const Icon(Icons.arrow_forward_ios_outlined)
-                          : const Icon(Icons.arrow_back_ios_outlined),
+                          ? Icon(Icons.arrow_forward_ios_outlined, size: 32.r,)
+                          : Icon(Icons.arrow_back_ios_outlined, size: 32.r),
                       textBuilder: (value) => value
-                          ? const Center(
+                          ? Center(
                               child: Text(
                               '去程',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                             ))
-                          : const Center(
+                          : Center(
                               child: Text(
                               '回程',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                             )),
                     ),
                     SizedBox(
@@ -186,18 +186,18 @@ class BusPage extends StatelessWidget {
                       colorBuilder: (b) =>
                           b ? Colors.blue.shade100 : Colors.blueAccent.shade700,
                       iconBuilder: (value) => value
-                          ? const Icon(Icons.wb_sunny_outlined)
-                          : const Icon(Icons.nightlight_outlined),
+                          ? Icon(Icons.wb_sunny_outlined, size: 32.r)
+                          : Icon(Icons.nightlight_outlined, size: 32.r),
                       textBuilder: (value) => value
-                          ? const Center(
+                          ? Center(
                               child: Text(
                               '上午',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                             ))
-                          : const Center(
+                          : Center(
                               child: Text(
                               '下午',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                             )),
                     ),
                   ],
