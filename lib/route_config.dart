@@ -22,6 +22,7 @@ class RouteConfig {
     GetPage(
       name: home,
       page: () => HomePage(),
+      transition: Transition.circularReveal,
     ),
     GetPage(
       name: rules,
@@ -36,22 +37,27 @@ class RouteConfig {
     GetPage(
       name: lobby,
       page: () => LobbyPage(),
+      transition: Transition.circularReveal,
     ),
     GetPage(
       name: store,
       page: () => StorePage(),
+      transition: Transition.circularReveal,
     ),
     GetPage(
       name: myCoupon,
       page: () => MyCouponPage(),
+      transition: Transition.circularReveal,
     ),
     GetPage(
       name: question,
       page: () => QuestionPage(),
+      transition: Transition.circularReveal,
     ),
     GetPage(
       name: roulette,
       page: () => RoulettePage(),
+      transition: Transition.circularReveal,
     ),
   ];
 }

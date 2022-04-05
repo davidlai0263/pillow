@@ -100,8 +100,8 @@ class DoodleBtnWidget extends StatelessWidget {
                               style: TextStyle(
                                 color: const Color(0xFF000000),
                                 fontSize: textSize.sp,
-                                fontWeight: FontWeight.w900,
-                                height: 1.25.sp
+                                fontWeight: FontWeight.bold,
+                                height: 1.22,
                               ),
                             )
                           : Icon(
