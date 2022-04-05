@@ -4,13 +4,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pillow/component/string/text_value.dart';
 import 'package:pillow/route_config.dart';
-
 import '../component/doodle_btn/btn_view.dart';
 import 'lobby_logic.dart';
+import 'package:map_launcher/map_launcher.dart';
 
 class LobbyPage extends StatelessWidget {
   final logic = Get.put(LobbyLogic());
   final state = Get.find<LobbyLogic>().state;
+
+  Future openMapsSheet(String name, Coords coords) async {
+    try {
+      final availableMaps = await MapLauncher.installedMaps;
+      return availableMaps.map((element) {
+        element.showMarker(coords: coords, title: name);
+      }).toList();
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
 
   LobbyPage({Key? key}) : super(key: key);
 
@@ -98,14 +109,15 @@ class LobbyPage extends StatelessWidget {
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold)),
                                     TextSpan(
-                                      text: map.address,
-                                      style: const TextStyle(
-                                          decoration:
-                                              TextDecoration.underline),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap =
-                                            () => print('Tap Here onTap'),
-                                    )
+                                        text: map.address,
+                                        style: const TextStyle(
+                                            decoration:
+                                                TextDecoration.underline),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () => openMapsSheet(
+                                                map.name,
+                                                map.coords,
+                                              ))
                                   ]))
                               .toList(),
                         ),

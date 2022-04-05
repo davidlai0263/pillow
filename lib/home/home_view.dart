@@ -47,11 +47,11 @@ class HomePage extends StatelessWidget {
                 ),
               )),
           Positioned(
-            top: 350.h,
+            bottom: 150.h,
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: 0.45.sh),
+              constraints: BoxConstraints(maxHeight: 0.35.sh),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   DoodleBtnWidget(
                     tag: '玩法說明',
