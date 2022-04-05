@@ -39,6 +39,7 @@ dependencies:
   flutter_screenutil: ^5.3.1
   geolocator: ^8.2.0
   map_launcher: ^2.2.1+1
+  animated_toggle_switch: ^0.4.0
 
 dev_dependencies:
   flutter_test:
