@@ -43,7 +43,7 @@ class LobbyPage extends StatelessWidget {
           ),
           backgroundColor: Colors.white.withOpacity(0.8),
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)));
+              RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10.r))));
     } catch (e) {
       debugPrint('$e');
     }
@@ -102,13 +102,44 @@ class LobbyPage extends StatelessWidget {
                     width: 0.95.sw,
                     fit: BoxFit.contain,
                   )),
-              Text(
-                '請前往以下地點進行挑戰',
-                style: TextStyle(
-                    height: 1.265,
-                    letterSpacing: 1.5.sp,
-                    color: Colors.white70,
-                    fontSize: 20.sp),
+              GestureDetector(
+                onTapDown: (tapDown) {
+                  debugPrint('press');
+                  logic.tap();
+                },
+                onTapUp: (tapUp) {
+                  debugPrint('press');
+                  logic.tap();
+                },
+                onTapCancel: () {
+                  debugPrint('press');
+                  logic.tap();
+                },
+                child: GetBuilder<LobbyLogic>(builder: (logic) {
+                  return SizedBox(
+                    height: 35.h,
+                    width: 240.w,
+                    child: AlignTransition(
+                      alignment: logic.animation,
+                      child: Text(
+                        '請前往以下地點進行挑戰',
+                        style: TextStyle(
+                          height: 1.265,
+                          letterSpacing: 1.5.sp,
+                          color: Colors.white70,
+                          fontSize: 20.sp,
+                          shadows: <Shadow>[
+                            Shadow(
+                              offset: Offset(4.5.w, 4.5.h),
+                              blurRadius: 7.5.r,
+                              color: const Color.fromARGB(255, 47, 47, 47),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(0, .0, 0, 0.1.sw),

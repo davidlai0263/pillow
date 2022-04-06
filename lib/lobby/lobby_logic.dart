@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
@@ -10,7 +9,7 @@ import '../component/data/site.dart';
 import '../component/doodle_btn/btn_view.dart';
 import 'lobby_state.dart';
 
-class LobbyLogic extends GetxController {
+class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
   final LobbyState state = LobbyState();
   final LocationSettings locationSettings = const LocationSettings(
     accuracy: LocationAccuracy.bestForNavigation,
@@ -31,7 +30,12 @@ class LobbyLogic extends GetxController {
       await Get.defaultDialog(
           title: '提醒！',
           middleText: '請同意存取位置權限，才可進行挑戰。',
-          titlePadding: EdgeInsets.symmetric(vertical: 8.h),
+          middleTextStyle:  TextStyle(
+              color: Colors.black,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 2.sp),
+          titlePadding: EdgeInsets.fromLTRB(0, 12.h, 1.h, 0),
           titleStyle: TextStyle(
               fontSize: 20.sp, height: 1.5, fontWeight: FontWeight.bold),
           contentPadding:
@@ -73,7 +77,7 @@ class LobbyLogic extends GetxController {
               state.nearLocation = element;
             }
           }
-          print(
+          debugPrint(
               '最近地點:${state.nearLocation.name} 距離:${state.nearLocation.distance}');
         }
       });
@@ -81,7 +85,12 @@ class LobbyLogic extends GetxController {
       await Get.defaultDialog(
           title: '提醒！',
           middleText: '請進入設定開啟位置存取權限，才可進行挑戰。',
-          titlePadding: EdgeInsets.symmetric(vertical: 8.h),
+          middleTextStyle:  TextStyle(
+              color: Colors.black,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 2.sp),
+          titlePadding: EdgeInsets.fromLTRB(0, 12.h, 1.h, 0),
           titleStyle: TextStyle(
               fontSize: 20.sp, height: 1.5, fontWeight: FontWeight.bold),
           contentPadding:
@@ -96,9 +105,27 @@ class LobbyLogic extends GetxController {
             },
           ));
       await Geolocator.openAppSettings();
-      await Geolocator.openLocationSettings();
     }
-
     super.onInit();
   }
+
+  bool onTapDown = false;
+  void tap() {
+    onTapDown = !onTapDown;
+    update();
+  }
+
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 1),
+    vsync: this,
+  )..repeat(reverse: true);
+  late final Animation<AlignmentGeometry> animation = Tween<AlignmentGeometry>(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  ).animate(
+    CurvedAnimation(
+      parent: _controller,
+      curve: Curves.linear,
+    ),
+  );
 }
