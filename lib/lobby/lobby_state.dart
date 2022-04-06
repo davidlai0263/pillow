@@ -1,5 +1,9 @@
+import '../component/string/text_value.dart';
+
 class LobbyState {
+  late MapText nearLocation;
+
   LobbyState() {
-    ///Initialize variables
+    nearLocation = map.first;
   }
 }

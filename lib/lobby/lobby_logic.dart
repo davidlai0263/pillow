@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:pillow/component/string/text_value.dart';
 
 import '../component/doodle_btn/btn_view.dart';
 import 'lobby_state.dart';
@@ -12,8 +13,8 @@ import 'lobby_state.dart';
 class LobbyLogic extends GetxController {
   final LobbyState state = LobbyState();
   final LocationSettings locationSettings = const LocationSettings(
-    accuracy: LocationAccuracy.high,
-    distanceFilter: 100,
+    accuracy: LocationAccuracy.bestForNavigation,
+    distanceFilter: 10,
   );
 
   late StreamSubscription<Position> positionStream;
@@ -42,6 +43,7 @@ class LobbyLogic extends GetxController {
               Get.back();
             },
           ));
+
       permission = await Geolocator.requestPermission();
     }
 
@@ -52,6 +54,24 @@ class LobbyLogic extends GetxController {
         debugPrint(position == null
             ? 'Unknown'
             : '${position.latitude.toString()}, ${position.longitude.toString()}');
+
+        if (position != null) {
+          for (var element in map) {
+            element.distance = Geolocator.distanceBetween(
+                    position.latitude,
+                    position.longitude,
+                    element.coords.latitude,
+                    element.coords.longitude)
+                .abs();
+          }
+          for (var element in map) {
+            if (element.distance < state.nearLocation.distance) {
+              state.nearLocation = element;
+            }
+          }
+          print(
+              '最近地點:${state.nearLocation.name} 距離:${state.nearLocation.distance}');
+        }
       });
     } else {
       await Get.defaultDialog(
