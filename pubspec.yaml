@@ -41,6 +41,7 @@ dependencies:
   map_launcher: ^2.2.1+1
   flutter_svg: ^1.0.3
   animated_toggle_switch: ^0.4.0
+  flutter_launcher_icons: ^0.9.2
 
 dev_dependencies:
   flutter_test:
@@ -84,3 +85,8 @@ flutter:
   #    - family:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_icons:
+  image_path: 'assets/images/pillow.png'
+  android: true
+  ios: true
