@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:pillow/component/string/text_value.dart';
 
+import '../component/data/site.dart';
 import '../component/doodle_btn/btn_view.dart';
 import 'lobby_state.dart';
 
@@ -56,7 +56,8 @@ class LobbyLogic extends GetxController {
             : '${position.latitude.toString()}, ${position.longitude.toString()}');
 
         if (position != null) {
-          for (var element in map) {
+          //update site distance
+          for (var element in siteMap) {
             element.distance = Geolocator.distanceBetween(
                     position.latitude,
                     position.longitude,
@@ -64,7 +65,8 @@ class LobbyLogic extends GetxController {
                     element.coords.longitude)
                 .abs();
           }
-          for (var element in map) {
+          //find near site
+          for (var element in siteMap) {
             if (element.distance < state.nearLocation.distance) {
               state.nearLocation = element;
             }
@@ -76,7 +78,7 @@ class LobbyLogic extends GetxController {
     } else {
       await Get.defaultDialog(
           title: '提醒！',
-          middleText: '請進入設定開啟位置存取權限，才可進行跳站。',
+          middleText: '請進入設定開啟位置存取權限，才可進行挑戰。',
           titlePadding: EdgeInsets.symmetric(vertical: 8.h),
           titleStyle: TextStyle(
               fontSize: 20.sp, height: 1.5, fontWeight: FontWeight.bold),

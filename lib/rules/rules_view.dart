@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pillow/component/doodle_btn/btn_view.dart';
-import 'package:pillow/component/string/text_value.dart';
 
+import '../component/data/site.dart';
+import '../component/data/string_vaule.dart';
 import 'rules_logic.dart';
 
 class RulesPage extends StatelessWidget {
@@ -50,7 +51,9 @@ class RulesPage extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(height: 120.h,),
+              SizedBox(
+                height: 120.h,
+              ),
               ConstrainedBox(
                   constraints: BoxConstraints(
                     maxHeight: 0.4.sh,
@@ -72,11 +75,10 @@ class RulesPage extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.all(12.0.r),
-                    child: Text(
-                        ruleText,
+                    child: Text(ruleText,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: const Color(0xffeaeaea),
+                            color: const Color(0xffeaeaea),
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 3.357.sp,
@@ -84,7 +86,6 @@ class RulesPage extends StatelessWidget {
                   ),
                 ),
               ),
-
             ],
           ),
         ],

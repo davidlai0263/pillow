@@ -1,9 +1,11 @@
-import '../component/string/text_value.dart';
+import 'package:pillow/component/data/site.dart';
 
 class LobbyState {
-  late MapText nearLocation;
+  late Site nearLocation;
+  late bool availableChallenge;
 
   LobbyState() {
-    nearLocation = map.first;
+    nearLocation = siteMap.first;
+    availableChallenge = false;
   }
 }

@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:pillow/component/string/text_value.dart';
 import 'package:pillow/route_config.dart';
+import '../component/data/site.dart';
 import '../component/doodle_btn/btn_view.dart';
 import 'lobby_logic.dart';
 import 'package:map_launcher/map_launcher.dart';
@@ -128,7 +128,7 @@ class LobbyPage extends StatelessWidget {
                             letterSpacing: 0.9,
                             height: 1.5,
                           ),
-                          children: map
+                          children: siteMap
                               .map((map) => TextSpan(children: [
                                     TextSpan(
                                         text: '${map.name}：',
