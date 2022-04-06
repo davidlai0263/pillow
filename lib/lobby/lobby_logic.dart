@@ -25,6 +25,8 @@ class LobbyLogic extends GetxController {
     permission = await Geolocator.requestPermission();
     permission = await Geolocator.checkPermission();
 
+    state.initData();
+
     if (permission == LocationPermission.denied) {
       await Get.defaultDialog(
           title: '提醒！',

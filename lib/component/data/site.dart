@@ -8,17 +8,31 @@ class Site {
   final String ans;
   final Coords coords;
   late double distance;
-  late bool fail;
 
-  Site(
-      {required this.name,
-      required this.address,
-      required this.qus,
-      required this.choose,
-      required this.ans,
-      required this.coords,
-      this.distance = 9999,
-      this.fail = false});
+  Site({
+    required this.name,
+    required this.address,
+    required this.qus,
+    required this.choose,
+    required this.ans,
+    required this.coords,
+    this.distance = 9999,
+  });
+}
+
+getSiteIndex(String name) {
+  Map<String, int> params = {
+    '橘之鄉蜜餞形象': 0,
+    '菌寶貝博物館': 1,
+    '錦普觀光果園': 2,
+    '橘子咖啡': 3,
+    '波的農場': 4,
+    '枕頭山休閒農業區': 5,
+    '望龍埤': 6,
+    '豬龍寨 波的波可窯烤披薩': 7,
+    '蘭陽老媽媽手工黑豆醬油': 8,
+  };
+  return params[name];
 }
 
 List<Site> siteMap = [
