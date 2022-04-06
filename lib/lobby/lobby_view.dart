@@ -102,24 +102,15 @@ class LobbyPage extends StatelessWidget {
                     width: 0.95.sw,
                     fit: BoxFit.contain,
                   )),
-              GestureDetector(
-                onTapDown: (tapDown) {
-                  debugPrint('press');
-                  logic.tap();
-                },
-                onTapUp: (tapUp) {
-                  debugPrint('press');
-                  logic.tap();
-                },
-                onTapCancel: () {
-                  debugPrint('press');
-                  logic.tap();
-                },
-                child: GetBuilder<LobbyLogic>(builder: (logic) {
-                  return SizedBox(
-                    height: 35.h,
-                    width: 240.w,
-                    child: AlignTransition(
+              SizedBox(
+                height: 30.sp,
+                child: GestureDetector(
+                  onTap: () {
+                    debugPrint('press');
+                  },
+
+                  child: GetBuilder<LobbyLogic>(builder: (logic) {
+                    return AlignTransition(
                       alignment: logic.animation,
                       child: Text(
                         '請前往以下地點進行挑戰',
@@ -137,12 +128,12 @@ class LobbyPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  }),
+                ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, .0, 0, 0.1.sw),
+                margin: EdgeInsets.fromLTRB(0, .0, 0, 0.075.sw),
                 constraints: BoxConstraints(
                   maxHeight: 0.325.sh,
                 ),

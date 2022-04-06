@@ -109,11 +109,6 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
     super.onInit();
   }
 
-  bool onTapDown = false;
-  void tap() {
-    onTapDown = !onTapDown;
-    update();
-  }
 
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 1),
@@ -128,4 +123,9 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
       curve: Curves.linear,
     ),
   );
+  @override
+  void onClose() {
+    _controller.dispose();
+    super.onClose();
+  }
 }
