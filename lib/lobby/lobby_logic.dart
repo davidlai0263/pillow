@@ -31,7 +31,8 @@ class LobbyLogic extends GetxController {
           titlePadding: EdgeInsets.symmetric(vertical: 8.h),
           titleStyle: TextStyle(
               fontSize: 20.sp, height: 1.5, fontWeight: FontWeight.bold),
-          contentPadding: EdgeInsets.symmetric(horizontal: 12.0.w),
+          contentPadding:
+              EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.0.w),
           backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
           confirm: DoodleBtnWidget(
             tag: 'go to argent gps request',
@@ -59,7 +60,8 @@ class LobbyLogic extends GetxController {
           titlePadding: EdgeInsets.symmetric(vertical: 8.h),
           titleStyle: TextStyle(
               fontSize: 20.sp, height: 1.5, fontWeight: FontWeight.bold),
-          contentPadding: EdgeInsets.symmetric(horizontal: 12.0.w),
+          contentPadding:
+              EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.0.w),
           backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
           confirm: DoodleBtnWidget(
             tag: 'go to setting',
