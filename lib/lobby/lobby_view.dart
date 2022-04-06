@@ -13,26 +13,23 @@ class LobbyPage extends StatelessWidget {
   final logic = Get.put(LobbyLogic());
   final state = Get.find<LobbyLogic>().state;
 
-  Future openMapsSheet(context, String title, String description,
-      Coords coords) async {
+  Future openMapsSheet(
+      context, String title, String description, Coords coords) async {
     try {
       final availableMaps = await MapLauncher.installedMaps;
 
-      showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return SafeArea(
+      Get.bottomSheet(
+          SafeArea(
             child: SingleChildScrollView(
               child: Wrap(
                 children: <Widget>[
                   for (var map in availableMaps)
                     ListTile(
-                      onTap: () =>
-                          map.showMarker(
-                            title: title,
-                            description: description,
-                            coords: coords,
-                          ),
+                      onTap: () => map.showMarker(
+                        title: title,
+                        description: description,
+                        coords: coords,
+                      ),
                       title: Text(map.mapName),
                       leading: SvgPicture.asset(
                         map.icon,
@@ -43,9 +40,10 @@ class LobbyPage extends StatelessWidget {
                 ],
               ),
             ),
-          );
-        },
-      );
+          ),
+          backgroundColor: Colors.white.withOpacity(0.8),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)));
     } catch (e) {
       debugPrint('$e');
     }
@@ -131,27 +129,25 @@ class LobbyPage extends StatelessWidget {
                             height: 1.5,
                           ),
                           children: map
-                              .map((map) =>
-                              TextSpan(children: [
-                                TextSpan(
-                                    text: '${map.name}：',
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold)),
-                                TextSpan(
-                                    text: map.address,
-                                    style: const TextStyle(
-                                      color: Color(0xff50acff),
-                                        decoration:
-                                        TextDecoration.underline),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () =>
-                                          openMapsSheet(
-                                            context,
-                                            map.name,
-                                            map.address,
-                                            map.coords,
-                                          ))
-                              ]))
+                              .map((map) => TextSpan(children: [
+                                    TextSpan(
+                                        text: '${map.name}：',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    TextSpan(
+                                        text: map.address,
+                                        style: const TextStyle(
+                                            color: Color(0xff50acff),
+                                            decoration:
+                                                TextDecoration.underline),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () => openMapsSheet(
+                                                context,
+                                                map.name,
+                                                map.address,
+                                                map.coords,
+                                              ))
+                                  ]))
                               .toList(),
                         ),
                       )),
