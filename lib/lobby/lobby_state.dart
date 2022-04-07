@@ -32,7 +32,7 @@ class LobbyState {
       credit = prefs.getInt('credit')!;
     } else {
       await prefs.setStringList(
-          'challengeSave', _boolListToStringLing(challengeSave));
+          'challengeSave', _boolListToStringList(challengeSave));
       await prefs.setInt('credit', credit);
     }
   }
@@ -40,7 +40,7 @@ class LobbyState {
   saveChallengeSave() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList(
-        'challengeSave', _boolListToStringLing(challengeSave));
+        'challengeSave', _boolListToStringList(challengeSave));
   }
 
   saveCredit() async {
@@ -60,7 +60,7 @@ class LobbyState {
     return boolList;
   }
 
-  _boolListToStringLing(List<bool> boolList) {
+  _boolListToStringList(List<bool> boolList) {
     List<String> stringList = [];
     for (var element in boolList) {
       if (element == true) {
