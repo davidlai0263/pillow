@@ -85,8 +85,10 @@ class BusPage extends StatelessWidget {
                       Get.defaultDialog(
                           title: '路線說明',
                           titlePadding: EdgeInsets.symmetric(vertical: 8.h),
-                          titleStyle:
-                              TextStyle(fontSize: 20.sp, height: 1.5, fontWeight: FontWeight.bold),
+                          titleStyle: TextStyle(
+                              fontSize: 20.sp,
+                              height: 1.5,
+                              fontWeight: FontWeight.bold),
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: 12.0.w),
                           backgroundColor:
@@ -107,8 +109,7 @@ class BusPage extends StatelessWidget {
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
                                   TextSpan(
-                                      text:
-                                          '於枕頭山下車後步行6分鐘或於錦普觀光梨園下車後步行8分鐘。\n'),
+                                      text: '於枕頭山下車後步行6分鐘或於錦普觀光梨園下車後步行8分鐘。\n'),
                                   TextSpan(
                                       text: '波的農場: ',
                                       style: TextStyle(
@@ -239,15 +240,14 @@ class BusPage extends StatelessWidget {
                         )),
                       ),
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 1.5.r
-                        ),
+                        border: Border.all(color: Colors.black, width: 1.5.r),
                         borderRadius: BorderRadius.all(Radius.circular(10.r)),
                         color: Colors.orangeAccent,
                       ),
                     ),
-                    SizedBox(height: 1.h,),
+                    SizedBox(
+                      height: 1.h,
+                    ),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: ConstrainedBox(

@@ -42,8 +42,8 @@ class LobbyPage extends StatelessWidget {
             ),
           ),
           backgroundColor: Colors.white.withOpacity(0.8),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10.r))));
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10.r))));
     } catch (e) {
       debugPrint('$e');
     }
@@ -108,7 +108,6 @@ class LobbyPage extends StatelessWidget {
                   onTap: () {
                     debugPrint('press');
                   },
-
                   child: GetBuilder<LobbyLogic>(builder: (logic) {
                     return AlignTransition(
                       alignment: logic.animation,
