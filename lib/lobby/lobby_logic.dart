@@ -23,10 +23,12 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
   Future<void> onInit() async {
     permission = await Geolocator.requestPermission();
     permission = await Geolocator.checkPermission();
+    debugPrint('$permission');
 
     state.initData();
 
-    if (permission == LocationPermission.denied) {
+    if (permission == LocationPermission.denied ||
+    permission == LocationPermission.deniedForever) {
       await Get.defaultDialog(
           title: '提醒！',
           middleText: '請同意存取位置權限，才可進行挑戰。',
@@ -35,9 +37,9 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,
               letterSpacing: 2.sp),
-          titlePadding: EdgeInsets.fromLTRB(0, 12.h, 1.h, 0),
+          titlePadding: EdgeInsets.fromLTRB(0, 13.h, 0, .5.h),
           titleStyle: TextStyle(
-              fontSize: 20.sp, height: 1.5, fontWeight: FontWeight.bold),
+              fontSize: 22.sp, height: 1.5, fontWeight: FontWeight.bold),
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.0.w),
           backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
@@ -53,7 +55,8 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
       permission = await Geolocator.requestPermission();
     }
 
-    if (await Geolocator.checkPermission() != LocationPermission.denied) {
+    permission = await Geolocator.checkPermission();
+    if (permission != LocationPermission.denied && permission != LocationPermission.deniedForever) {
       positionStream =
           Geolocator.getPositionStream(locationSettings: locationSettings)
               .listen((Position? position) {
@@ -90,9 +93,9 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,
               letterSpacing: 2.sp),
-          titlePadding: EdgeInsets.fromLTRB(0, 12.h, 1.h, 0),
+          titlePadding: EdgeInsets.fromLTRB(0, 13.h, 0, .5.h),
           titleStyle: TextStyle(
-              fontSize: 20.sp, height: 1.5, fontWeight: FontWeight.bold),
+              fontSize: 22.sp, height: 1.5, fontWeight: FontWeight.bold),
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.0.w),
           backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
@@ -104,14 +107,20 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
               Get.back();
             },
           ));
-      await Geolocator.openAppSettings();
+
+      if(GetPlatform.isIOS){
+        await Geolocator.openLocationSettings();
+      }else{
+        await Geolocator.openAppSettings();
+      }
+
     }
     super.onInit();
   }
 
 
   late final AnimationController _controller = AnimationController(
-    duration: const Duration(seconds: 1),
+    duration: const Duration(milliseconds: 800),
     vsync: this,
   )..repeat(reverse: true);
   late final Animation<AlignmentGeometry> animation = Tween<AlignmentGeometry>(

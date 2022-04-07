@@ -24,17 +24,20 @@ class LobbyPage extends StatelessWidget {
               child: Wrap(
                 children: <Widget>[
                   for (var map in availableMaps)
-                    ListTile(
+                    InkWell(
+                      borderRadius: BorderRadius.circular(10.r),
                       onTap: () => map.showMarker(
                         title: title,
                         description: description,
                         coords: coords,
                       ),
-                      title: Text(map.mapName),
-                      leading: SvgPicture.asset(
-                        map.icon,
-                        height: 30.0,
-                        width: 30.0,
+                      child: ListTile(
+                        title: Text(map.mapName),
+                        leading: SvgPicture.asset(
+                          map.icon,
+                          height: 30.0,
+                          width: 30.0,
+                        ),
                       ),
                     ),
                 ],
@@ -76,14 +79,14 @@ class LobbyPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 50.h,
+            top: 57.5.h,
             right: 10.w,
             child: DoodleBtnWidget(
               onTapUpCallback: () {
                 Get.toNamed(RouteConfig.store);
               },
-              facWidth: 0.365,
-              facHeight: 0.085,
+              facWidth: 0.33,
+              facHeight: 0.07,
               text: '兌換商店',
             ),
           ),
@@ -103,7 +106,7 @@ class LobbyPage extends StatelessWidget {
                     fit: BoxFit.contain,
                   )),
               SizedBox(
-                height: 30.sp,
+                height: 28.5.sp,
                 child: GestureDetector(
                   onTap: () {
                     debugPrint('press');

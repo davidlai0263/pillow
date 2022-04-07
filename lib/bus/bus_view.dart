@@ -99,7 +99,6 @@ class BusPage extends StatelessWidget {
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16.sp,
-                                        fontWeight: FontWeight.w500,
                                         letterSpacing: 4),
                                     children: const [
                                   TextSpan(text: '※錦普觀光梨園為單邊設站(僅有去程)\n'),

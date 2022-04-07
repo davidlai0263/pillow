@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pillow/component/doodle_btn/btn_view.dart';
 
-import '../component/data/site.dart';
-import '../component/data/string_vaule.dart';
 import 'rules_logic.dart';
 
 class RulesPage extends StatelessWidget {
@@ -75,7 +73,7 @@ class RulesPage extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.all(12.0.r),
-                    child: Text(ruleText,
+                    child: Text(state.ruleText,
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             color: const Color(0xffeaeaea),

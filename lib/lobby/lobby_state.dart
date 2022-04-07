@@ -6,7 +6,7 @@ class LobbyState {
   late bool availableChallenge;
   late List<bool> challengeSave;
   late int credit;
-
+  late List<int> coupon;
   LobbyState() {
     nearLocation = siteMap.first;
     availableChallenge = false;
@@ -22,6 +22,7 @@ class LobbyState {
       false
     ];
     credit = 0;
+    coupon = [0, 0, 0, 0, 0, 0, 0];
   }
 
   initData() async {
@@ -30,10 +31,12 @@ class LobbyState {
       challengeSave =
           _stringListToBoolList(prefs.getStringList('challengeSave')!);
       credit = prefs.getInt('credit')!;
+      coupon = _stringListToIntList(prefs.getStringList('coupon')!);
     } else {
       await prefs.setStringList(
           'challengeSave', _boolListToStringList(challengeSave));
       await prefs.setInt('credit', credit);
+      await prefs.setStringList('coupon', _intListToStringList(coupon));
     }
   }
 
@@ -46,6 +49,11 @@ class LobbyState {
   saveCredit() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('credit', credit);
+  }
+
+  saveCoupon() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('coupon', _intListToStringList(coupon));
   }
 
   _stringListToBoolList(List<String> stringList) {
@@ -68,6 +76,22 @@ class LobbyState {
       } else {
         stringList.add('false');
       }
+    }
+    return stringList;
+  }
+
+  _stringListToIntList(List<String> stringList) {
+    List<int> intList = [];
+    for (var element in stringList) {
+      intList.add(int.parse(element));
+    }
+    return intList;
+  }
+
+  _intListToStringList(List<int> intList) {
+    List<String> stringList = [];
+    for (var element in intList) {
+      stringList.add(element.toString());
     }
     return stringList;
   }
