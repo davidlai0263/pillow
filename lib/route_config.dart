@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'bus/bus_view.dart';
 import 'lobby/lobby_view.dart';
-import 'my_coupon/my_coupon_view.dart';
 import 'question/question_view.dart';
 import 'roulette/roulette_view.dart';
 import 'rules/rules_view.dart';
@@ -42,11 +41,6 @@ class RouteConfig {
     GetPage(
       name: store,
       page: () => StorePage(),
-      transition: Transition.circularReveal,
-    ),
-    GetPage(
-      name: myCoupon,
-      page: () => MyCouponPage(),
       transition: Transition.circularReveal,
     ),
     GetPage(

@@ -35,7 +35,7 @@ class LobbyLogic extends GetxController
                 children: <Widget>[
                   for (var map in availableMaps)
                     InkWell(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(16.r),
                       onTap: () => {
                         map.showMarker(
                           title: title,
@@ -133,12 +133,45 @@ class LobbyLogic extends GetxController
             '',
             forwardAnimationCurve: Curves.easeInOutBack,
             borderRadius: 28.r,
-            titleText: Text(
-              '您正在前往...',
-              style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
+            titleText: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '您正在前往...',
+                  style: TextStyle(
+                      fontSize: 22.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                DoodleBtnWidget(
+                  onTapUpCallback: () {
+                    if (state.nearLocation.distance >= 50) {
+                      openMapsSheet(
+                          Get.context,
+                          state.nearLocation.name,
+                          state.nearLocation.address,
+                          state.nearLocation.coords);
+                    }
+                    else{
+                      controller.stop();
+                      positionStream.pause();
+                      Get.toNamed(RouteConfig.question);
+                    }
+                    Get.closeAllSnackbars();
+                  },
+                  tag: '查看',
+                  textColor: Colors.white,
+                  text: '查看',
+                  facWidth: 0.16,
+                  facHeight: 0.05,
+                  textSize: 14,
+                  borderWidth: 1.5,
+                  devWidth: 2.5,
+                  devHeight: 2.5,
+                  borderRadius: 12,
+                  backgroundColor: const Color(0xffacacac),
+                )
+              ],
             ),
             messageText: Wrap(alignment: WrapAlignment.start, children: [
               RichText(
@@ -160,34 +193,6 @@ class LobbyLogic extends GetxController
                       )
                     ]),
               ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: DoodleBtnWidget(
-                  onTapUpCallback: () {
-                    if (state.nearLocation.distance >= 50) {
-                      openMapsSheet(
-                          Get.context,
-                          state.nearLocation.name,
-                          state.nearLocation.address,
-                          state.nearLocation.coords);
-                    }
-                    else{
-                      controller.stop();
-                      positionStream.pause();
-                      Get.toNamed(RouteConfig.question);
-                    }
-                    Get.closeAllSnackbars();
-                  },
-                  tag: '查看',
-                  textColor: Colors.white,
-                  text: '查看',
-                  facWidth: 0.18,
-                  facHeight: 0.055,
-                  textSize: 14,
-                  borderWidth: 1.5,
-                  backgroundColor: const Color(0xffacacac),
-                ),
-              )
             ]),
             duration: const Duration(seconds: 5),
             margin: const EdgeInsets.symmetric(horizontal: .0),

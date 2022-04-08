@@ -16,30 +16,36 @@ class DoodleBtnWidget extends StatelessWidget {
   final String text;
   final double textSize;
   final Color textColor;
+  final double textSpacing;
   final IconData icon;
   final double iconSize;
   final bool isText;
   final bool activation;
+  final double devWidth;
+  final double devHeight;
 
-  const DoodleBtnWidget(
-      {Key? key,
-      this.tag,
-      required this.onTapUpCallback,
-      this.isPopUp = true,
-      this.backgroundColor = const Color(0xFFFFFFFF),
-      this.borderColor = const Color(0xff404040),
-      this.borderWidth = 3.25,
-      this.borderRadius = 16.0,
-      this.facWidth = 0.365,
-      this.facHeight = 0.088,
-      this.text = '',
-      this.textSize = 25.0,
-      this.textColor = const Color(0xFF000000),
-      this.icon = Icons.arrow_back_rounded,
-      this.iconSize = 42.0,
-      this.isText = true,
-      this.activation = true})
-      : super(key: key);
+  const DoodleBtnWidget({
+    Key? key,
+    this.tag,
+    required this.onTapUpCallback,
+    this.isPopUp = true,
+    this.backgroundColor = const Color(0xFFFFFFFF),
+    this.borderColor = const Color(0xff404040),
+    this.borderWidth = 3.25,
+    this.borderRadius = 16.0,
+    this.facWidth = 0.365,
+    this.facHeight = 0.088,
+    this.text = '',
+    this.textSize = 25.0,
+    this.textColor = const Color(0xFF000000),
+    this.textSpacing = 1,
+    this.icon = Icons.arrow_back_rounded,
+    this.iconSize = 42.0,
+    this.isText = true,
+    this.activation = true,
+    this.devWidth = 0,
+    this.devHeight = 0,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +68,8 @@ class DoodleBtnWidget extends StatelessWidget {
             }
           : null,
       child: SizedBox(
-        width: facWidth.sw,
-        height: facHeight.sh,
+        width: facWidth.sw - devWidth,
+        height: facHeight.sh -devHeight,
         child: Stack(alignment: Alignment.topLeft, children: <Widget>[
           Positioned(
             right: 0,
