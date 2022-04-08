@@ -6,51 +6,10 @@ import 'package:pillow/route_config.dart';
 import '../component/data/site.dart';
 import '../component/doodle_btn/btn_view.dart';
 import 'lobby_logic.dart';
-import 'package:map_launcher/map_launcher.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LobbyPage extends StatelessWidget {
   final logic = Get.put(LobbyLogic());
   final state = Get.find<LobbyLogic>().state;
-
-  Future openMapsSheet(
-      context, String title, String description, Coords coords) async {
-    try {
-      final availableMaps = await MapLauncher.installedMaps;
-
-      Get.bottomSheet(
-          SafeArea(
-            child: SingleChildScrollView(
-              child: Wrap(
-                children: <Widget>[
-                  for (var map in availableMaps)
-                    InkWell(
-                      borderRadius: BorderRadius.circular(10.r),
-                      onTap: () => map.showMarker(
-                        title: title,
-                        description: description,
-                        coords: coords,
-                      ),
-                      child: ListTile(
-                        title: Text(map.mapName),
-                        leading: SvgPicture.asset(
-                          map.icon,
-                          height: 30.0,
-                          width: 30.0,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ),
-          backgroundColor: Colors.white.withOpacity(0.8),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(10.r))));
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
 
   LobbyPage({Key? key}) : super(key: key);
 
@@ -165,7 +124,7 @@ class LobbyPage extends StatelessWidget {
                                             decoration:
                                                 TextDecoration.underline),
                                         recognizer: TapGestureRecognizer()
-                                          ..onTap = () => openMapsSheet(
+                                          ..onTap = () => logic.openMapsSheet(
                                                 context,
                                                 map.name,
                                                 map.address,

@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:map_launcher/map_launcher.dart';
 
 import '../component/data/site.dart';
 import '../component/doodle_btn/btn_view.dart';
@@ -13,11 +15,50 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
   final LobbyState state = LobbyState();
   final LocationSettings locationSettings = const LocationSettings(
     accuracy: LocationAccuracy.bestForNavigation,
-    distanceFilter: 10,
+    distanceFilter: 50,
   );
 
   late StreamSubscription<Position> positionStream;
   late LocationPermission permission;
+
+  Future openMapsSheet(
+      context, String title, String description, Coords coords) async {
+    try {
+      final availableMaps = await MapLauncher.installedMaps;
+
+      Get.bottomSheet(
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Wrap(
+                children: <Widget>[
+                  for (var map in availableMaps)
+                    InkWell(
+                      borderRadius: BorderRadius.circular(10.r),
+                      onTap: () => map.showMarker(
+                        title: title,
+                        description: description,
+                        coords: coords,
+                      ),
+                      child: ListTile(
+                        title: Text(map.mapName),
+                        leading: SvgPicture.asset(
+                          map.icon,
+                          height: 30.0,
+                          width: 30.0,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+          backgroundColor: Colors.white.withOpacity(0.8),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10.r))));
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
 
   @override
   Future<void> onInit() async {
@@ -28,11 +69,11 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
     state.initData();
 
     if (permission == LocationPermission.denied ||
-    permission == LocationPermission.deniedForever) {
+        permission == LocationPermission.deniedForever) {
       await Get.defaultDialog(
           title: '提醒！',
           middleText: '請同意存取位置權限，才可進行挑戰。',
-          middleTextStyle:  TextStyle(
+          middleTextStyle: TextStyle(
               color: Colors.black,
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,
@@ -56,7 +97,8 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
     }
 
     permission = await Geolocator.checkPermission();
-    if (permission != LocationPermission.denied && permission != LocationPermission.deniedForever) {
+    if (permission != LocationPermission.denied &&
+        permission != LocationPermission.deniedForever) {
       positionStream =
           Geolocator.getPositionStream(locationSettings: locationSettings)
               .listen((Position? position) {
@@ -80,6 +122,20 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
               state.nearLocation = element;
             }
           }
+          Get.snackbar('您正在前往...',
+              '距離您最近的地點為：${state.nearLocation.name}，還有${state.nearLocation.distance.toInt()}公尺。',
+              duration: const Duration(seconds: 8),
+              colorText: Colors.white,
+              backgroundColor: Colors.grey.withOpacity(0.8),
+              mainButton: TextButton(
+                  onPressed: () {
+                    openMapsSheet(Get.context, state.nearLocation.name,
+                        state.nearLocation.address, state.nearLocation.coords);
+                  },
+                  child: Text(
+                    '點擊查看地圖位置',
+                    style: TextStyle(color: Colors.blueAccent[700]),
+                  )));
           debugPrint(
               '最近地點:${state.nearLocation.name} 距離:${state.nearLocation.distance}');
         }
@@ -88,7 +144,7 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
       await Get.defaultDialog(
           title: '提醒！',
           middleText: '請進入設定開啟位置存取權限，才可進行挑戰。',
-          middleTextStyle:  TextStyle(
+          middleTextStyle: TextStyle(
               color: Colors.black,
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,
@@ -108,16 +164,14 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
             },
           ));
 
-      if(GetPlatform.isIOS){
+      if (GetPlatform.isIOS) {
         await Geolocator.openLocationSettings();
-      }else{
+      } else {
         await Geolocator.openAppSettings();
       }
-
     }
     super.onInit();
   }
-
 
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: 800),
