@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:map_launcher/map_launcher.dart';
+import 'package:pillow/route_config.dart';
 
 import '../component/data/site.dart';
 import '../component/doodle_btn/btn_view.dart';
@@ -22,8 +23,8 @@ class LobbyLogic extends GetxController
   late StreamSubscription<Position> positionStream;
   late LocationPermission permission;
 
-  Future openMapsSheet(context, String title, String description,
-      Coords coords) async {
+  Future openMapsSheet(
+      context, String title, String description, Coords coords) async {
     try {
       final availableMaps = await MapLauncher.installedMaps;
 
@@ -35,12 +36,14 @@ class LobbyLogic extends GetxController
                   for (var map in availableMaps)
                     InkWell(
                       borderRadius: BorderRadius.circular(10.r),
-                      onTap: () =>
-                          map.showMarker(
-                            title: title,
-                            description: description,
-                            coords: coords,
-                          ),
+                      onTap: () => {
+                        map.showMarker(
+                          title: title,
+                          description: description,
+                          coords: coords,
+                        ),
+                        Get.back()
+                      },
                       child: ListTile(
                         title: Text(map.mapName),
                         leading: SvgPicture.asset(
@@ -56,7 +59,7 @@ class LobbyLogic extends GetxController
           ),
           backgroundColor: Colors.white.withOpacity(0.8),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(10.r))));
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16.r))));
     } catch (e) {
       debugPrint('$e');
     }
@@ -85,7 +88,7 @@ class LobbyLogic extends GetxController
           titleStyle: TextStyle(
               fontSize: 22.sp, height: 1.5, fontWeight: FontWeight.bold),
           contentPadding:
-          EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.0.w),
+              EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.0.w),
           backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
           confirm: DoodleBtnWidget(
             tag: 'go to argent gps request',
@@ -105,91 +108,96 @@ class LobbyLogic extends GetxController
       positionStream =
           Geolocator.getPositionStream(locationSettings: locationSettings)
               .listen((Position? position) {
-            debugPrint(position == null
-                ? 'Unknown'
-                : '${position.latitude.toString()}, ${position.longitude
-                .toString()}');
+        debugPrint(position == null
+            ? 'Unknown'
+            : '${position.latitude.toString()}, ${position.longitude.toString()}');
 
-            if (position != null) {
-              //update site distance
-              for (var element in siteMap) {
-                element.distance = Geolocator.distanceBetween(
+        if (position != null) {
+          //update site distance
+          for (var element in siteMap) {
+            element.distance = Geolocator.distanceBetween(
                     position.latitude,
                     position.longitude,
                     element.coords.latitude,
                     element.coords.longitude)
-                    .abs();
-              }
-              //find near site
-              for (var element in siteMap) {
-                if (element.distance < state.nearLocation.distance) {
-                  state.nearLocation = element;
-                }
-              }
-              Get.snackbar(
-                '',
-                '',
-                forwardAnimationCurve: Curves.easeOutBack,
-                borderRadius: 28.r,
-                titleText: Text(
-                  '您正在前往...',
-                  style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                messageText: Wrap(
-                    alignment: WrapAlignment.end,
-                    crossAxisAlignment: WrapCrossAlignment.end,
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                            style: TextStyle(
-                                fontSize: 16.sp, color: Colors.white),
-                            text: '距離您最近的地點「',
-                            children: [
-                              TextSpan(
-                                text: state.nearLocation.name,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const TextSpan(text: '」，還有'),
-                              TextSpan(
-                                text: '${state.nearLocation.distance.toInt()}',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const TextSpan(
-                                text: '公尺。',
-                              )
-                            ]),
-                      ),
-                      DoodleBtnWidget(
-                        onTapUpCallback: () {
-                          openMapsSheet(Get.context, state.nearLocation.name,
-                              state.nearLocation.address,
-                              state.nearLocation.coords);
-                          Get.closeAllSnackbars();
-                        },
-                        tag: '查看',
-                        textColor: Colors.white,
-                        text: '查看',
-                        facWidth: 0.18,
-                        facHeight: 0.055,
-                        textSize: 14,
-                        borderWidth: 1.5,
-                        backgroundColor: const Color(0xffacacac),)
-                    ]),
-                duration: const Duration(seconds: 5),
-                margin: const EdgeInsets.symmetric(horizontal: .0),
-                colorText: Colors.white,
-                backgroundColor: Colors.grey.withOpacity(0.8),
-              );
-              debugPrint(
-                  '最近地點:${state.nearLocation.name} 距離:${state.nearLocation
-                      .distance}');
+                .abs();
+          }
+          //find near site
+          for (var element in siteMap) {
+            if (element.distance < state.nearLocation.distance) {
+              state.nearLocation = element;
             }
-          });
+          }
+          Get.snackbar(
+            '',
+            '',
+            forwardAnimationCurve: Curves.easeInOutBack,
+            borderRadius: 28.r,
+            titleText: Text(
+              '您正在前往...',
+              style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+            messageText: Wrap(alignment: WrapAlignment.start, children: [
+              RichText(
+                text: TextSpan(
+                    style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                    text: '距離您最近的地點「',
+                    children: [
+                      TextSpan(
+                        text: state.nearLocation.name,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const TextSpan(text: '」，還有'),
+                      TextSpan(
+                        text: '${state.nearLocation.distance.toInt()}',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const TextSpan(
+                        text: '公尺。',
+                      )
+                    ]),
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: DoodleBtnWidget(
+                  onTapUpCallback: () {
+                    if (state.nearLocation.distance >= 50) {
+                      openMapsSheet(
+                          Get.context,
+                          state.nearLocation.name,
+                          state.nearLocation.address,
+                          state.nearLocation.coords);
+                    }
+                    else{
+                      controller.stop();
+                      positionStream.pause();
+                      Get.toNamed(RouteConfig.question);
+                    }
+                    Get.closeAllSnackbars();
+                  },
+                  tag: '查看',
+                  textColor: Colors.white,
+                  text: '查看',
+                  facWidth: 0.18,
+                  facHeight: 0.055,
+                  textSize: 14,
+                  borderWidth: 1.5,
+                  backgroundColor: const Color(0xffacacac),
+                ),
+              )
+            ]),
+            duration: const Duration(seconds: 5),
+            margin: const EdgeInsets.symmetric(horizontal: .0),
+            colorText: Colors.white,
+            backgroundColor: Colors.grey.withOpacity(0.8),
+          );
+          debugPrint(
+              '最近地點:${state.nearLocation.name} 距離:${state.nearLocation.distance}');
+        }
+      });
     } else {
       await Get.defaultDialog(
           title: '提醒！',
@@ -203,7 +211,7 @@ class LobbyLogic extends GetxController
           titleStyle: TextStyle(
               fontSize: 22.sp, height: 1.5, fontWeight: FontWeight.bold),
           contentPadding:
-          EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.0.w),
+              EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.0.w),
           backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
           confirm: DoodleBtnWidget(
             tag: 'go to setting',
@@ -227,8 +235,7 @@ class LobbyLogic extends GetxController
   late final AnimationController controller = AnimationController(
     duration: const Duration(milliseconds: 800),
     vsync: this,
-  )
-    ..repeat(reverse: true);
+  )..repeat(reverse: true);
   late final Animation<AlignmentGeometry> animation = Tween<AlignmentGeometry>(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,

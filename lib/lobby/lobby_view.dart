@@ -45,7 +45,7 @@ class LobbyPage extends StatelessWidget {
               onTapUpCallback: () {
                 logic.controller.stop();
                 logic.positionStream.pause();
-                Get.toNamed(RouteConfig.store, preventDuplicates: false);
+                Get.toNamed(RouteConfig.store);
               },
               facWidth: 0.33,
               facHeight: 0.07,
