@@ -173,27 +173,25 @@ class LobbyLogic extends GetxController
                 )
               ],
             ),
-            messageText: Wrap(alignment: WrapAlignment.start, children: [
-              RichText(
-                text: TextSpan(
-                    style: TextStyle(fontSize: 16.sp, color: Colors.white),
-                    text: '距離您最近的地點「',
-                    children: [
-                      TextSpan(
-                        text: state.nearLocation.name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const TextSpan(text: '」，還有'),
-                      TextSpan(
-                        text: '${state.nearLocation.distance.toInt()}',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const TextSpan(
-                        text: '公尺。',
-                      )
-                    ]),
-              ),
-            ]),
+            messageText: RichText(
+              text: TextSpan(
+                  style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                  text: '距離您最近的地點「',
+                  children: [
+                    TextSpan(
+                      text: state.nearLocation.name,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const TextSpan(text: '」，還有'),
+                    TextSpan(
+                      text: '${state.nearLocation.distance.toInt()}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const TextSpan(
+                      text: '公尺。',
+                    )
+                  ]),
+            ),
             duration: const Duration(seconds: 5),
             margin: const EdgeInsets.symmetric(horizontal: .0),
             colorText: Colors.white,
