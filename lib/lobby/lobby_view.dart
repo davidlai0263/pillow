@@ -13,6 +13,7 @@ class LobbyPage extends StatelessWidget {
 
   LobbyPage({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +43,9 @@ class LobbyPage extends StatelessWidget {
             right: 10.w,
             child: DoodleBtnWidget(
               onTapUpCallback: () {
-                Get.toNamed(RouteConfig.store);
+                logic.controller.stop();
+                logic.positionStream.pause();
+                Get.toNamed(RouteConfig.store, preventDuplicates: false);
               },
               facWidth: 0.33,
               facHeight: 0.07,
@@ -66,32 +69,27 @@ class LobbyPage extends StatelessWidget {
                   )),
               SizedBox(
                 height: 28.5.sp,
-                child: GestureDetector(
-                  onTap: () {
-                    debugPrint('press');
-                  },
-                  child: GetBuilder<LobbyLogic>(builder: (logic) {
-                    return AlignTransition(
-                      alignment: logic.animation,
-                      child: Text(
-                        '請前往以下地點進行挑戰',
-                        style: TextStyle(
-                          height: 1.265,
-                          letterSpacing: 1.5.sp,
-                          color: Colors.white70,
-                          fontSize: 20.sp,
-                          shadows: <Shadow>[
-                            Shadow(
-                              offset: Offset(4.5.w, 4.5.h),
-                              blurRadius: 7.5.r,
-                              color: const Color.fromARGB(255, 47, 47, 47),
-                            ),
-                          ],
-                        ),
+                child: GetBuilder<LobbyLogic>(builder: (logic) {
+                  return AlignTransition(
+                    alignment: logic.animation,
+                    child: Text(
+                      '請前往以下地點進行挑戰',
+                      style: TextStyle(
+                        height: 1.265,
+                        letterSpacing: 1.5.sp,
+                        color: Colors.white70,
+                        fontSize: 20.sp,
+                        shadows: <Shadow>[
+                          Shadow(
+                            offset: Offset(4.5.w, 4.5.h),
+                            blurRadius: 7.5.r,
+                            color: const Color.fromARGB(255, 47, 47, 47),
+                          ),
+                        ],
                       ),
-                    );
-                  }),
-                ),
+                    ),
+                  );
+                }),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(0, .0, 0, 0.075.sw),

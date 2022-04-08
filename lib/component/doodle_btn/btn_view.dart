@@ -15,6 +15,7 @@ class DoodleBtnWidget extends StatelessWidget {
   final double facHeight;
   final String text;
   final double textSize;
+  final Color textColor;
   final IconData icon;
   final double iconSize;
   final bool isText;
@@ -33,6 +34,7 @@ class DoodleBtnWidget extends StatelessWidget {
       this.facHeight = 0.088,
       this.text = '',
       this.textSize = 25.0,
+      this.textColor = const Color(0xFF000000),
       this.icon = Icons.arrow_back_rounded,
       this.iconSize = 42.0,
       this.isText = true,
@@ -100,7 +102,7 @@ class DoodleBtnWidget extends StatelessWidget {
                           ? Text(
                               text,
                               style: TextStyle(
-                                color: const Color(0xFF000000),
+                                color: textColor,
                                 fontSize: textSize.sp,
                                 fontWeight: FontWeight.bold,
                                 height: 1.22,

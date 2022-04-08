@@ -11,7 +11,8 @@ import '../component/data/site.dart';
 import '../component/doodle_btn/btn_view.dart';
 import 'lobby_state.dart';
 
-class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
+class LobbyLogic extends GetxController
+    with GetSingleTickerProviderStateMixin, WidgetsBindingObserver {
   final LobbyState state = LobbyState();
   final LocationSettings locationSettings = const LocationSettings(
     accuracy: LocationAccuracy.bestForNavigation,
@@ -21,8 +22,8 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
   late StreamSubscription<Position> positionStream;
   late LocationPermission permission;
 
-  Future openMapsSheet(
-      context, String title, String description, Coords coords) async {
+  Future openMapsSheet(context, String title, String description,
+      Coords coords) async {
     try {
       final availableMaps = await MapLauncher.installedMaps;
 
@@ -34,11 +35,12 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
                   for (var map in availableMaps)
                     InkWell(
                       borderRadius: BorderRadius.circular(10.r),
-                      onTap: () => map.showMarker(
-                        title: title,
-                        description: description,
-                        coords: coords,
-                      ),
+                      onTap: () =>
+                          map.showMarker(
+                            title: title,
+                            description: description,
+                            coords: coords,
+                          ),
                       child: ListTile(
                         title: Text(map.mapName),
                         leading: SvgPicture.asset(
@@ -62,6 +64,7 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
 
   @override
   Future<void> onInit() async {
+    debugPrint('onInitS');
     permission = await Geolocator.requestPermission();
     permission = await Geolocator.checkPermission();
     debugPrint('$permission');
@@ -82,7 +85,7 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
           titleStyle: TextStyle(
               fontSize: 22.sp, height: 1.5, fontWeight: FontWeight.bold),
           contentPadding:
-              EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.0.w),
+          EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.0.w),
           backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
           confirm: DoodleBtnWidget(
             tag: 'go to argent gps request',
@@ -102,44 +105,91 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
       positionStream =
           Geolocator.getPositionStream(locationSettings: locationSettings)
               .listen((Position? position) {
-        debugPrint(position == null
-            ? 'Unknown'
-            : '${position.latitude.toString()}, ${position.longitude.toString()}');
+            debugPrint(position == null
+                ? 'Unknown'
+                : '${position.latitude.toString()}, ${position.longitude
+                .toString()}');
 
-        if (position != null) {
-          //update site distance
-          for (var element in siteMap) {
-            element.distance = Geolocator.distanceBetween(
+            if (position != null) {
+              //update site distance
+              for (var element in siteMap) {
+                element.distance = Geolocator.distanceBetween(
                     position.latitude,
                     position.longitude,
                     element.coords.latitude,
                     element.coords.longitude)
-                .abs();
-          }
-          //find near site
-          for (var element in siteMap) {
-            if (element.distance < state.nearLocation.distance) {
-              state.nearLocation = element;
+                    .abs();
+              }
+              //find near site
+              for (var element in siteMap) {
+                if (element.distance < state.nearLocation.distance) {
+                  state.nearLocation = element;
+                }
+              }
+              Get.snackbar(
+                '',
+                '',
+                forwardAnimationCurve: Curves.easeOutBack,
+                borderRadius: 28.r,
+                titleText: Text(
+                  '您正在前往...',
+                  style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                messageText: Wrap(
+                    alignment: WrapAlignment.end,
+                    crossAxisAlignment: WrapCrossAlignment.end,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                            style: TextStyle(
+                                fontSize: 16.sp, color: Colors.white),
+                            text: '距離您最近的地點「',
+                            children: [
+                              TextSpan(
+                                text: state.nearLocation.name,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const TextSpan(text: '」，還有'),
+                              TextSpan(
+                                text: '${state.nearLocation.distance.toInt()}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const TextSpan(
+                                text: '公尺。',
+                              )
+                            ]),
+                      ),
+                      DoodleBtnWidget(
+                        onTapUpCallback: () {
+                          openMapsSheet(Get.context, state.nearLocation.name,
+                              state.nearLocation.address,
+                              state.nearLocation.coords);
+                          Get.closeAllSnackbars();
+                        },
+                        tag: '查看',
+                        textColor: Colors.white,
+                        text: '查看',
+                        facWidth: 0.18,
+                        facHeight: 0.055,
+                        textSize: 14,
+                        borderWidth: 1.5,
+                        backgroundColor: const Color(0xffacacac),)
+                    ]),
+                duration: const Duration(seconds: 5),
+                margin: const EdgeInsets.symmetric(horizontal: .0),
+                colorText: Colors.white,
+                backgroundColor: Colors.grey.withOpacity(0.8),
+              );
+              debugPrint(
+                  '最近地點:${state.nearLocation.name} 距離:${state.nearLocation
+                      .distance}');
             }
-          }
-          Get.snackbar('您正在前往...',
-              '距離您最近的地點為：${state.nearLocation.name}，還有${state.nearLocation.distance.toInt()}公尺。',
-              duration: const Duration(seconds: 8),
-              colorText: Colors.white,
-              backgroundColor: Colors.grey.withOpacity(0.8),
-              mainButton: TextButton(
-                  onPressed: () {
-                    openMapsSheet(Get.context, state.nearLocation.name,
-                        state.nearLocation.address, state.nearLocation.coords);
-                  },
-                  child: Text(
-                    '點擊查看地圖位置',
-                    style: TextStyle(color: Colors.blueAccent[700]),
-                  )));
-          debugPrint(
-              '最近地點:${state.nearLocation.name} 距離:${state.nearLocation.distance}');
-        }
-      });
+          });
     } else {
       await Get.defaultDialog(
           title: '提醒！',
@@ -153,7 +203,7 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
           titleStyle: TextStyle(
               fontSize: 22.sp, height: 1.5, fontWeight: FontWeight.bold),
           contentPadding:
-              EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.0.w),
+          EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.0.w),
           backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
           confirm: DoodleBtnWidget(
             tag: 'go to setting',
@@ -170,25 +220,36 @@ class LobbyLogic extends GetxController with GetSingleTickerProviderStateMixin {
         await Geolocator.openAppSettings();
       }
     }
+    debugPrint('onInitF');
     super.onInit();
   }
 
-  late final AnimationController _controller = AnimationController(
+  late final AnimationController controller = AnimationController(
     duration: const Duration(milliseconds: 800),
     vsync: this,
-  )..repeat(reverse: true);
+  )
+    ..repeat(reverse: true);
   late final Animation<AlignmentGeometry> animation = Tween<AlignmentGeometry>(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   ).animate(
     CurvedAnimation(
-      parent: _controller,
+      parent: controller,
       curve: Curves.linear,
     ),
   );
+
+  @override
+  void onReady() {
+    debugPrint('onReady');
+    super.onReady();
+  }
+
   @override
   void onClose() {
-    _controller.dispose();
+    controller.dispose();
+    positionStream.cancel();
+    debugPrint('onClose');
     super.onClose();
   }
 }

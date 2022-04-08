@@ -10,6 +10,7 @@ import 'store_logic.dart';
 class StorePage extends StatelessWidget {
   final logic = Get.put(StoreLogic());
   final state = Get.find<StoreLogic>().state;
+  final logicLobby = Get.put(LobbyLogic());
   final lobbyState = Get.find<LobbyLogic>().state;
   StorePage({Key? key}) : super(key: key);
 
@@ -30,7 +31,10 @@ class StorePage extends StatelessWidget {
             child: DoodleBtnWidget(
               tag: '返回',
               onTapUpCallback: () {
+                logicLobby.controller.repeat(reverse: true);
+                logicLobby.positionStream.resume();
                 Get.back();
+                // Get.put(LobbyLogic());
               },
               facWidth: 0.245,
               facHeight: 0.07,
@@ -39,6 +43,7 @@ class StorePage extends StatelessWidget {
           ),
           Positioned(
             top: 50.h,
+            right: 110.w,
             child: DoodleBtnWidget(
               onTapUpCallback: () {
                 Get.toNamed(RouteConfig.myCoupon);
