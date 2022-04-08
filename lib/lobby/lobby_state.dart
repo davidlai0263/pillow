@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:pillow/component/data/site.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -5,8 +6,8 @@ class LobbyState {
   late Site nearLocation;
   late bool availableChallenge;
   late List<bool> challengeSave;
-  late int credit;
-  late List<int> coupon;
+  late var credit = 0.obs;
+  late List<int> coupon = [0, 0, 0, 0, 0, 0, 0].obs;
   LobbyState() {
     nearLocation = siteMap.first;
     availableChallenge = false;
@@ -21,7 +22,7 @@ class LobbyState {
       false,
       false
     ];
-    credit = 0;
+    credit.value = 0;
     coupon = [0, 0, 0, 0, 0, 0, 0];
   }
 
@@ -30,12 +31,12 @@ class LobbyState {
     if (prefs.containsKey('challengeSave') && prefs.containsKey('credit')) {
       challengeSave =
           _stringListToBoolList(prefs.getStringList('challengeSave')!);
-      credit = prefs.getInt('credit')!;
+      credit.value = prefs.getInt('credit')!;
       coupon = _stringListToIntList(prefs.getStringList('coupon')!);
     } else {
       await prefs.setStringList(
           'challengeSave', _boolListToStringList(challengeSave));
-      await prefs.setInt('credit', credit);
+      await prefs.setInt('credit', credit.value);
       await prefs.setStringList('coupon', _intListToStringList(coupon));
     }
   }
@@ -48,7 +49,7 @@ class LobbyState {
 
   saveCredit() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('credit', credit);
+    await prefs.setInt('credit', credit.value);
   }
 
   saveCoupon() async {
