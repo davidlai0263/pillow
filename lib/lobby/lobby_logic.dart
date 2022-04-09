@@ -73,6 +73,7 @@ class LobbyLogic extends GetxController
     debugPrint('$permission');
 
     state.initData();
+    state.cooldown = DateTime.utc(1900);
 
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) {

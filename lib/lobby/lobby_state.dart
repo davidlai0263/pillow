@@ -10,7 +10,6 @@ class LobbyState {
   late var credit = 0.obs;
   late List<int> coupon = [0, 0, 0, 0, 0, 0, 0].obs;
   LobbyState() {
-    cooldown = DateTime.now();
     nearLocation = siteMap.first;
     availableChallenge = false;
     challengeSave = [
