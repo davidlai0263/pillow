@@ -4,18 +4,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class StoreState {
   late var credit = 0.obs;
-  late List<int> coupon = [0, 0, 0, 0, 0, 0, 0];
+  late List<int> coupon;
 
   StoreState() {
     credit.value = 0;
-    coupon = [0, 0, 0, 0, 0, 0, 0].obs;
+    coupon = [0, 0, 0, 0, 0, 0, 0];
   }
   initData() async {
     final prefs = await SharedPreferences.getInstance();
-    if (prefs.containsKey('credit') || prefs.containsKey('coupon')) {
+    if (prefs.containsKey('credit') && prefs.containsKey('coupon')) {
       credit.value = prefs.getInt('credit')!;
       coupon = _stringListToIntList(prefs.getStringList('coupon')!);
-      debugPrint('createKey');
+      debugPrint('point : ${credit.value}');
+      debugPrint('have : $coupon');
     } else {
       await prefs.setInt('credit', credit.value);
       await prefs.setStringList('coupon', _intListToStringList(coupon));

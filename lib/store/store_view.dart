@@ -11,9 +11,7 @@ import 'store_logic.dart';
 
 class StorePage extends StatelessWidget {
   final logic = Get.put(StoreLogic());
-  final state = Get
-      .find<StoreLogic>()
-      .state;
+  final state = Get.find<StoreLogic>().state;
 
   StorePage({Key? key}) : super(key: key);
 
@@ -44,14 +42,8 @@ class StorePage extends StatelessWidget {
               tag: '返回',
               onTapUpCallback: () {
                 Get.back();
-                Get
-                    .put(LobbyLogic())
-                    .controller
-                    .repeat(reverse: true);
-                Get
-                    .put(LobbyLogic())
-                    .positionStream
-                    .resume();
+                Get.put(LobbyLogic()).controller.repeat(reverse: true);
+                Get.put(LobbyLogic()).positionStream.resume();
               },
               facWidth: 0.245,
               facHeight: 0.07,
@@ -74,11 +66,10 @@ class StorePage extends StatelessWidget {
                   width: 1.sw,
                   height: .45.sh,
                   color: Colors.yellow.shade300.withOpacity(0.85),
-                  child: CouponWidget(state: state))),
+                  child: CouponWidget(logic: logic, state: state))),
           Positioned(
             bottom: 100.h,
-            child: Obx(() =>
-                Text(
+            child: Obx(() => Text(
                   '現有積分：${state.credit}',
                   style: TextStyle(
                       color: Colors.white,
@@ -95,9 +86,11 @@ class StorePage extends StatelessWidget {
 class CouponWidget extends StatelessWidget {
   const CouponWidget({
     Key? key,
+    required this.logic,
     required this.state,
   }) : super(key: key);
 
+  final StoreLogic logic;
   final StoreState state;
 
   @override
@@ -118,30 +111,31 @@ class CouponWidget extends StatelessWidget {
                     width: 0.3.sw,
                     color: Colors.black,
                   ),
-                  Obx(() {
-                    return Text(
-                      '擁有：${state.coupon[c.index]}',
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold),
-                    );
-                  }),
+                  GetBuilder<StoreLogic>(
+                    assignId: true,
+                    builder: (logic) {
+                      return Text(
+                        '擁有：${state.coupon[c.index]}',
+                        style: TextStyle(
+                            fontSize: 18.sp, fontWeight: FontWeight.bold),
+                      );
+                    },
+                  ),
                   SizedBox(height: 4.h),
                   DoodleBtnWidget(
                     tag: '${c.point}',
                     onTapUpCallback: () {
                       Get.defaultDialog(
                         title: '${c.money}元折價券',
-                        titlePadding:
-                        EdgeInsets.symmetric(vertical: 8.h),
+                        titlePadding: EdgeInsets.symmetric(vertical: 8.h),
                         titleStyle: TextStyle(
                             fontSize: 20.sp,
                             height: 1.5,
                             fontWeight: FontWeight.bold),
-                        contentPadding: EdgeInsets.fromLTRB(
-                            12.0.w, 0, 12.0.w, 12.h),
-                        backgroundColor: Colors.yellow.shade300
-                            .withOpacity(0.85),
+                        contentPadding:
+                            EdgeInsets.fromLTRB(12.0.w, 0, 12.0.w, 12.h),
+                        backgroundColor:
+                            Colors.yellow.shade300.withOpacity(0.85),
                         content: RichText(
                             text: TextSpan(
                                 style: TextStyle(
@@ -150,31 +144,41 @@ class CouponWidget extends StatelessWidget {
                                     color: Colors.black),
                                 text: '是否花費',
                                 children: [
-                                  TextSpan(
-                                      text: '「${c.point}積分」',
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight
-                                            .bold,
-                                      )),
-                                  const TextSpan(
-                                    text: '兌換此折價券',
-                                  ),
-                                ])),
+                              TextSpan(
+                                  text: '「${c.point}積分」',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                              const TextSpan(
+                                text: '兌換此折價券',
+                              ),
+                            ])),
+                        cancel: DoodleBtnWidget(
+                          tag: 'cancel',
+                          onTapUpCallback: () {
+                            Get.back();
+                          },
+                          text: '取消',
+                          textSize: 14,
+                          facWidth: 0.2,
+                          facHeight: 0.055,
+                          borderWidth: 2,
+                          borderRadius: 14,
+                          devWidth: 1.5,
+                          devHeight: 1.5,
+                        ),
                         confirm: DoodleBtnWidget(
                           tag: 'sure',
                           onTapUpCallback: () async {
                             Get.back();
-                            bool enough =
-                                state.credit.value > c.point;
-                            if (state.credit.value >
-                                c.point) {
+                            bool enough = state.credit.value >= c.point;
+                            if (state.credit.value > c.point) {
                               int point = c.point;
                               state.credit.value -= point;
                               state.coupon[c.index] += 1;
-                              debugPrint('${state.credit.value}');
-                              debugPrint('${state.coupon[c.index]}');
                               state.saveCredit();
                               state.saveCoupon();
+                              logic.haveChange();
                             }
                             Get.snackbar(
                               '',
@@ -196,35 +200,17 @@ class CouponWidget extends StatelessWidget {
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 8.h),
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 18.h),
+                              padding: EdgeInsets.symmetric(vertical: 8.h),
+                              margin: EdgeInsets.symmetric(vertical: 18.h),
                               borderRadius: 36.r,
-                              duration:
-                              const Duration(seconds: 2),
-                              animationDuration:
-                              const Duration(seconds: 1),
+                              duration: const Duration(seconds: 2),
+                              animationDuration: const Duration(seconds: 1),
                               backgroundColor: Colors.black38,
                               snackPosition: SnackPosition.BOTTOM,
                               maxWidth: 0.5.sw,
                             );
                           },
                           text: '確定',
-                          textSize: 14,
-                          facWidth: 0.2,
-                          facHeight: 0.055,
-                          borderWidth: 2,
-                          borderRadius: 14,
-                          devWidth: 1.5,
-                          devHeight: 1.5,
-                        ),
-                        cancel: DoodleBtnWidget(
-                          tag: 'cancel',
-                          onTapUpCallback: () {
-                            Get.back();
-                          },
-                          text: '取消',
                           textSize: 14,
                           facWidth: 0.2,
                           facHeight: 0.055,
@@ -246,11 +232,11 @@ class CouponWidget extends StatelessWidget {
                   ),
                   padding
                       ? SizedBox(
-                    height: 12.h,
-                  )
+                          height: 12.h,
+                        )
                       : const SizedBox(
-                    height: .0,
-                  )
+                          height: .0,
+                        )
                 ],
               );
             }).toList(),

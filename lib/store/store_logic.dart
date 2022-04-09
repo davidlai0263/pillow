@@ -5,7 +5,20 @@ import 'store_state.dart';
 
 class StoreLogic extends GetxController {
   final StoreState state = StoreState();
-
+  @override
+  Future<void> onInit() async{
+    state.initData();
+    super.onInit();
+  }
+  @override
+  void onReady() {
+    update();
+    super.onReady();
+  }
+   void haveChange() {
+    state.initData();
+    update();
+   }
 }
 class CustomScroll extends ScrollBehavior {
   @override

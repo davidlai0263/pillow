@@ -7,5 +7,7 @@ class RouletteLogic extends GetxController {
   final RouletteState state = RouletteState();
   final StreamController dividerController = StreamController<int>();
   final wheelNotifier = StreamController<double>();
+  bool isSpinning = false;
+
   double generateRandomAngle() => Random().nextDouble() * pi * 2;
 }

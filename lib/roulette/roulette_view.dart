@@ -29,7 +29,57 @@ class RoulettePage extends StatelessWidget {
             child: DoodleBtnWidget(
               tag: '返回',
               onTapUpCallback: () {
-                Get.back();
+                logic.isSpinning
+                    ? Get.back()
+                    : Get.defaultDialog(
+                        title: '確定退出？',
+                        titlePadding: EdgeInsets.symmetric(vertical: 8.h),
+                        titleStyle: TextStyle(
+                            fontSize: 20.sp,
+                            height: 1.5,
+                            fontWeight: FontWeight.bold),
+                        contentPadding:
+                            EdgeInsets.fromLTRB(12.0.w, 0, 12.0.w, 12.h),
+                        backgroundColor:
+                            Colors.yellow.shade300.withOpacity(0.85),
+                        content: RichText(
+                            text: TextSpan(
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              letterSpacing: 0.9.sp,
+                              color: Colors.black),
+                          text: '您目前尚未抽獎，如退出將失去獲得積分的機會！',
+                        )),
+                        cancel: DoodleBtnWidget(
+                          tag: 'cancelBack',
+                          onTapUpCallback: () {
+                            Get.back();
+                          },
+                          text: '取消',
+                          textSize: 14,
+                          facWidth: 0.2,
+                          facHeight: 0.055,
+                          borderWidth: 2,
+                          borderRadius: 14,
+                          devWidth: 1.5,
+                          devHeight: 1.5,
+                        ),
+                        confirm: DoodleBtnWidget(
+                          tag: 'sureBack',
+                          onTapUpCallback: () {
+                            Get.back();
+                            Get.back();
+                          },
+                          text: '確定',
+                          textSize: 14,
+                          facWidth: 0.2,
+                          facHeight: 0.055,
+                          borderWidth: 2,
+                          borderRadius: 14,
+                          devWidth: 1.5,
+                          devHeight: 1.5,
+                        ),
+                      );
                 // Get.put(LobbyLogic());
               },
               facWidth: 0.245,
@@ -60,8 +110,10 @@ class RoulettePage extends StatelessWidget {
               ),
               child: GestureDetector(
                 onTap: () {
-                  logic.wheelNotifier.sink
-                      .add((Random().nextInt(10000) + 5000));
+                  logic.isSpinning
+                      ? null
+                      : logic.wheelNotifier.sink
+                          .add((Random().nextInt(10000) + 5000));
                 },
               ),
             ),
@@ -94,7 +146,8 @@ class SpinnerWheel extends StatelessWidget {
       onUpdate: (int point) {
         //轉動時觸發轉到什麼
       },
-      onEnd: (int index) async{
+      onEnd: (int index) async {
+        logic.isSpinning = true;
         List<int> list = [1, 3, 5, 3, 3, 5];
         debugPrint('point ${list[index - 1]}');
         storeState.credit.value += list[index - 1];
