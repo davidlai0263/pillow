@@ -128,6 +128,7 @@ class LobbyLogic extends GetxController
               state.nearLocation = element;
             }
           }
+          //cooldown
           debugPrint(DateTime.now().difference(state.cooldown).inSeconds.toString());
           if(DateTime.now().difference(state.cooldown).inSeconds > 8){
             Get.snackbar(
