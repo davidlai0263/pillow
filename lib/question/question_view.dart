@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pillow/component/doodle_btn/btn_view.dart';
 import 'package:pillow/lobby/lobby_logic.dart';
-
-import '../route_config.dart';
 import 'question_logic.dart';
 
 class QuestionPage extends StatelessWidget {

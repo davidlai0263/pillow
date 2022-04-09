@@ -6,14 +6,14 @@ import 'package:pillow/component/data/coupon.dart';
 import 'package:pillow/component/doodle_btn/btn_view.dart';
 import 'package:pillow/lobby/lobby_logic.dart';
 import 'package:pillow/route_config.dart';
-
+import 'package:pillow/store/store_state.dart';
 import 'store_logic.dart';
 
 class StorePage extends StatelessWidget {
   final logic = Get.put(StoreLogic());
-  final state = Get.find<StoreLogic>().state;
-  final logicLobby = Get.put(LobbyLogic());
-  final lobbyState = Get.find<LobbyLogic>().state;
+  final state = Get
+      .find<StoreLogic>()
+      .state;
 
   StorePage({Key? key}) : super(key: key);
 
@@ -35,7 +35,7 @@ class StorePage extends StatelessWidget {
                 onPressed: () {
                   Get.toNamed(RouteConfig.roulette);
                 },
-                child: Text('roulette'),
+                child: const Text('roulette'),
               )),
           Positioned(
             top: 57.5.h,
@@ -43,10 +43,15 @@ class StorePage extends StatelessWidget {
             child: DoodleBtnWidget(
               tag: '返回',
               onTapUpCallback: () {
-                logicLobby.controller.repeat(reverse: true);
-                logicLobby.positionStream.resume();
                 Get.back();
-                // Get.put(LobbyLogic());
+                Get
+                    .put(LobbyLogic())
+                    .controller
+                    .repeat(reverse: true);
+                Get
+                    .put(LobbyLogic())
+                    .positionStream
+                    .resume();
               },
               facWidth: 0.245,
               facHeight: 0.07,
@@ -66,17 +71,15 @@ class StorePage extends StatelessWidget {
           ),
           Positioned(
               child: Container(
-            width: 1.sw,
-            height: .45.sh,
-            color: Colors.yellow.shade300.withOpacity(0.85),
-            child: Coupon(
-              logic: logic,
-            ),
-          )),
+                  width: 1.sw,
+                  height: .45.sh,
+                  color: Colors.yellow.shade300.withOpacity(0.85),
+                  child: CouponWidget(state: state))),
           Positioned(
             bottom: 100.h,
-            child: Obx(() => Text(
-                  '現有積分：${lobbyState.credit}',
+            child: Obx(() =>
+                Text(
+                  '現有積分：${state.credit}',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 32.sp,
@@ -89,10 +92,13 @@ class StorePage extends StatelessWidget {
   }
 }
 
-class Coupon extends StatelessWidget {
-  final StoreLogic logic;
+class CouponWidget extends StatelessWidget {
+  const CouponWidget({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
 
-  const Coupon({Key? key, required this.logic}) : super(key: key);
+  final StoreState state;
 
   @override
   Widget build(BuildContext context) {
@@ -112,26 +118,30 @@ class Coupon extends StatelessWidget {
                     width: 0.3.sw,
                     color: Colors.black,
                   ),
-                  Text(
-                    '擁有：${c.have}',
-                    style:
-                        TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
-                  ),
+                  Obx(() {
+                    return Text(
+                      '擁有：${state.coupon[c.index]}',
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.bold),
+                    );
+                  }),
                   SizedBox(height: 4.h),
                   DoodleBtnWidget(
                     tag: '${c.point}',
                     onTapUpCallback: () {
                       Get.defaultDialog(
                         title: '${c.money}元折價券',
-                        titlePadding: EdgeInsets.symmetric(vertical: 8.h),
+                        titlePadding:
+                        EdgeInsets.symmetric(vertical: 8.h),
                         titleStyle: TextStyle(
                             fontSize: 20.sp,
                             height: 1.5,
                             fontWeight: FontWeight.bold),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(12.0.w, 0, 12.0.w, 12.h),
-                        backgroundColor:
-                            Colors.yellow.shade300.withOpacity(0.85),
+                        contentPadding: EdgeInsets.fromLTRB(
+                            12.0.w, 0, 12.0.w, 12.h),
+                        backgroundColor: Colors.yellow.shade300
+                            .withOpacity(0.85),
                         content: RichText(
                             text: TextSpan(
                                 style: TextStyle(
@@ -140,27 +150,39 @@ class Coupon extends StatelessWidget {
                                     color: Colors.black),
                                 text: '是否花費',
                                 children: [
-                              TextSpan(
-                                  text: '「${c.point}積分」',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              const TextSpan(
-                                text: '兌換此折價券',
-                              ),
-                            ])),
+                                  TextSpan(
+                                      text: '「${c.point}積分」',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight
+                                            .bold,
+                                      )),
+                                  const TextSpan(
+                                    text: '兌換此折價券',
+                                  ),
+                                ])),
                         confirm: DoodleBtnWidget(
                           tag: 'sure',
-                          onTapUpCallback: () {
+                          onTapUpCallback: () async {
                             Get.back();
-                            bool enough = lobbyState.credit.value > c.point;
+                            bool enough =
+                                state.credit.value > c.point;
+                            if (state.credit.value >
+                                c.point) {
+                              int point = c.point;
+                              state.credit.value -= point;
+                              state.coupon[c.index] += 1;
+                              debugPrint('${state.credit.value}');
+                              debugPrint('${state.coupon[c.index]}');
+                              state.saveCredit();
+                              state.saveCoupon();
+                            }
                             Get.snackbar(
                               '',
                               '',
                               titleText: Text(
                                 enough ? '積分足夠：' : '積分不足：',
                                 style: TextStyle(
-                                  fontSize: 16.sp,
+                                  fontSize: 14.sp,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -174,11 +196,15 @@ class Coupon extends StatelessWidget {
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              padding: EdgeInsets.symmetric(vertical: 8.h),
-                              margin: EdgeInsets.symmetric(vertical: 18.h),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 8.h),
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 18.h),
                               borderRadius: 36.r,
-                              duration: const Duration(seconds: 2),
-                              animationDuration: const Duration(seconds: 1),
+                              duration:
+                              const Duration(seconds: 2),
+                              animationDuration:
+                              const Duration(seconds: 1),
                               backgroundColor: Colors.black38,
                               snackPosition: SnackPosition.BOTTOM,
                               maxWidth: 0.5.sw,
@@ -220,11 +246,11 @@ class Coupon extends StatelessWidget {
                   ),
                   padding
                       ? SizedBox(
-                          height: 12.h,
-                        )
+                    height: 12.h,
+                  )
                       : const SizedBox(
-                          height: .0,
-                        )
+                    height: .0,
+                  )
                 ],
               );
             }).toList(),
