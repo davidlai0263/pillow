@@ -3,12 +3,14 @@ import 'package:pillow/component/data/site.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LobbyState {
+  late DateTime cooldown;
   late Site nearLocation;
   late bool availableChallenge;
   late List<bool> challengeSave;
   late var credit = 0.obs;
   late List<int> coupon = [0, 0, 0, 0, 0, 0, 0].obs;
   LobbyState() {
+    cooldown = DateTime.now();
     nearLocation = siteMap.first;
     availableChallenge = false;
     challengeSave = [

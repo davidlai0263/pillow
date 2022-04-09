@@ -128,77 +128,81 @@ class LobbyLogic extends GetxController
               state.nearLocation = element;
             }
           }
-          Get.snackbar(
-            '',
-            '',
-            forwardAnimationCurve: Curves.easeInOutBack,
-            borderRadius: 28.r,
-            titleText: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '您正在前往...',
-                  style: TextStyle(
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                DoodleBtnWidget(
-                  onTapUpCallback: () {
-                    if (state.nearLocation.distance >= 50) {
-                      openMapsSheet(
-                          Get.context,
-                          state.nearLocation.name,
-                          state.nearLocation.address,
-                          state.nearLocation.coords);
-                    }
-                    else{
-                      controller.stop();
-                      positionStream.pause();
-                      Get.toNamed(RouteConfig.question);
-                    }
-                    Get.closeAllSnackbars();
-                  },
-                  tag: '查看',
-                  textColor: Colors.white,
-                  text: '查看',
-                  facWidth: 0.16,
-                  facHeight: 0.05,
-                  textSize: 14,
-                  borderWidth: 1.5,
-                  devWidth: 2.5,
-                  devHeight: 2.5,
-                  borderRadius: 12,
-                  backgroundColor: const Color(0xffacacac),
-                )
-              ],
-            ),
-            messageText: RichText(
-              text: TextSpan(
-                  style: TextStyle(fontSize: 16.sp, color: Colors.white),
-                  text: '距離您最近的地點「',
-                  children: [
-                    TextSpan(
-                      text: state.nearLocation.name,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const TextSpan(text: '」，還有'),
-                    TextSpan(
-                      text: '${state.nearLocation.distance.toInt()}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const TextSpan(
-                      text: '公尺。',
-                    )
-                  ]),
-            ),
-            duration: const Duration(seconds: 5),
-            margin: const EdgeInsets.symmetric(horizontal: .0),
-            colorText: Colors.white,
-            backgroundColor: Colors.grey.withOpacity(0.8),
-          );
-          debugPrint(
-              '最近地點:${state.nearLocation.name} 距離:${state.nearLocation.distance}');
+          debugPrint(DateTime.now().difference(state.cooldown).inSeconds.toString());
+          if(DateTime.now().difference(state.cooldown).inSeconds > 8){
+            Get.snackbar(
+              '',
+              '',
+              forwardAnimationCurve: Curves.easeInOutBack,
+              borderRadius: 28.r,
+              titleText: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '您正在前往...',
+                    style: TextStyle(
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  DoodleBtnWidget(
+                    onTapUpCallback: () {
+                      if (state.nearLocation.distance >= 50) {
+                        openMapsSheet(
+                            Get.context,
+                            state.nearLocation.name,
+                            state.nearLocation.address,
+                            state.nearLocation.coords);
+                      }
+                      else{
+                        controller.stop();
+                        positionStream.pause();
+                        Get.toNamed(RouteConfig.question);
+                      }
+                      Get.closeAllSnackbars();
+                    },
+                    tag: '查看',
+                    textColor: Colors.white,
+                    text: '查看',
+                    facWidth: 0.16,
+                    facHeight: 0.05,
+                    textSize: 14,
+                    borderWidth: 1.5,
+                    devWidth: 2.5,
+                    devHeight: 2.5,
+                    borderRadius: 12,
+                    backgroundColor: const Color(0xffacacac),
+                  )
+                ],
+              ),
+              messageText: RichText(
+                text: TextSpan(
+                    style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                    text: '距離您最近的地點「',
+                    children: [
+                      TextSpan(
+                        text: state.nearLocation.name,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const TextSpan(text: '」，還有'),
+                      TextSpan(
+                        text: '${state.nearLocation.distance.toInt()}',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const TextSpan(
+                        text: '公尺。',
+                      )
+                    ]),
+              ),
+              duration: const Duration(seconds: 5),
+              margin: const EdgeInsets.symmetric(horizontal: .0),
+              colorText: Colors.white,
+              backgroundColor: Colors.grey.withOpacity(0.8),
+            );
+            state.cooldown = DateTime.now();
+            debugPrint(
+                '最近地點:${state.nearLocation.name} 距離:${state.nearLocation.distance}');
+          }
         }
       });
     } else {
