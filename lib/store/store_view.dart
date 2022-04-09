@@ -29,6 +29,15 @@ class StorePage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Positioned(
+              right: 0,
+              top: 30,
+              child: TextButton(
+                onPressed: () {
+                  Get.toNamed(RouteConfig.roulette);
+                },
+                child: Text('roulette'),
+              )),
+          Positioned(
             top: 57.5.h,
             left: 10.w,
             child: DoodleBtnWidget(
@@ -48,9 +57,7 @@ class StorePage extends StatelessWidget {
             top: 50.h,
             right: 110.w,
             child: DoodleBtnWidget(
-              onTapUpCallback: () {
-                Get.toNamed(RouteConfig.myCoupon);
-              },
+              onTapUpCallback: () {},
               facWidth: 0.376,
               facHeight: 0.085,
               text: '我的折價卷',
@@ -147,31 +154,33 @@ class Coupon extends StatelessWidget {
                           onTapUpCallback: () {
                             Get.back();
                             bool enough = lobbyState.credit.value > c.point;
-                            Get.snackbar('', '',
-                                titleText: Text(
-                                  enough ? '積分足夠：' : '積分不足：',
-                                  style: TextStyle(
-                                    fontSize: 16.sp,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.center,
+                            Get.snackbar(
+                              '',
+                              '',
+                              titleText: Text(
+                                enough ? '積分足夠：' : '積分不足：',
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                messageText: Text(
-                                  enough ? '兌換成功：' : '兌換失敗',
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
+                                textAlign: TextAlign.center,
+                              ),
+                              messageText: Text(
+                                enough ? '兌換成功：' : '兌換失敗',
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: Colors.white,
                                 ),
-                                padding: EdgeInsets.symmetric(vertical: 8.h),
-                                margin: EdgeInsets.symmetric(vertical: 18.h),
-                                borderRadius: 36.r,
-                                duration: const Duration(seconds: 2),
-                                animationDuration: const Duration(seconds: 1),
-                                backgroundColor: Colors.black38,
-                                snackPosition: SnackPosition.BOTTOM,
+                                textAlign: TextAlign.center,
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: 8.h),
+                              margin: EdgeInsets.symmetric(vertical: 18.h),
+                              borderRadius: 36.r,
+                              duration: const Duration(seconds: 2),
+                              animationDuration: const Duration(seconds: 1),
+                              backgroundColor: Colors.black38,
+                              snackPosition: SnackPosition.BOTTOM,
                               maxWidth: 0.5.sw,
                             );
                           },
