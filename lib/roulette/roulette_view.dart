@@ -152,6 +152,46 @@ class SpinnerWheel extends StatelessWidget {
         debugPrint('point ${list[index - 1]}');
         storeState.credit.value += list[index - 1];
         storeState.saveCredit();
+        Get.defaultDialog(
+          title: '中獎！',
+          titlePadding: EdgeInsets.symmetric(vertical: 6.h),
+          titleStyle: TextStyle(
+              fontSize: 20.sp, height: 1.5, fontWeight: FontWeight.bold),
+          contentPadding: EdgeInsets.fromLTRB(10.0.w, 0, 10.0.w, 10.h),
+          backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
+          content: RichText(
+              text: TextSpan(
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      letterSpacing: 1.sp,
+                      color: Colors.black),
+                  text: '恭喜獲得',
+                  children: [
+                TextSpan(
+                  text: '${list[index - 1]}',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, letterSpacing: 1.sp, fontSize: 18.sp),
+                ),
+                const TextSpan(
+                  text: '點積分',
+                )
+              ])),
+          confirm: DoodleBtnWidget(
+            tag: 'sureBack',
+            onTapUpCallback: () {
+              Get.back();
+              Get.back();
+            },
+            text: '確定',
+            textSize: 14,
+            facWidth: 0.2,
+            facHeight: 0.055,
+            borderWidth: 2,
+            borderRadius: 14,
+            devWidth: 1.5,
+            devHeight: 1.5,
+          ),
+        );
       },
       shouldStartOrStop: logic.wheelNotifier.stream,
       secondaryImage: Image.asset('assets/images/gored.png'),

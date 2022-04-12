@@ -67,6 +67,7 @@ class StorePage extends StatelessWidget {
                   height: .45.sh,
                   color: Colors.yellow.shade300.withOpacity(0.85),
                   child: CouponWidget(logic: logic, state: state))),
+          Text('點擊優惠卷使用', style: TextStyle(fontSize: 16.sp, color: Colors.white70),),
           Positioned(
             bottom: 100.h,
             child: Obx(() => Text(
