@@ -74,8 +74,8 @@ class RoulettePage extends StatelessWidget {
                                     facHeight: 0.055,
                                     borderWidth: 2,
                                     borderRadius: 14,
-                                    devWidth: 1.5,
-                                    devHeight: 1.5,
+                                    devWidth: 1.75,
+                                    devHeight: 1.75,
                                   ),
                                   DoodleBtnWidget(
                                     tag: 'DiaSureBack',
@@ -89,8 +89,8 @@ class RoulettePage extends StatelessWidget {
                                     facHeight: 0.055,
                                     borderWidth: 2,
                                     borderRadius: 14,
-                                    devWidth: 1.5,
-                                    devHeight: 1.5,
+                                    devWidth: 1.75,
+                                    devHeight: 1.75,
                                   ),
                                 ],
                               )
@@ -129,10 +129,12 @@ class RoulettePage extends StatelessWidget {
               ),
               child: GestureDetector(
                 onTap: () {
+                  double random = Random().nextInt(1100) + 7100;
+                  debugPrint('$random');
                   logic.isSpinning
                       ? null
                       : logic.wheelNotifier.sink
-                          .add((Random().nextInt(1111) + 6666));
+                          .add(random);
                 },
               ),
             ),
@@ -207,19 +209,20 @@ class SpinnerWheel extends StatelessWidget {
                 height: 11.5.w,
               ),
               DoodleBtnWidget(
-                  tag: 'sure',
-                  onTapUpCallback: () {
-                    Get.back();
-                    Get.back();
-                  },
-                  text: '確定',
-                  textSize: 14,
-                  facWidth: 0.2,
-                  facHeight: 0.055,
-                  borderWidth: 2,
-                  borderRadius: 14,
-                  devWidth: 1.5,
-                  devHeight: 1.5)
+                tag: 'sure',
+                onTapUpCallback: () {
+                  Get.back();
+                  Get.back();
+                },
+                text: '確定',
+                textSize: 14,
+                facWidth: 0.2,
+                facHeight: 0.055,
+                borderWidth: 2,
+                borderRadius: 14,
+                devWidth: 1.75,
+                devHeight: 1.75,
+              )
             ],
           ),
         );

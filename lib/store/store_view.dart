@@ -212,8 +212,8 @@ class CouponWidget extends StatelessWidget {
                                   facHeight: 0.055,
                                   borderWidth: 2,
                                   borderRadius: 14,
-                                  devWidth: 1.5,
-                                  devHeight: 1.5,
+                                  devWidth: 1.75,
+                                  devHeight: 1.75,
                                 ),
                                 DoodleBtnWidget(
                                   tag: 'shopSure',
@@ -267,8 +267,8 @@ class CouponWidget extends StatelessWidget {
                                   facHeight: 0.055,
                                   borderWidth: 2,
                                   borderRadius: 14,
-                                  devWidth: 1.5,
-                                  devHeight: 1.5,
+                                  devWidth: 1.75,
+                                  devHeight: 1.75,
                                 ),
                               ],
                             )
@@ -282,8 +282,8 @@ class CouponWidget extends StatelessWidget {
                     facWidth: 0.21,
                     facHeight: 0.055,
                     borderRadius: 12,
-                    devWidth: 1.5,
-                    devHeight: 1.5,
+                    devWidth: 1.75,
+                    devHeight: 1.75,
                   ),
                   padding
                       ? SizedBox(

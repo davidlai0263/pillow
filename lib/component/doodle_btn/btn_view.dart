@@ -67,8 +67,8 @@ class DoodleBtnWidget extends StatelessWidget {
             }
           : null,
       child: SizedBox(
-        width: facWidth.sw - devWidth,
-        height: facHeight.sh - devHeight,
+        width: facWidth.sw - devWidth.h,
+        height: facHeight.sh - devHeight.h,
         child: Stack(alignment: Alignment.topLeft, children: <Widget>[
           Positioned(
             right: 0,
