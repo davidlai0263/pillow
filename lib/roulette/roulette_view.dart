@@ -28,60 +28,74 @@ class RoulettePage extends StatelessWidget {
             top: 57.5.h,
             left: 10.w,
             child: DoodleBtnWidget(
-              tag: '返回',
+              tag: 'rouletteBack',
               onTapUpCallback: () {
                 logic.isSpinning
                     ? Get.back()
                     : Get.defaultDialog(
                         title: '確定退出？',
-                        titlePadding: EdgeInsets.symmetric(vertical: 10.h),
+                        titlePadding:
+                            EdgeInsets.fromLTRB(.0.w, 10.0.w, .0.w, 6.0.w),
                         titleStyle: TextStyle(
                             fontSize: 20.sp,
                             height: 1.5,
                             fontWeight: FontWeight.bold),
                         contentPadding:
-                        EdgeInsets.fromLTRB(16.0.w, 0, 16.0.w, 14.h),
+                            EdgeInsets.fromLTRB(14.0.w, 1.0.w, 14.0.w, .0),
                         backgroundColor:
                             Colors.yellow.shade300.withOpacity(0.85),
                         content: SizedBox(
                           width: 0.62.sw,
-                          child: RichText(
-                              text: TextSpan(
-                            style: TextStyle(
-                                fontSize: 16.sp,
-                                letterSpacing: 0.9.sp,
-                                color: Colors.black),
-                            text: '您目前尚未抽獎，如退出將失去獲得積分的機會！',
-                          )),
-                        ),
-                        cancel: DoodleBtnWidget(
-                          tag: 'DiaCancelBack',
-                          onTapUpCallback: () {
-                            Get.back();
-                          },
-                          text: '取消',
-                          textSize: 14,
-                          facWidth: 0.2,
-                          facHeight: 0.055,
-                          borderWidth: 2,
-                          borderRadius: 14,
-                          devWidth: 1.5,
-                          devHeight: 1.5,
-                        ),
-                        confirm: DoodleBtnWidget(
-                          tag: 'DiaSureBack',
-                          onTapUpCallback: () {
-                            Get.back();
-                            Get.back();
-                          },
-                          text: '確定',
-                          textSize: 14,
-                          facWidth: 0.2,
-                          facHeight: 0.055,
-                          borderWidth: 2,
-                          borderRadius: 14,
-                          devWidth: 1.5,
-                          devHeight: 1.5,
+                          child: Column(
+                            children: [
+                              RichText(
+                                  text: TextSpan(
+                                style: TextStyle(
+                                    fontSize: 16.sp,
+                                    letterSpacing: 0.9.sp,
+                                    color: Colors.black),
+                                text: '您目前尚未抽獎，如退出將失去獲得積分的機會！',
+                              )),
+                              SizedBox(
+                                height: 11.5.w,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  DoodleBtnWidget(
+                                    tag: 'DiaCancelBack',
+                                    onTapUpCallback: () {
+                                      Get.back();
+                                    },
+                                    text: '取消',
+                                    textSize: 14,
+                                    facWidth: 0.2,
+                                    facHeight: 0.055,
+                                    borderWidth: 2,
+                                    borderRadius: 14,
+                                    devWidth: 1.5,
+                                    devHeight: 1.5,
+                                  ),
+                                  DoodleBtnWidget(
+                                    tag: 'DiaSureBack',
+                                    onTapUpCallback: () {
+                                      Get.back();
+                                      Get.back();
+                                    },
+                                    text: '確定',
+                                    textSize: 14,
+                                    facWidth: 0.2,
+                                    facHeight: 0.055,
+                                    borderWidth: 2,
+                                    borderRadius: 14,
+                                    devWidth: 1.5,
+                                    devHeight: 1.5,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       );
                 // Get.put(LobbyLogic());
@@ -160,47 +174,52 @@ class SpinnerWheel extends StatelessWidget {
         Get.defaultDialog(
           title: '中獎！',
           radius: 32.r,
-          titlePadding: EdgeInsets.fromLTRB(0, 14.0.h, 0, 0),
+          titlePadding: EdgeInsets.fromLTRB(.0.w, 10.0.w, .0.w, 6.0.w),
           titleStyle: TextStyle(
-              fontSize: 22.sp, height: 1.5, fontWeight: FontWeight.bold),
-          contentPadding: EdgeInsets.fromLTRB(0, 10.h, 0, 20.0.h),
+            fontSize: 22.sp,
+            fontWeight: FontWeight.bold,
+          ),
+          contentPadding: EdgeInsets.fromLTRB(14.0.w, 1.0.w, 14.0.w, .0),
           backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
-          content: RichText(
-              text: TextSpan(
-                  style: TextStyle(
-                      fontSize: 18.sp,
-                      letterSpacing: 1.sp,
-                      color: Colors.black),
-                  text: '恭喜獲得',
-                  children: [
-                TextSpan(
-                  text: ' ${list[index - 1]} ',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.sp,
-                      fontSize: 20.sp),
-                ),
-                const TextSpan(
-                  text: '點積分',
-                )
-              ])),
-          confirm: Column(
+          content: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              DoodleBtnWidget(
-                tag: 'sure',
-                onTapUpCallback: () {
-                  Get.back();
-                  Get.back();
-                },
-                text: '確定',
-                textSize: 14,
-                facWidth: 0.2,
-                facHeight: 0.055,
-                borderWidth: 2,
-                borderRadius: 14,
-                devWidth: 1.5,
-                devHeight: 1.5,
+              RichText(
+                  text: TextSpan(
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          letterSpacing: 1.sp,
+                          color: Colors.black),
+                      text: '恭喜獲得',
+                      children: [
+                    TextSpan(
+                      text: ' ${list[index - 1]} ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.sp,
+                          fontSize: 20.sp),
+                    ),
+                    const TextSpan(
+                      text: '點積分',
+                    )
+                  ])),
+              SizedBox(
+                height: 11.5.w,
               ),
+              DoodleBtnWidget(
+                  tag: 'sure',
+                  onTapUpCallback: () {
+                    Get.back();
+                    Get.back();
+                  },
+                  text: '確定',
+                  textSize: 14,
+                  facWidth: 0.2,
+                  facHeight: 0.055,
+                  borderWidth: 2,
+                  borderRadius: 14,
+                  devWidth: 1.5,
+                  devHeight: 1.5)
             ],
           ),
         );

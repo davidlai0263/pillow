@@ -40,15 +40,14 @@ class StorePage extends StatelessWidget {
             left: 10.w,
             child: DoodleBtnWidget(
               tag: 'storeBack',
-              onTapUpCallback: () async{
-                if(Get.isSnackbarOpen){
+              onTapUpCallback: () async {
+                if (Get.isSnackbarOpen) {
                   Get.closeAllSnackbars();
                   await Future.delayed(const Duration(milliseconds: 550));
                 }
                 Get.put(LobbyLogic()).positionStream.resume();
                 Get.back();
                 // Get.put(LobbyLogic()).controller.repeat(reverse: true);
-
               },
               facWidth: 0.245,
               facHeight: 0.07,
@@ -164,102 +163,116 @@ class CouponWidget extends StatelessWidget {
                     onTapUpCallback: () {
                       Get.defaultDialog(
                         title: '${c.gift}元折價券',
-                        titlePadding: EdgeInsets.symmetric(vertical: 8.h),
+                        titlePadding:
+                            EdgeInsets.fromLTRB(.0.w, 10.0.w, .0.w, 6.0.w),
                         titleStyle: TextStyle(
-                            fontSize: 20.sp,
-                            height: 1.5,
-                            fontWeight: FontWeight.bold),
+                            fontSize: 20.sp, fontWeight: FontWeight.bold),
                         contentPadding:
-                            EdgeInsets.fromLTRB(12.0.w, 0, 12.0.w, 12.h),
+                            EdgeInsets.fromLTRB(14.0.w, 1.0.w, 14.0.w, .0),
                         backgroundColor:
                             Colors.yellow.shade300.withOpacity(0.85),
-                        content: RichText(
-                            text: TextSpan(
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    letterSpacing: 0.9.sp,
-                                    color: Colors.black),
-                                text: '是否花費',
-                                children: [
-                              TextSpan(
-                                  text: '「${c.point}積分」',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              const TextSpan(
-                                text: '兌換此折價券',
-                              ),
-                            ])),
-                        cancel: DoodleBtnWidget(
-                          tag: 'shopCancel',
-                          onTapUpCallback: () async{
-                            if(Get.isSnackbarOpen) {
-                              Get.closeAllSnackbars();
-                              await Future.delayed(
-                                  const Duration(milliseconds: 550));
-                            }
-                            Get.back();
-                          },
-                          text: '取消',
-                          textSize: 14,
-                          facWidth: 0.2,
-                          facHeight: 0.055,
-                          borderWidth: 2,
-                          borderRadius: 14,
-                          devWidth: 1.5,
-                          devHeight: 1.5,
-                        ),
-                        confirm: DoodleBtnWidget(
-                          tag: 'shopSure',
-                          onTapUpCallback: () async {
-                            Get.back();
-                            bool enough = state.credit.value >= c.point;
-                            if (state.credit.value > c.point) {
-                              int point = c.point;
-                              state.credit.value -= point;
-                              state.coupon[c.index] += 1;
-                              state.saveCredit();
-                              state.saveCoupon();
-                              logic.haveChange();
-                            }
-                            Get.snackbar(
-                              '',
-                              '',
-                              animationDuration: const Duration(milliseconds: 500),
-                              titleText: Text(
-                                enough ? '積分足夠：' : '積分不足：',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
+                        content: Column(
+                          children: [
+                            RichText(
+                                text: TextSpan(
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        letterSpacing: 0.9.sp,
+                                        color: Colors.black),
+                                    text: '是否花費',
+                                    children: [
+                                  TextSpan(
+                                      text: '「${c.point}積分」',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  const TextSpan(
+                                    text: '兌換此折價券',
+                                  ),
+                                ])),
+                            SizedBox(
+                              height: 11.5.w,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                DoodleBtnWidget(
+                                  tag: 'shopCancel',
+                                  onTapUpCallback: () async {
+                                    if (Get.isSnackbarOpen) {
+                                      Get.closeAllSnackbars();
+                                      await Future.delayed(
+                                          const Duration(milliseconds: 550));
+                                    }
+                                    Get.back();
+                                  },
+                                  text: '取消',
+                                  textSize: 14,
+                                  facWidth: 0.2,
+                                  facHeight: 0.055,
+                                  borderWidth: 2,
+                                  borderRadius: 14,
+                                  devWidth: 1.5,
+                                  devHeight: 1.5,
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              messageText: Text(
-                                enough ? '兌換成功：' : '兌換失敗',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: Colors.white,
+                                DoodleBtnWidget(
+                                  tag: 'shopSure',
+                                  onTapUpCallback: () async {
+                                    Get.back();
+                                    bool enough = state.credit.value >= c.point;
+                                    if (state.credit.value > c.point) {
+                                      int point = c.point;
+                                      state.credit.value -= point;
+                                      state.coupon[c.index] += 1;
+                                      state.saveCredit();
+                                      state.saveCoupon();
+                                      logic.haveChange();
+                                    }
+                                    Get.snackbar(
+                                      '',
+                                      '',
+                                      animationDuration:
+                                          const Duration(milliseconds: 500),
+                                      titleText: Text(
+                                        enough ? '積分足夠：' : '積分不足：',
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      messageText: Text(
+                                        enough ? '兌換成功：' : '兌換失敗',
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          color: Colors.white,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 8.h),
+                                      margin:
+                                          EdgeInsets.symmetric(vertical: 18.h),
+                                      borderRadius: 36.r,
+                                      duration: const Duration(seconds: 2),
+                                      backgroundColor: Colors.black38,
+                                      snackPosition: SnackPosition.BOTTOM,
+                                      maxWidth: 0.5.sw,
+                                    );
+                                  },
+                                  text: '確定',
+                                  textSize: 14,
+                                  facWidth: 0.2,
+                                  facHeight: 0.055,
+                                  borderWidth: 2,
+                                  borderRadius: 14,
+                                  devWidth: 1.5,
+                                  devHeight: 1.5,
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              padding: EdgeInsets.symmetric(vertical: 8.h),
-                              margin: EdgeInsets.symmetric(vertical: 18.h),
-                              borderRadius: 36.r,
-                              duration: const Duration(seconds: 2),
-                              backgroundColor: Colors.black38,
-                              snackPosition: SnackPosition.BOTTOM,
-                              maxWidth: 0.5.sw,
-                            );
-                          },
-                          text: '確定',
-                          textSize: 14,
-                          facWidth: 0.2,
-                          facHeight: 0.055,
-                          borderWidth: 2,
-                          borderRadius: 14,
-                          devWidth: 1.5,
-                          devHeight: 1.5,
+                              ],
+                            )
+                          ],
                         ),
                       );
                     },
