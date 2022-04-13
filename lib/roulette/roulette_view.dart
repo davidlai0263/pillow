@@ -25,7 +25,8 @@ class RoulettePage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Positioned(
-            bottom: 57.5.h,
+            top: 57.5.h,
+            left: 10.w,
             child: DoodleBtnWidget(
               tag: '返回',
               onTapUpCallback: () {
@@ -33,25 +34,28 @@ class RoulettePage extends StatelessWidget {
                     ? Get.back()
                     : Get.defaultDialog(
                         title: '確定退出？',
-                        titlePadding: EdgeInsets.symmetric(vertical: 8.h),
+                        titlePadding: EdgeInsets.symmetric(vertical: 10.h),
                         titleStyle: TextStyle(
                             fontSize: 20.sp,
                             height: 1.5,
                             fontWeight: FontWeight.bold),
                         contentPadding:
-                            EdgeInsets.fromLTRB(12.0.w, 0, 12.0.w, 12.h),
+                        EdgeInsets.fromLTRB(16.0.w, 0, 16.0.w, 14.h),
                         backgroundColor:
                             Colors.yellow.shade300.withOpacity(0.85),
-                        content: RichText(
-                            text: TextSpan(
-                          style: TextStyle(
-                              fontSize: 16.sp,
-                              letterSpacing: 0.9.sp,
-                              color: Colors.black),
-                          text: '您目前尚未抽獎，如退出將失去獲得積分的機會！',
-                        )),
+                        content: SizedBox(
+                          width: 0.62.sw,
+                          child: RichText(
+                              text: TextSpan(
+                            style: TextStyle(
+                                fontSize: 16.sp,
+                                letterSpacing: 0.9.sp,
+                                color: Colors.black),
+                            text: '您目前尚未抽獎，如退出將失去獲得積分的機會！',
+                          )),
+                        ),
                         cancel: DoodleBtnWidget(
-                          tag: 'cancelBack',
+                          tag: 'DiaCancelBack',
                           onTapUpCallback: () {
                             Get.back();
                           },
@@ -65,7 +69,7 @@ class RoulettePage extends StatelessWidget {
                           devHeight: 1.5,
                         ),
                         confirm: DoodleBtnWidget(
-                          tag: 'sureBack',
+                          tag: 'DiaSureBack',
                           onTapUpCallback: () {
                             Get.back();
                             Get.back();
@@ -84,11 +88,12 @@ class RoulettePage extends StatelessWidget {
               },
               facWidth: 0.245,
               facHeight: 0.07,
-              text: '關閉',
+              isText: false,
             ),
           ),
           Positioned(
             top: 50.h,
+            right: 110.w,
             child: DoodleBtnWidget(
               onTapUpCallback: () {},
               facWidth: 0.376,
@@ -113,7 +118,7 @@ class RoulettePage extends StatelessWidget {
                   logic.isSpinning
                       ? null
                       : logic.wheelNotifier.sink
-                          .add((Random().nextInt(10000) + 5000));
+                          .add((Random().nextInt(1111) + 6666));
                 },
               ),
             ),
@@ -154,42 +159,49 @@ class SpinnerWheel extends StatelessWidget {
         storeState.saveCredit();
         Get.defaultDialog(
           title: '中獎！',
-          titlePadding: EdgeInsets.symmetric(vertical: 6.h),
+          radius: 32.r,
+          titlePadding: EdgeInsets.fromLTRB(0, 14.0.h, 0, 0),
           titleStyle: TextStyle(
-              fontSize: 20.sp, height: 1.5, fontWeight: FontWeight.bold),
-          contentPadding: EdgeInsets.fromLTRB(10.0.w, 0, 10.0.w, 10.h),
+              fontSize: 22.sp, height: 1.5, fontWeight: FontWeight.bold),
+          contentPadding: EdgeInsets.fromLTRB(0, 10.h, 0, 20.0.h),
           backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
           content: RichText(
               text: TextSpan(
                   style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: 18.sp,
                       letterSpacing: 1.sp,
                       color: Colors.black),
                   text: '恭喜獲得',
                   children: [
                 TextSpan(
-                  text: '${list[index - 1]}',
+                  text: ' ${list[index - 1]} ',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, letterSpacing: 1.sp, fontSize: 18.sp),
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.sp,
+                      fontSize: 20.sp),
                 ),
                 const TextSpan(
                   text: '點積分',
                 )
               ])),
-          confirm: DoodleBtnWidget(
-            tag: 'sureBack',
-            onTapUpCallback: () {
-              Get.back();
-              Get.back();
-            },
-            text: '確定',
-            textSize: 14,
-            facWidth: 0.2,
-            facHeight: 0.055,
-            borderWidth: 2,
-            borderRadius: 14,
-            devWidth: 1.5,
-            devHeight: 1.5,
+          confirm: Column(
+            children: [
+              DoodleBtnWidget(
+                tag: 'sure',
+                onTapUpCallback: () {
+                  Get.back();
+                  Get.back();
+                },
+                text: '確定',
+                textSize: 14,
+                facWidth: 0.2,
+                facHeight: 0.055,
+                borderWidth: 2,
+                borderRadius: 14,
+                devWidth: 1.5,
+                devHeight: 1.5,
+              ),
+            ],
           ),
         );
       },

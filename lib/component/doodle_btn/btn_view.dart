@@ -6,7 +6,6 @@ import 'btn_logic.dart';
 class DoodleBtnWidget extends StatelessWidget {
   final String? tag;
   final Function onTapUpCallback;
-  final bool isPopUp;
   final Color backgroundColor;
   final Color borderColor;
   final double borderWidth;
@@ -28,7 +27,6 @@ class DoodleBtnWidget extends StatelessWidget {
     Key? key,
     this.tag,
     required this.onTapUpCallback,
-    this.isPopUp = true,
     this.backgroundColor = const Color(0xFFFFFFFF),
     this.borderColor = const Color(0xff404040),
     this.borderWidth = 3.25,
@@ -57,19 +55,20 @@ class DoodleBtnWidget extends StatelessWidget {
             }
           : null,
       onTapUp: activation
-          ? (tapUp) {
-              onTapUpCallback();
-              isPopUp ? logic.tap() : null;
+          ? (tapUp) async {
+              logic.isDelay ? null : onTapUpCallback();
+              logic.isDelay ? null : logic.delay();
+              logic.tap();
             }
           : null,
       onTapCancel: activation
           ? () {
-              isPopUp ? logic.tap() : null;
+              logic.tap();
             }
           : null,
       child: SizedBox(
         width: facWidth.sw - devWidth,
-        height: facHeight.sh -devHeight,
+        height: facHeight.sh - devHeight,
         child: Stack(alignment: Alignment.topLeft, children: <Widget>[
           Positioned(
             right: 0,

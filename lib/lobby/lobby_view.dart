@@ -29,7 +29,7 @@ class LobbyPage extends StatelessWidget {
             top: 57.5.h,
             left: 10.w,
             child: DoodleBtnWidget(
-              tag: '返回',
+              tag: 'lobbyBack',
               onTapUpCallback: () {
                 Get.back();
               },
@@ -43,7 +43,7 @@ class LobbyPage extends StatelessWidget {
             right: 10.w,
             child: DoodleBtnWidget(
               onTapUpCallback: () {
-                logic.controller.stop();
+                // logic.controller.stop();
                 logic.positionStream.pause();
                 Get.toNamed(RouteConfig.store);
               },
@@ -68,7 +68,7 @@ class LobbyPage extends StatelessWidget {
                     fit: BoxFit.contain,
                   )),
               SizedBox(
-                height: 28.5.sp,
+                height: 27.5.h,
                 child: GetBuilder<LobbyLogic>(builder: (logic) {
                   return AlignTransition(
                     alignment: logic.animation,

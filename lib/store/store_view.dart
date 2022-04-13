@@ -39,11 +39,16 @@ class StorePage extends StatelessWidget {
             top: 57.5.h,
             left: 10.w,
             child: DoodleBtnWidget(
-              tag: '返回',
-              onTapUpCallback: () {
-                Get.back();
-                Get.put(LobbyLogic()).controller.repeat(reverse: true);
+              tag: 'storeBack',
+              onTapUpCallback: () async{
+                if(Get.isSnackbarOpen){
+                  Get.closeAllSnackbars();
+                  await Future.delayed(const Duration(milliseconds: 550));
+                }
                 Get.put(LobbyLogic()).positionStream.resume();
+                Get.back();
+                // Get.put(LobbyLogic()).controller.repeat(reverse: true);
+
               },
               facWidth: 0.245,
               facHeight: 0.07,
@@ -67,7 +72,33 @@ class StorePage extends StatelessWidget {
                   height: .45.sh,
                   color: Colors.yellow.shade300.withOpacity(0.85),
                   child: CouponWidget(logic: logic, state: state))),
-          Text('點擊優惠卷使用', style: TextStyle(fontSize: 16.sp, color: Colors.white70),),
+          Positioned(
+            top: 0.225.sh,
+            child: SizedBox(
+              height: 27.5.sp,
+              child: GetBuilder<LobbyLogic>(builder: (logic) {
+                return AlignTransition(
+                  alignment: logic.animation,
+                  child: Text(
+                    '點擊折價卷以使用',
+                    style: TextStyle(
+                      height: 1.265,
+                      letterSpacing: 1.5.sp,
+                      color: Colors.white,
+                      fontSize: 20.sp,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(4.5.w, 4.5.h),
+                          blurRadius: 7.5.r,
+                          color: const Color.fromARGB(255, 47, 47, 47),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+            ),
+          ),
           Positioned(
             bottom: 100.h,
             child: Obx(() => Text(
@@ -107,10 +138,15 @@ class CouponWidget extends StatelessWidget {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(
-                    c.image,
-                    width: 0.3.sw,
-                    color: Colors.black,
+                  GestureDetector(
+                    onTap: () {
+                      debugPrint('onPressCoupon${c.gift}');
+                    },
+                    child: SvgPicture.asset(
+                      c.image,
+                      width: 0.3.sw,
+                      color: Colors.black,
+                    ),
                   ),
                   GetBuilder<StoreLogic>(
                     assignId: true,
@@ -124,10 +160,10 @@ class CouponWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h),
                   DoodleBtnWidget(
-                    tag: '${c.point}',
+                    tag: '${c.point}Point',
                     onTapUpCallback: () {
                       Get.defaultDialog(
-                        title: '${c.money}元折價券',
+                        title: '${c.gift}元折價券',
                         titlePadding: EdgeInsets.symmetric(vertical: 8.h),
                         titleStyle: TextStyle(
                             fontSize: 20.sp,
@@ -155,8 +191,13 @@ class CouponWidget extends StatelessWidget {
                               ),
                             ])),
                         cancel: DoodleBtnWidget(
-                          tag: 'cancel',
-                          onTapUpCallback: () {
+                          tag: 'shopCancel',
+                          onTapUpCallback: () async{
+                            if(Get.isSnackbarOpen) {
+                              Get.closeAllSnackbars();
+                              await Future.delayed(
+                                  const Duration(milliseconds: 550));
+                            }
                             Get.back();
                           },
                           text: '取消',
@@ -169,7 +210,7 @@ class CouponWidget extends StatelessWidget {
                           devHeight: 1.5,
                         ),
                         confirm: DoodleBtnWidget(
-                          tag: 'sure',
+                          tag: 'shopSure',
                           onTapUpCallback: () async {
                             Get.back();
                             bool enough = state.credit.value >= c.point;
@@ -184,6 +225,7 @@ class CouponWidget extends StatelessWidget {
                             Get.snackbar(
                               '',
                               '',
+                              animationDuration: const Duration(milliseconds: 500),
                               titleText: Text(
                                 enough ? '積分足夠：' : '積分不足：',
                                 style: TextStyle(
@@ -205,7 +247,6 @@ class CouponWidget extends StatelessWidget {
                               margin: EdgeInsets.symmetric(vertical: 18.h),
                               borderRadius: 36.r,
                               duration: const Duration(seconds: 2),
-                              animationDuration: const Duration(seconds: 1),
                               backgroundColor: Colors.black38,
                               snackPosition: SnackPosition.BOTTOM,
                               maxWidth: 0.5.sw,

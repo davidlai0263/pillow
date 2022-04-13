@@ -197,7 +197,6 @@ class LobbyLogic extends GetxController
                     ]),
               ),
               duration: const Duration(seconds: 5),
-              margin: const EdgeInsets.symmetric(horizontal: .0),
               colorText: Colors.white,
               backgroundColor: Colors.grey.withOpacity(0.8),
             );
@@ -242,7 +241,7 @@ class LobbyLogic extends GetxController
   }
 
   late final AnimationController controller = AnimationController(
-    duration: const Duration(milliseconds: 800),
+    duration: const Duration(milliseconds: 750),
     vsync: this,
   )..repeat(reverse: true);
   late final Animation<AlignmentGeometry> animation = Tween<AlignmentGeometry>(
@@ -251,7 +250,7 @@ class LobbyLogic extends GetxController
   ).animate(
     CurvedAnimation(
       parent: controller,
-      curve: Curves.linear,
+      curve: Curves.easeInOut,
     ),
   );
 
