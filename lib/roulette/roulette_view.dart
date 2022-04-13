@@ -34,15 +34,11 @@ class RoulettePage extends StatelessWidget {
                     ? Get.back()
                     : Get.defaultDialog(
                         title: '  確定退出 ？',
-                  radius: 24.r,
-                        titlePadding:
-                            EdgeInsets.fromLTRB(.0.w, 10.0.w, .0.w, 6.0.w),
+                        radius: 24.r,
+                        titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
                         titleStyle: TextStyle(
-                            fontSize: 20.sp,
-                            height: 1.5,
-                            fontWeight: FontWeight.bold),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(14.0.w, .0, 14.0.w, 10.0.w),
+                            fontSize: 20.sp, fontWeight: FontWeight.bold),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 18.w),
                         backgroundColor:
                             Colors.yellow.shade300.withOpacity(0.85),
                         content: SizedBox(
@@ -58,7 +54,7 @@ class RoulettePage extends StatelessWidget {
                                 text: '您目前尚未抽獎，如退出將失去獲得積分的機會！',
                               )),
                               SizedBox(
-                                height: 8.5.w,
+                                height: 14.h,
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -174,14 +170,14 @@ class SpinnerWheel extends StatelessWidget {
         storeState.credit.value += list[index - 1];
         storeState.saveCredit();
         Get.defaultDialog(
-          title: '  中獎 ！',
-          radius: 24.r,
-          titlePadding: EdgeInsets.fromLTRB(.0.w, 10.0.w, .0.w, 6.0.w),
+          title: '中獎！',
+          radius: 32.r,
+          titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
           titleStyle: TextStyle(
             fontSize: 22.sp,
             fontWeight: FontWeight.bold,
           ),
-          contentPadding: EdgeInsets.fromLTRB(14.0.w, .0, 14.0.w, 10.0.w),
+          contentPadding: EdgeInsets.symmetric(horizontal: 18.w),
           backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
           content: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -206,7 +202,7 @@ class SpinnerWheel extends StatelessWidget {
                     )
                   ])),
               SizedBox(
-                height: 8.5.w,
+                height: 14.0.h,
               ),
               DoodleBtnWidget(
                 tag: 'sure',
@@ -218,7 +214,7 @@ class SpinnerWheel extends StatelessWidget {
                 textSize: 14,
                 facWidth: 0.2,
                 facHeight: 0.055,
-                borderWidth: 2.5,
+                borderWidth: 2,
                 borderRadius: 14,
                 devWidth: 1.75,
                 devHeight: 1.75,

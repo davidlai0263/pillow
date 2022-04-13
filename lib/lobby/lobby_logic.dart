@@ -169,9 +169,9 @@ class LobbyLogic extends GetxController
                     facWidth: 0.16,
                     facHeight: 0.05,
                     textSize: 14,
-                    borderWidth: 1.5,
-                    devWidth: 2.5,
-                    devHeight: 2.5,
+                    borderWidth: 2,
+                    devWidth: 2.25,
+                    devHeight: 2.25,
                     borderRadius: 12,
                     backgroundColor: const Color(0xffacacac),
                   )

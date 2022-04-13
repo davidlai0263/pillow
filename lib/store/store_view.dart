@@ -108,12 +108,12 @@ class StorePage extends StatelessWidget {
           Positioned(
             bottom: 0.11.sh,
             child: Obx(() => Text(
-              '現有積分：${state.credit}',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 32.sp,
-                  fontWeight: FontWeight.bold),
-            )),
+                  '現有積分：${state.credit}',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 32.sp,
+                      fontWeight: FontWeight.bold),
+                )),
           ),
         ],
       ),
@@ -150,12 +150,10 @@ class CouponWidget extends StatelessWidget {
                       Get.defaultDialog(
                         title: '${c.gift}元折價券',
                         radius: 24.r,
-                        titlePadding:
-                            EdgeInsets.fromLTRB(.0.w, 10.0.w, .0.w, 6.0.w),
+                        titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
                         titleStyle: TextStyle(
                             fontSize: 20.sp, fontWeight: FontWeight.bold),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(14.0.w, .0, 14.0.w, 10.0.w),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 18.w),
                         backgroundColor:
                             Colors.yellow.shade300.withOpacity(0.85),
                         content: Column(
@@ -183,7 +181,7 @@ class CouponWidget extends StatelessWidget {
                                       )),
                                 ])),
                             SizedBox(
-                              height: 13.5.w,
+                              height: 14.h,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -288,12 +286,10 @@ class CouponWidget extends StatelessWidget {
                       Get.defaultDialog(
                         title: '${c.gift}元折價券',
                         radius: 24.r,
-                        titlePadding:
-                            EdgeInsets.fromLTRB(.0.w, 10.0.h, .0.w, 6.0.h),
+                        titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
                         titleStyle: TextStyle(
                             fontSize: 20.sp, fontWeight: FontWeight.bold),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(14.0.w, .0, 14.0.w, 10.0.h),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 18.w),
                         backgroundColor:
                             Colors.yellow.shade300.withOpacity(0.85),
                         content: Column(
@@ -316,7 +312,7 @@ class CouponWidget extends StatelessWidget {
                                   ),
                                 ])),
                             SizedBox(
-                              height: 11.5.w,
+                              height: 14.0.h,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -343,6 +339,11 @@ class CouponWidget extends StatelessWidget {
                                 DoodleBtnWidget(
                                   tag: 'shopSure',
                                   onTapUpCallback: () async {
+                                    if (Get.isSnackbarOpen) {
+                                      Get.closeAllSnackbars();
+                                      await Future.delayed(
+                                          const Duration(milliseconds: 550));
+                                    }
                                     Get.back();
                                     bool enough = state.credit.value >= c.point;
                                     if (state.credit.value > c.point) {
