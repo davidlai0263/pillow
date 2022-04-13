@@ -174,7 +174,7 @@ class SpinnerWheel extends StatelessWidget {
           radius: 32.r,
           titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
           titleStyle: TextStyle(
-            fontSize: 22.sp,
+            fontSize: 20.sp,
             fontWeight: FontWeight.bold,
           ),
           contentPadding: EdgeInsets.symmetric(horizontal: 18.w),

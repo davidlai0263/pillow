@@ -45,11 +45,16 @@ class LobbyLogic extends GetxController
                         Get.back()
                       },
                       child: ListTile(
-                        title: Text(map.mapName),
+                        contentPadding:
+                            EdgeInsets.fromLTRB(22.w, 10.w, .0, 10.w),
+                        title: Text(
+                          map.mapName,
+                          style: TextStyle(fontSize: 18.sp),
+                        ),
                         leading: SvgPicture.asset(
                           map.icon,
-                          height: 30.0,
-                          width: 30.0,
+                          height: 30.r,
+                          width: 30.r,
                         ),
                       ),
                     ),
@@ -130,8 +135,9 @@ class LobbyLogic extends GetxController
             }
           }
           //cooldown
-          debugPrint(DateTime.now().difference(state.cooldown).inSeconds.toString());
-          if(DateTime.now().difference(state.cooldown).inSeconds > 8){
+          debugPrint(
+              DateTime.now().difference(state.cooldown).inSeconds.toString());
+          if (DateTime.now().difference(state.cooldown).inSeconds > 8) {
             Get.snackbar(
               '',
               '',
@@ -155,8 +161,7 @@ class LobbyLogic extends GetxController
                             state.nearLocation.name,
                             state.nearLocation.address,
                             state.nearLocation.coords);
-                      }
-                      else{
+                      } else {
                         controller.stop();
                         positionStream.pause();
                         Get.toNamed(RouteConfig.question);
