@@ -68,7 +68,7 @@ class LobbyPage extends StatelessWidget {
                     fit: BoxFit.contain,
                   )),
               SizedBox(
-                height: 27.5.h,
+                height: 27.5.sp,
                 child: GetBuilder<LobbyLogic>(builder: (logic) {
                   return AlignTransition(
                     alignment: logic.animation,
@@ -92,7 +92,7 @@ class LobbyPage extends StatelessWidget {
                 }),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, .0, 0, 0.075.sw),
+                margin: EdgeInsets.fromLTRB(0, .0, 0, 0.07.sw),
                 constraints: BoxConstraints(
                   maxHeight: 0.325.sh,
                 ),

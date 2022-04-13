@@ -33,7 +33,8 @@ class RoulettePage extends StatelessWidget {
                 logic.isSpinning
                     ? Get.back()
                     : Get.defaultDialog(
-                        title: '確定退出？',
+                        title: '  確定退出 ？',
+                  radius: 24.r,
                         titlePadding:
                             EdgeInsets.fromLTRB(.0.w, 10.0.w, .0.w, 6.0.w),
                         titleStyle: TextStyle(
@@ -41,7 +42,7 @@ class RoulettePage extends StatelessWidget {
                             height: 1.5,
                             fontWeight: FontWeight.bold),
                         contentPadding:
-                            EdgeInsets.fromLTRB(14.0.w, 1.0.w, 14.0.w, .0),
+                            EdgeInsets.fromLTRB(14.0.w, .0, 14.0.w, 10.0.w),
                         backgroundColor:
                             Colors.yellow.shade300.withOpacity(0.85),
                         content: SizedBox(
@@ -57,7 +58,7 @@ class RoulettePage extends StatelessWidget {
                                 text: '您目前尚未抽獎，如退出將失去獲得積分的機會！',
                               )),
                               SizedBox(
-                                height: 11.5.w,
+                                height: 8.5.w,
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -72,7 +73,7 @@ class RoulettePage extends StatelessWidget {
                                     textSize: 14,
                                     facWidth: 0.2,
                                     facHeight: 0.055,
-                                    borderWidth: 2,
+                                    borderWidth: 2.5,
                                     borderRadius: 14,
                                     devWidth: 1.75,
                                     devHeight: 1.75,
@@ -87,7 +88,7 @@ class RoulettePage extends StatelessWidget {
                                     textSize: 14,
                                     facWidth: 0.2,
                                     facHeight: 0.055,
-                                    borderWidth: 2,
+                                    borderWidth: 2.5,
                                     borderRadius: 14,
                                     devWidth: 1.75,
                                     devHeight: 1.75,
@@ -133,8 +134,7 @@ class RoulettePage extends StatelessWidget {
                   debugPrint('$random');
                   logic.isSpinning
                       ? null
-                      : logic.wheelNotifier.sink
-                          .add(random);
+                      : logic.wheelNotifier.sink.add(random);
                 },
               ),
             ),
@@ -174,14 +174,14 @@ class SpinnerWheel extends StatelessWidget {
         storeState.credit.value += list[index - 1];
         storeState.saveCredit();
         Get.defaultDialog(
-          title: '中獎！',
-          radius: 32.r,
+          title: '  中獎 ！',
+          radius: 24.r,
           titlePadding: EdgeInsets.fromLTRB(.0.w, 10.0.w, .0.w, 6.0.w),
           titleStyle: TextStyle(
             fontSize: 22.sp,
             fontWeight: FontWeight.bold,
           ),
-          contentPadding: EdgeInsets.fromLTRB(14.0.w, 1.0.w, 14.0.w, .0),
+          contentPadding: EdgeInsets.fromLTRB(14.0.w, .0, 14.0.w, 10.0.w),
           backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
           content: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -206,7 +206,7 @@ class SpinnerWheel extends StatelessWidget {
                     )
                   ])),
               SizedBox(
-                height: 11.5.w,
+                height: 8.5.w,
               ),
               DoodleBtnWidget(
                 tag: 'sure',
@@ -218,7 +218,7 @@ class SpinnerWheel extends StatelessWidget {
                 textSize: 14,
                 facWidth: 0.2,
                 facHeight: 0.055,
-                borderWidth: 2,
+                borderWidth: 2.5,
                 borderRadius: 14,
                 devWidth: 1.75,
                 devHeight: 1.75,
