@@ -170,7 +170,7 @@ class SpinnerWheel extends StatelessWidget {
         storeState.credit.value += list[index - 1];
         storeState.saveCredit();
         Get.defaultDialog(
-          title: '中獎！',
+          title: '  中獎 ！',
           radius: 32.r,
           titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
           titleStyle: TextStyle(
