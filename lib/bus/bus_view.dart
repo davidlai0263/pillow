@@ -269,11 +269,14 @@ class BusPage extends StatelessWidget {
                             constraints: BoxConstraints(
                               maxHeight: 0.57.sh,
                             ),
-                            child: SingleChildScrollView(
-                              child: Image.asset(
-                                'assets/images/bus${logic.busSheet}.png',
-                                width: 0.9.sw,
-                                fit: BoxFit.contain,
+                            child: ScrollConfiguration(
+                              behavior: CustomScroll(),
+                              child: SingleChildScrollView(
+                                child: Image.asset(
+                                  'assets/images/bus${logic.busSheet}.png',
+                                  width: 0.9.sw,
+                                  fit: BoxFit.contain,
+                                ),
                               ),
                             ),
                           ),

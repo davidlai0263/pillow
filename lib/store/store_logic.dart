@@ -20,6 +20,7 @@ class StoreLogic extends GetxController {
     update();
    }
 }
+
 class CustomScroll extends ScrollBehavior {
   @override
   Widget buildViewportChrome(

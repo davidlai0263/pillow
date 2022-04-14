@@ -70,17 +70,20 @@ class RulesPage extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(12.r)),
                   color: const Color(0xb3af8337),
                 ),
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.all(12.0.r),
-                    child: Text(state.ruleText,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: const Color(0xffeaeaea),
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 3.357.sp,
-                            height: 1.5)),
+                child: ScrollConfiguration(
+                  behavior: CustomScroll(),
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
+                      child: Text(state.ruleText,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: const Color(0xffeaeaea),
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 3.357.sp,
+                              height: 1.5)),
+                    ),
                   ),
                 ),
               ),

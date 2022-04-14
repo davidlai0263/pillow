@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'bus_state.dart';
@@ -66,5 +67,13 @@ class BusLogic extends GetxController {
   void setBusRoute(){
     busRoute=!busRoute;
     setBusSheet(busID);
+  }
+}
+
+class CustomScroll extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }

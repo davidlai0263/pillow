@@ -64,6 +64,30 @@ class LobbyPage extends StatelessWidget {
                     width: 0.95.sw,
                     fit: BoxFit.contain,
                   )),
+              SizedBox(
+                height: 27.5.sp,
+                child: GetBuilder<LobbyLogic>(builder: (logic) {
+                  return AlignTransition(
+                    alignment: logic.animation,
+                    child: Text(
+                      '請前往以下地點進行挑戰',
+                      style: TextStyle(
+                        height: 1.265,
+                        letterSpacing: 1.5.sp,
+                        color: Colors.white70,
+                        fontSize: 20.sp,
+                        shadows: <Shadow>[
+                          Shadow(
+                            offset: Offset(4.5.w, 4.5.h),
+                            blurRadius: 7.5.r,
+                            color: const Color.fromARGB(255, 47, 47, 47),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+              ),
               Container(
                 margin: EdgeInsets.fromLTRB(0, .0, 0, 35.h),
                 constraints: BoxConstraints(
@@ -71,70 +95,47 @@ class LobbyPage extends StatelessWidget {
                 ),
                 width: 1.sw,
                 color: const Color(0xb3af8337),
-                child: SingleChildScrollView(
-                  child: Padding(
-                      padding: EdgeInsets.fromLTRB(10.w, 6.h, 10.w, 8.h),
-                      child: RichText(
-                        text: TextSpan(
-                          style: TextStyle(
-                            color: const Color(0xfff0f0f0),
-                            fontSize: 17.sp,
-                            letterSpacing: 0.9,
-                            height: 1.5,
+                child: ScrollConfiguration(
+                  behavior: CustomScrollLobby(),
+                  child: SingleChildScrollView(
+                    child: Padding(
+                        padding: EdgeInsets.fromLTRB(10.w, 6.h, 10.w, 8.h),
+                        child: RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                              color: const Color(0xfff0f0f0),
+                              fontSize: 17.sp,
+                              letterSpacing: 0.9,
+                              height: 1.5,
+                            ),
+                            children: siteMap
+                                .map((map) => TextSpan(children: [
+                                      TextSpan(
+                                          text: '${map.name}：',
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      TextSpan(
+                                          text: map.address,
+                                          style: const TextStyle(
+                                              color: Color(0xff50acff),
+                                              decoration:
+                                                  TextDecoration.underline),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () => logic.openMapsSheet(
+                                                  context,
+                                                  map.name,
+                                                  map.address,
+                                                  map.coords,
+                                                ))
+                                    ]))
+                                .toList(),
                           ),
-                          children: siteMap
-                              .map((map) => TextSpan(children: [
-                                    TextSpan(
-                                        text: '${map.name}：',
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                    TextSpan(
-                                        text: map.address,
-                                        style: const TextStyle(
-                                            color: Color(0xff50acff),
-                                            decoration:
-                                                TextDecoration.underline),
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () => logic.openMapsSheet(
-                                                context,
-                                                map.name,
-                                                map.address,
-                                                map.coords,
-                                              ))
-                                  ]))
-                              .toList(),
-                        ),
-                      )),
+                        )),
+                  ),
                 ),
               ),
             ],
           ),
-          Positioned(
-            child: SizedBox(
-              height: 27.5.sp,
-              child: GetBuilder<LobbyLogic>(builder: (logic) {
-                return AlignTransition(
-                  alignment: logic.animation,
-                  child: Text(
-                    '請前往以下地點進行挑戰',
-                    style: TextStyle(
-                      height: 1.265,
-                      letterSpacing: 1.5.sp,
-                      color: Colors.white70,
-                      fontSize: 20.sp,
-                      shadows: <Shadow>[
-                        Shadow(
-                          offset: Offset(4.5.w, 4.5.h),
-                          blurRadius: 7.5.r,
-                          color: const Color.fromARGB(255, 47, 47, 47),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }),
-            ),
-          )
         ],
       ),
     );

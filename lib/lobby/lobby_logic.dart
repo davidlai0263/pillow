@@ -273,3 +273,11 @@ class LobbyLogic extends GetxController
     super.onClose();
   }
 }
+
+class CustomScrollLobby extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
+  }
+}
