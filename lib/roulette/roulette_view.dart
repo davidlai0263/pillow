@@ -224,7 +224,7 @@ class SpinnerWheel extends StatelessWidget {
         );
       },
       shouldStartOrStop: logic.wheelNotifier.stream,
-      secondaryImage: Image.asset('assets/images/gored.png'),
+      secondaryImage: Image.asset('assets/images/go_red.png'),
       secondaryImageHeight: 125.h,
       secondaryImageWidth: 125.w,
     );

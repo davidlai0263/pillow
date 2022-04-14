@@ -179,13 +179,13 @@ class LobbyLogic extends GetxController
                             children: [
                               GestureDetector(
                                 child: Image.asset(
-                                  'assets/images/orange.jpg',
+                                  state.nearLocation.imagePath,
                                 ),
                                 onTap: () {
                                   Get.dialog(Center(
                                     child: InteractiveViewer(
                                       child: Image.asset(
-                                        'assets/images/orange.jpg',
+                                        state.nearLocation.imagePath,
                                       ),
                                     ),
                                   ));
@@ -200,26 +200,16 @@ class LobbyLogic extends GetxController
                                 child: ScrollConfiguration(
                                   behavior: CustomScrollLobby(),
                                   child: SingleChildScrollView(
-                                    child: Padding(
-                                        padding: EdgeInsets.fromLTRB(10.w, 6.h, 10.w, 8.h),
-                                        child: RichText(
-                                          text: TextSpan(
+                                    child: Center(
+                                      child: Padding(
+                                          padding: EdgeInsets.fromLTRB(10.w, 8.w, 10.w, 8.w),
+                                          child: Text(
+                                              state.nearLocation.intro,
                                             style: TextStyle(
-                                              color: const Color(0xfff0f0f0),
-                                              fontSize: 17.sp,
-                                              letterSpacing: 0.9,
-                                              height: 1.5,
+                                              fontSize: 18.sp, wordSpacing: 1.sp, height: 1.5
                                             ),
-                                            children: siteMap
-                                                .map((map) => TextSpan(children: [
-                                              TextSpan(
-                                                  text: '${map.name}：',
-                                                  style: const TextStyle(
-                                                      fontWeight: FontWeight.bold)),
-                                            ]))
-                                                .toList(),
-                                          ),
-                                        )),
+                                          )),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -384,14 +374,5 @@ class CustomScrollLobby extends ScrollBehavior {
   Widget buildViewportChrome(
       BuildContext context, Widget child, AxisDirection axisDirection) {
     return child;
-  }
-}
-
-class ImageScreen extends StatelessWidget {
-  const ImageScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector();
   }
 }
