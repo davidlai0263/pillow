@@ -175,7 +175,7 @@ class BusPage extends StatelessWidget {
                                 '去程',
                                 style: TextStyle(
                                     height: 1.2,
-                                    fontSize: 16.sp,
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.bold),
                               ))
                               : Center(
@@ -183,7 +183,7 @@ class BusPage extends StatelessWidget {
                                 '回程',
                                 style: TextStyle(
                                     height: 1.2,
-                                    fontSize: 16.sp,
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.bold),
                               )),
                         ),
@@ -216,7 +216,7 @@ class BusPage extends StatelessWidget {
                                 '上午',
                                 style: TextStyle(
                                     height: 1.2,
-                                    fontSize: 16.sp,
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.bold),
                               ))
                               : Center(
@@ -224,7 +224,7 @@ class BusPage extends StatelessWidget {
                                 '下午',
                                 style: TextStyle(
                                     height: 1.2,
-                                    fontSize: 16.sp,
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.bold),
                               )),
                         ),

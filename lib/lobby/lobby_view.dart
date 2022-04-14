@@ -55,7 +55,7 @@ class LobbyPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                  margin: EdgeInsets.fromLTRB(0, 135.h, 0, 0),
+                  margin: EdgeInsets.fromLTRB(0, 125.h, 0, 0),
                   constraints: BoxConstraints(
                     maxHeight: 0.4.sh,
                   ),

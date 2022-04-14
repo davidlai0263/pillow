@@ -155,6 +155,7 @@ class LobbyLogic extends GetxController
                   ),
                   DoodleBtnWidget(
                     onTapUpCallback: () {
+                      Get.closeAllSnackbars();
                       if (state.nearLocation.distance >= 50) {
                         openMapsSheet(
                             Get.context,
@@ -164,9 +165,113 @@ class LobbyLogic extends GetxController
                       } else {
                         controller.stop();
                         positionStream.pause();
-                        Get.toNamed(RouteConfig.question);
+                        Get.defaultDialog(
+                          title: state.nearLocation.name,
+                          barrierDismissible: false,
+                          radius: 24.r,
+                          titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
+                          titleStyle: TextStyle(
+                              fontSize: 24.sp, fontWeight: FontWeight.bold),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 0.w),
+                          backgroundColor:
+                              Colors.yellow.shade300.withOpacity(0.85),
+                          content: Column(
+                            children: [
+                              GestureDetector(
+                                child: Image.asset(
+                                  'assets/images/orange.jpg',
+                                ),
+                                onTap: () {
+                                  Get.dialog(Center(
+                                    child: InteractiveViewer(
+                                      child: Image.asset(
+                                        'assets/images/orange.jpg',
+                                      ),
+                                    ),
+                                  ));
+                                },
+                              ),
+                              Container(
+                                constraints: BoxConstraints(
+                                  maxHeight: 0.325.sh,
+                                ),
+                                width: 1.sw,
+                                color: const Color(0xb3af8337),
+                                child: ScrollConfiguration(
+                                  behavior: CustomScrollLobby(),
+                                  child: SingleChildScrollView(
+                                    child: Padding(
+                                        padding: EdgeInsets.fromLTRB(10.w, 6.h, 10.w, 8.h),
+                                        child: RichText(
+                                          text: TextSpan(
+                                            style: TextStyle(
+                                              color: const Color(0xfff0f0f0),
+                                              fontSize: 17.sp,
+                                              letterSpacing: 0.9,
+                                              height: 1.5,
+                                            ),
+                                            children: siteMap
+                                                .map((map) => TextSpan(children: [
+                                              TextSpan(
+                                                  text: '${map.name}：',
+                                                  style: const TextStyle(
+                                                      fontWeight: FontWeight.bold)),
+                                            ]))
+                                                .toList(),
+                                          ),
+                                        )),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 14.h,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  DoodleBtnWidget(
+                                    tag: 'introCancel',
+                                    onTapUpCallback: () async {
+                                      if (Get.isSnackbarOpen) {
+                                        Get.closeAllSnackbars();
+                                        await Future.delayed(const Duration(
+                                            milliseconds: 550));
+                                      }
+                                      Get.back();
+                                      controller.repeat(reverse: true);
+                                      positionStream.resume();
+                                    },
+                                    text: '取消',
+                                    textSize: 14,
+                                    facWidth: 0.2,
+                                    facHeight: 0.055,
+                                    borderWidth: 2.5,
+                                    borderRadius: 14,
+                                    devWidth: 1.5,
+                                    devHeight: 1.5,
+                                  ),
+                                  DoodleBtnWidget(
+                                    tag: 'introSure',
+                                    onTapUpCallback: () async {
+                                      Get.back();
+                                      Get.toNamed(RouteConfig.question);
+                                    },
+                                    text: '確定',
+                                    textSize: 14,
+                                    facWidth: 0.2,
+                                    facHeight: 0.055,
+                                    borderWidth: 2.5,
+                                    borderRadius: 14,
+                                    devWidth: 1.5,
+                                    devHeight: 1.5,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        );
                       }
-                      Get.closeAllSnackbars();
                     },
                     tag: '查看',
                     textColor: Colors.white,
@@ -279,5 +384,14 @@ class CustomScrollLobby extends ScrollBehavior {
   Widget buildViewportChrome(
       BuildContext context, Widget child, AxisDirection axisDirection) {
     return child;
+  }
+}
+
+class ImageScreen extends StatelessWidget {
+  const ImageScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector();
   }
 }

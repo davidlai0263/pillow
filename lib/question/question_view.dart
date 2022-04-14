@@ -41,7 +41,6 @@ class QuestionPage extends StatelessWidget {
           ),
           Positioned(
             bottom: 50.h,
-            right: 110.w,
             child: DoodleBtnWidget(
               onTapUpCallback: () {
               },
