@@ -13,7 +13,6 @@ class LobbyPage extends StatelessWidget {
 
   LobbyPage({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,10 +54,8 @@ class LobbyPage extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                height: 115.h,
-              ),
-              ConstrainedBox(
+              Container(
+                  margin: EdgeInsets.fromLTRB(0, 135.h, 0, 0),
                   constraints: BoxConstraints(
                     maxHeight: 0.4.sh,
                   ),
@@ -67,32 +64,8 @@ class LobbyPage extends StatelessWidget {
                     width: 0.95.sw,
                     fit: BoxFit.contain,
                   )),
-              SizedBox(
-                height: 27.5.sp,
-                child: GetBuilder<LobbyLogic>(builder: (logic) {
-                  return AlignTransition(
-                    alignment: logic.animation,
-                    child: Text(
-                      '請前往以下地點進行挑戰',
-                      style: TextStyle(
-                        height: 1.265,
-                        letterSpacing: 1.5.sp,
-                        color: Colors.white70,
-                        fontSize: 20.sp,
-                        shadows: <Shadow>[
-                          Shadow(
-                            offset: Offset(4.5.w, 4.5.h),
-                            blurRadius: 7.5.r,
-                            color: const Color.fromARGB(255, 47, 47, 47),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }),
-              ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, .0, 0, 0.07.sw),
+                margin: EdgeInsets.fromLTRB(0, .0, 0, 35.h),
                 constraints: BoxConstraints(
                   maxHeight: 0.325.sh,
                 ),
@@ -136,6 +109,32 @@ class LobbyPage extends StatelessWidget {
               ),
             ],
           ),
+          Positioned(
+            child: SizedBox(
+              height: 27.5.sp,
+              child: GetBuilder<LobbyLogic>(builder: (logic) {
+                return AlignTransition(
+                  alignment: logic.animation,
+                  child: Text(
+                    '請前往以下地點進行挑戰',
+                    style: TextStyle(
+                      height: 1.265,
+                      letterSpacing: 1.5.sp,
+                      color: Colors.white70,
+                      fontSize: 20.sp,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(4.5.w, 4.5.h),
+                          blurRadius: 7.5.r,
+                          color: const Color.fromARGB(255, 47, 47, 47),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+            ),
+          )
         ],
       ),
     );

@@ -5,6 +5,10 @@ import 'btn_logic.dart';
 
 class DoodleBtnWidget extends StatelessWidget {
   final String? tag;
+  final int delayTime;
+  final bool isStatusDown;
+  final bool isPopUp;
+  final bool isDownToUp;
   final Function onTapUpCallback;
   final Color backgroundColor;
   final Color borderColor;
@@ -26,6 +30,10 @@ class DoodleBtnWidget extends StatelessWidget {
   const DoodleBtnWidget({
     Key? key,
     this.tag,
+    this.delayTime = 600,
+    this.isStatusDown = false,
+    this.isPopUp = true,
+    this.isDownToUp = true,
     required this.onTapUpCallback,
     this.backgroundColor = const Color(0xFFFFFFFF),
     this.borderColor = const Color(0xff404040),
@@ -48,91 +56,98 @@ class DoodleBtnWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final logic = Get.put(DoodleBtnWidgetLogic(), tag: tag);
-    return GestureDetector(
-      onTapDown: activation
-          ? (tapDown) {
-              logic.tap();
-            }
-          : null,
-      onTapUp: activation
-          ? (tapUp) async {
-              logic.isDelay ? null : onTapUpCallback();
-              logic.isDelay ? null : logic.delay();
-              logic.tap();
-            }
-          : null,
-      onTapCancel: activation
-          ? () {
-              logic.tap();
-            }
-          : null,
-      child: SizedBox(
-        width: facWidth.sw - devWidth.h,
-        height: facHeight.sh - devHeight.h,
-        child: Stack(alignment: Alignment.topLeft, children: <Widget>[
-          Positioned(
-            right: 0,
-            bottom: 0,
-            child: Container(
-              width: (facWidth.sw - 5.h),
-              height: (facHeight.sh - 6.h),
-              decoration: BoxDecoration(
-                image: const DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage('assets/images/slash.png')),
-                color: backgroundColor,
-                border: Border.all(
-                  width: borderWidth.r,
-                  color: borderColor,
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(borderRadius.r),
-                ),
+    return SizedBox(
+      width: facWidth.sw - devWidth.h,
+      height: facHeight.sh - devHeight.h,
+      child: Stack(alignment: Alignment.topLeft, children: <Widget>[
+        Positioned(
+          right: 0,
+          bottom: 0,
+          child: Container(
+            width: (facWidth.sw - 5.h),
+            height: (facHeight.sh - 6.h),
+            decoration: BoxDecoration(
+              image: const DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/slash.png')),
+              color: backgroundColor,
+              border: Border.all(
+                width: borderWidth.r,
+                color: borderColor,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(borderRadius.r),
               ),
             ),
           ),
-          GetBuilder<DoodleBtnWidgetLogic>(
-              tag: tag,
-              builder: (logic) {
-                return AnimatedAlign(
-                  alignment: logic.onTapDown
-                      ? Alignment.bottomRight
-                      : Alignment.topLeft,
-                  duration: const Duration(milliseconds: 100),
-                  child: Container(
-                    width: (facWidth.sw - 5.h),
-                    height: (facHeight.sh - 6.h),
-                    child: Center(
-                      child: isText
-                          ? Text(
-                              text,
-                              style: TextStyle(
-                                color: textColor,
-                                fontSize: textSize.sp,
-                                fontWeight: FontWeight.bold,
-                                height: 1.22,
-                              ),
-                            )
-                          : Icon(
-                              icon,
-                              size: iconSize.r,
-                            ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: backgroundColor,
-                      border: Border.all(
-                        width: borderWidth.r,
-                        color: borderColor,
+        ),
+        GetBuilder<DoodleBtnWidgetLogic>(
+            tag: tag,
+            builder: (logic) {
+              return AbsorbPointer(
+                absorbing: isDownToUp
+                    ? false
+                    : (isStatusDown ? !logic.onTapDown : logic.onTapDown),
+                child: GestureDetector(
+                  onTapDown: activation
+                      ? (tapDown) {
+                    logic.tap();
+                    debugPrint('${logic.onTapDown}');
+                  }
+                      : null,
+                  onTapUp: activation
+                      ? (tapUp) async {
+                    logic.isDelay ? null : onTapUpCallback();
+                    logic.isDelay ? null : logic.delay(delayTime);
+                    isPopUp ? logic.tap() : null;
+                  }
+                      : null,
+                  onTapCancel: activation
+                      ? () {
+                    logic.tap();
+                  }
+                      : null,
+                  child: AnimatedAlign(
+                    alignment:
+                    (isStatusDown ? !logic.onTapDown : logic.onTapDown)
+                        ? Alignment.bottomRight
+                        : Alignment.topLeft,
+                    duration: const Duration(milliseconds: 100),
+                    child: Container(
+                      width: (facWidth.sw - 5.h),
+                      height: (facHeight.sh - 6.h),
+                      child: Center(
+                        child: isText
+                            ? Text(
+                          text,
+                          style: TextStyle(
+                            color: textColor,
+                            fontSize: textSize.sp,
+                            fontWeight: FontWeight.bold,
+                            height: 1.22,
+                          ),
+                        )
+                            : Icon(
+                          icon,
+                          size: iconSize.r,
+                        ),
                       ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(borderRadius.r),
+                      decoration: BoxDecoration(
+                        color: backgroundColor,
+                        border: Border.all(
+                          width: borderWidth.r,
+                          color: borderColor,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(borderRadius.r),
+                        ),
                       ),
                     ),
                   ),
-                );
-              })
-        ]),
-      ),
+                ),
+              );
+            })
+      ]),
     );
   }
 }

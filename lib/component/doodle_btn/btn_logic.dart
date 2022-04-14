@@ -6,10 +6,12 @@ class DoodleBtnWidgetLogic extends GetxController {
     onTapDown = !onTapDown;
     update();
   }
+
+
   bool isDelay = false;
-  void delay() async{
+  void delay(int? time) async{
     isDelay = true;
-    await Future.delayed(const Duration(milliseconds: 600));
+    await Future.delayed(Duration(milliseconds: time ?? 600));
     isDelay = false;
   }
 }
