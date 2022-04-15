@@ -169,10 +169,10 @@ class LobbyLogic extends GetxController
                           title: state.nearLocation.name,
                           barrierDismissible: false,
                           radius: 24.r,
-                          titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
+                          titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 14.h),
                           titleStyle: TextStyle(
                               fontSize: 24.sp, fontWeight: FontWeight.bold),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 0.w),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 0),
                           backgroundColor:
                               Colors.yellow.shade300.withOpacity(0.85),
                           content: Column(
