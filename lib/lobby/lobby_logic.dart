@@ -66,7 +66,7 @@ class LobbyLogic extends GetxController
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(top: Radius.circular(16.r))));
     } catch (e) {
-      debugPrint('$e bug');
+      debugPrint('$e');
     }
   }
 
