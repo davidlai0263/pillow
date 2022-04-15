@@ -6,6 +6,8 @@ class LobbyState {
   late Site nearLocation;
   late bool availableChallenge;
   late List<bool> challengeSave;
+  bool isClose = false;
+  String location = '';
 
   LobbyState() {
     nearLocation = siteMap.first;

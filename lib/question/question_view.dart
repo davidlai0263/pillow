@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pillow/component/doodle_btn/btn_view.dart';
 import 'package:pillow/lobby/lobby_logic.dart';
+import 'package:pillow/route_config.dart';
 import 'question_logic.dart';
 
 class QuestionPage extends StatelessWidget {
@@ -28,11 +29,10 @@ class QuestionPage extends StatelessWidget {
             left: 10.w,
             child: DoodleBtnWidget(
               tag: '返回',
-              onTapUpCallback: () {
+              onTapUpCallback: () async{
                 logicLobby.controller.repeat(reverse: true);
                 logicLobby.positionStream.resume();
                 Get.back();
-                // Get.put(LobbyLogic());
               },
               facWidth: 0.245,
               facHeight: 0.07,

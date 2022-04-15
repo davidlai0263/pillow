@@ -92,7 +92,6 @@ class DoodleBtnWidget extends StatelessWidget {
                   onTapDown: activation
                       ? (tapDown) {
                     logic.tap();
-                    debugPrint('${logic.onTapDown}');
                   }
                       : null,
                   onTapUp: activation

@@ -9,7 +9,9 @@ import 'lobby_logic.dart';
 
 class LobbyPage extends StatelessWidget {
   final logic = Get.put(LobbyLogic());
-  final state = Get.find<LobbyLogic>().state;
+  final state = Get
+      .find<LobbyLogic>()
+      .state;
 
   LobbyPage({Key? key}) : super(key: key);
 
@@ -44,6 +46,7 @@ class LobbyPage extends StatelessWidget {
               onTapUpCallback: () {
                 // logic.controller.stop();
                 logic.positionStream.pause();
+                Get.closeCurrentSnackbar();
                 Get.toNamed(RouteConfig.store);
               },
               facWidth: 0.33,
@@ -64,29 +67,42 @@ class LobbyPage extends StatelessWidget {
                     width: 0.95.sw,
                     fit: BoxFit.contain,
                   )),
-              SizedBox(
-                height: 27.5.sp,
-                child: GetBuilder<LobbyLogic>(builder: (logic) {
-                  return AlignTransition(
+              GestureDetector(
+                onTap: () {
+                  if(state.nearLocation.distance <= 50) {
+                    Get.closeAllSnackbars();
+                    logic.introDialog();
+                  }
+                },
+                child: SizedBox(
+                  height: 27.5.sp,
+                  child: AlignTransition(
                     alignment: logic.animation,
-                    child: Text(
-                      '請前往以下地點進行挑戰',
-                      style: TextStyle(
-                        height: 1.265,
-                        letterSpacing: 1.5.sp,
-                        color: Colors.white70,
-                        fontSize: 20.sp,
-                        shadows: <Shadow>[
-                          Shadow(
-                            offset: Offset(4.5.w, 4.5.h),
-                            blurRadius: 7.5.r,
-                            color: const Color.fromARGB(255, 47, 47, 47),
+                    child: GetBuilder<LobbyLogic>(
+                      assignId: true,
+                      builder: (logic) {
+                        return Text(
+                          (state.nearLocation.distance <= 50)
+                              ? '點擊前往「${state.nearLocation.name}」挑戰'
+                              : '請前往以下地點進行挑戰',
+                          style: TextStyle(
+                            height: 1.265,
+                            letterSpacing: 1.25.sp,
+                            color: Colors.white70,
+                            fontSize: 18.sp,
+                            shadows: <Shadow>[
+                              Shadow(
+                                offset: Offset(4.5.w, 4.5.h),
+                                blurRadius: 7.5.r,
+                                color: const Color.fromARGB(255, 47, 47, 47),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        );
+                      },
                     ),
-                  );
-                }),
+                  ),
+                ),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(0, .0, 0, 35.h),
@@ -109,25 +125,27 @@ class LobbyPage extends StatelessWidget {
                               height: 1.5,
                             ),
                             children: siteMap
-                                .map((map) => TextSpan(children: [
-                                      TextSpan(
-                                          text: '${map.name}：',
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold)),
-                                      TextSpan(
-                                          text: map.address,
-                                          style: const TextStyle(
-                                              color: Color(0xff50acff),
-                                              decoration:
-                                                  TextDecoration.underline),
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = () => logic.openMapsSheet(
-                                                  context,
-                                                  map.name,
-                                                  map.address,
-                                                  map.coords,
-                                                ))
-                                    ]))
+                                .map((map) =>
+                                TextSpan(children: [
+                                  TextSpan(
+                                      text: '${map.name}：',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(
+                                      text: map.address,
+                                      style: const TextStyle(
+                                          color: Color(0xff50acff),
+                                          decoration:
+                                          TextDecoration.underline),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () =>
+                                            logic.openMapsSheet(
+                                              context,
+                                              map.name,
+                                              map.address,
+                                              map.coords,
+                                            ))
+                                ]))
                                 .toList(),
                           ),
                         )),

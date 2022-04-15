@@ -66,7 +66,7 @@ class LobbyLogic extends GetxController
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(top: Radius.circular(16.r))));
     } catch (e) {
-      debugPrint('$e');
+      debugPrint('$e bug');
     }
   }
 
@@ -75,7 +75,7 @@ class LobbyLogic extends GetxController
     debugPrint('onInitS');
     permission = await Geolocator.requestPermission();
     permission = await Geolocator.checkPermission();
-    debugPrint('$permission');
+    debugPrint('permission: $permission');
 
     state.initData();
     state.cooldown = DateTime.utc(1900);
@@ -134,9 +134,13 @@ class LobbyLogic extends GetxController
               state.nearLocation = element;
             }
           }
+          debugPrint(
+              '最近地點:${state.nearLocation.name} 距離:${state.nearLocation.distance}');
+          update();
           //cooldown
           debugPrint(
-              DateTime.now().difference(state.cooldown).inSeconds.toString());
+              DateTime.now().difference(state.cooldown).inSeconds.toString() +
+                  '秒');
           if (DateTime.now().difference(state.cooldown).inSeconds > 8) {
             Get.snackbar(
               '',
@@ -165,102 +169,7 @@ class LobbyLogic extends GetxController
                       } else {
                         controller.stop();
                         positionStream.pause();
-                        Get.defaultDialog(
-                          title: state.nearLocation.name,
-                          barrierDismissible: false,
-                          radius: 24.r,
-                          titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
-                          titleStyle: TextStyle(
-                              fontSize: 24.sp, fontWeight: FontWeight.bold),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 0.w),
-                          backgroundColor:
-                              Colors.yellow.shade300.withOpacity(0.85),
-                          content: Column(
-                            children: [
-                              GestureDetector(
-                                child: Image.asset(
-                                  state.nearLocation.imagePath,
-                                ),
-                                onTap: () {
-                                  Get.dialog(Center(
-                                    child: InteractiveViewer(
-                                      child: Image.asset(
-                                        state.nearLocation.imagePath,
-                                      ),
-                                    ),
-                                  ));
-                                },
-                              ),
-                              Container(
-                                constraints: BoxConstraints(
-                                  maxHeight: 0.325.sh,
-                                ),
-                                width: 1.sw,
-                                color: const Color(0xb3af8337),
-                                child: ScrollConfiguration(
-                                  behavior: CustomScrollLobby(),
-                                  child: SingleChildScrollView(
-                                    child: Center(
-                                      child: Padding(
-                                          padding: EdgeInsets.fromLTRB(10.w, 8.w, 10.w, 8.w),
-                                          child: Text(
-                                              state.nearLocation.intro,
-                                            style: TextStyle(
-                                              fontSize: 18.sp, wordSpacing: 1.sp, height: 1.5
-                                            ),
-                                          )),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 14.h,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  DoodleBtnWidget(
-                                    tag: 'introCancel',
-                                    onTapUpCallback: () async {
-                                      if (Get.isSnackbarOpen) {
-                                        Get.closeAllSnackbars();
-                                        await Future.delayed(const Duration(
-                                            milliseconds: 550));
-                                      }
-                                      Get.back();
-                                      controller.repeat(reverse: true);
-                                      positionStream.resume();
-                                    },
-                                    text: '取消',
-                                    textSize: 14,
-                                    facWidth: 0.2,
-                                    facHeight: 0.055,
-                                    borderWidth: 2.5,
-                                    borderRadius: 14,
-                                    devWidth: 1.5,
-                                    devHeight: 1.5,
-                                  ),
-                                  DoodleBtnWidget(
-                                    tag: 'introSure',
-                                    onTapUpCallback: () async {
-                                      Get.back();
-                                      Get.toNamed(RouteConfig.question);
-                                    },
-                                    text: '確定',
-                                    textSize: 14,
-                                    facWidth: 0.2,
-                                    facHeight: 0.055,
-                                    borderWidth: 2.5,
-                                    borderRadius: 14,
-                                    devWidth: 1.5,
-                                    devHeight: 1.5,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        );
+                        introDialog();
                       }
                     },
                     tag: '查看',
@@ -301,8 +210,8 @@ class LobbyLogic extends GetxController
               backgroundColor: Colors.grey.withOpacity(0.8),
             );
             state.cooldown = DateTime.now();
-            debugPrint(
-                '最近地點:${state.nearLocation.name} 距離:${state.nearLocation.distance}');
+            // debugPrint(
+            //     '最近地點:${state.nearLocation.name} 距離:${state.nearLocation.distance}');
           }
         }
       });
@@ -354,9 +263,101 @@ class LobbyLogic extends GetxController
     ),
   );
 
+  Future<dynamic> introDialog() {
+    return Get.defaultDialog(
+      title: state.nearLocation.name,
+      barrierDismissible: false,
+      radius: 24.r,
+      titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 14.h),
+      titleStyle: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+      backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
+      content: Column(
+        children: [
+          GestureDetector(
+            child: Image.asset(
+              state.nearLocation.imagePath,
+            ),
+            onTap: () {
+              Get.dialog(Center(
+                child: InteractiveViewer(
+                  child: Image.asset(
+                    state.nearLocation.imagePath,
+                  ),
+                ),
+              ));
+            },
+          ),
+          Container(
+            constraints: BoxConstraints(
+              maxHeight: 0.325.sh,
+            ),
+            width: 1.sw,
+            color: const Color(0xb3af8337),
+            child: ScrollConfiguration(
+              behavior: CustomScrollLobby(),
+              child: SingleChildScrollView(
+                child: Center(
+                  child: Padding(
+                      padding: EdgeInsets.fromLTRB(10.w, 8.w, 10.w, 8.w),
+                      child: Text(
+                        state.nearLocation.intro,
+                        style: TextStyle(
+                            fontSize: 18.sp, wordSpacing: 1.sp, height: 1.5),
+                      )),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 14.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              DoodleBtnWidget(
+                tag: 'introCancel',
+                onTapUpCallback: () {
+                  Get.closeCurrentSnackbar();
+                  Get.back();
+                },
+                text: '取消',
+                textSize: 14,
+                facWidth: 0.2,
+                facHeight: 0.055,
+                borderWidth: 2.5,
+                borderRadius: 14,
+                devWidth: 1.5,
+                devHeight: 1.5,
+              ),
+              DoodleBtnWidget(
+                tag: 'introSure',
+                onTapUpCallback: () {
+                  controller.stop();
+                  positionStream.pause();
+                  Get.closeCurrentSnackbar();
+                  Get.toNamed(RouteConfig.question);
+                },
+                text: '挑戰',
+                textSize: 14,
+                facWidth: 0.2,
+                facHeight: 0.055,
+                borderWidth: 2.5,
+                borderRadius: 14,
+                devWidth: 1.5,
+                devHeight: 1.5,
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   void onReady() {
     debugPrint('onReady');
+    update();
     super.onReady();
   }
 
