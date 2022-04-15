@@ -90,6 +90,6 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 flutter_icons:
-  image_path: 'assets/images/pillow.png'
+  image_path: 'assets/images/icon.png'
   android: true
   ios: true
