@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pillow/component/data/site.dart';
 import 'package:pillow/component/doodle_btn/btn_view.dart';
 import 'package:pillow/lobby/lobby_logic.dart';
 import 'package:pillow/route_config.dart';
@@ -25,31 +27,222 @@ class QuestionPage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Positioned(
-            top: 57.5.h,
-            left: 10.w,
+            top: 67.5.h,
             child: DoodleBtnWidget(
-              tag: '返回',
-              onTapUpCallback: () async{
-                logicLobby.controller.repeat(reverse: true);
-                logicLobby.positionStream.resume();
-                Get.back();
-              },
-              facWidth: 0.245,
-              facHeight: 0.07,
-              isText: false,
+              text: lobbyState.nearLocation.name,
+              facWidth: 0.6,
+              facHeight: 0.09,
+              onTapUpCallback: (){},
+              activation: false,
             ),
           ),
           Positioned(
-            bottom: 50.h,
-            child: DoodleBtnWidget(
-              onTapUpCallback: () {
-              },
-              facWidth: 0.376,
-              facHeight: 0.085,
-              text: '開始遊戲',
-              activation: true,
+            top: 225.h,
+              child: Container(
+            color: const Color(0xccaf8337),
+            width: 1.sw,
+            child: Padding(
+              padding: EdgeInsets.all(20.w),
+              child: Text(lobbyState.nearLocation.qus, style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),),
             ),
-          ),
+          )),
+          Positioned(
+            top: 450.h,
+            child: Column(
+              children: [
+                Row(children: [
+                  DoodleBtnWidget(
+                    tag: 'Ans0',
+                    onTapUpCallback: () {
+                      if(lobbyState.nearLocation.choose[0] == lobbyState.nearLocation.ans){
+                        Get.offNamed('/roulette');
+                      }
+                      else{
+                        Get.snackbar(
+                          '',
+                          '',
+                          animationDuration:
+                          const Duration(milliseconds: 500),
+                          titleText: Text(
+                            '答錯了',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          messageText: Text(
+                            '再試一次',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          padding:
+                          EdgeInsets.symmetric(vertical: 8.h),
+                          margin:
+                          EdgeInsets.symmetric(vertical: 18.h),
+                          borderRadius: 36.r,
+                          duration: const Duration(seconds: 2),
+                          backgroundColor: Colors.black38,
+                          snackPosition: SnackPosition.BOTTOM,
+                          maxWidth: 0.5.sw,
+                        );
+                      }
+                    },
+                    facWidth: 0.376,
+                    facHeight: 0.1,
+                    text: lobbyState.nearLocation.choose[0],
+                  ),
+                  SizedBox(width: 20.w,),
+                  DoodleBtnWidget(
+                    tag: 'Ans1',
+                    onTapUpCallback: () {
+                      if(lobbyState.nearLocation.choose[1] == lobbyState.nearLocation.ans){
+                        Get.offNamed('/roulette');
+                      }
+                      else{
+                        Get.snackbar(
+                          '',
+                          '',
+                          animationDuration:
+                          const Duration(milliseconds: 500),
+                          titleText: Text(
+                            '答錯了',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          messageText: Text(
+                            '再試一次',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          padding:
+                          EdgeInsets.symmetric(vertical: 8.h),
+                          margin:
+                          EdgeInsets.symmetric(vertical: 18.h),
+                          borderRadius: 36.r,
+                          duration: const Duration(seconds: 2),
+                          backgroundColor: Colors.black38,
+                          snackPosition: SnackPosition.BOTTOM,
+                          maxWidth: 0.5.sw,
+                        );
+                      }
+                    },
+                    facWidth: 0.376,
+                    facHeight: 0.1,
+                    text: lobbyState.nearLocation.choose[1],
+                  ),
+                ],),
+                SizedBox(height: 20.w,),
+                Row(children: [
+                  DoodleBtnWidget(
+                    tag: 'Ans2',
+                    onTapUpCallback: () {
+                      if(lobbyState.nearLocation.choose[2] == lobbyState.nearLocation.ans){
+                        Get.offNamed('/roulette');
+                      }else{
+                        Get.snackbar(
+                          '',
+                          '',
+                          animationDuration:
+                          const Duration(milliseconds: 500),
+                          titleText: Text(
+                            '答錯了',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          messageText: Text(
+                            '再試一次',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          padding:
+                          EdgeInsets.symmetric(vertical: 8.h),
+                          margin:
+                          EdgeInsets.symmetric(vertical: 18.h),
+                          borderRadius: 36.r,
+                          duration: const Duration(seconds: 2),
+                          backgroundColor: Colors.black38,
+                          snackPosition: SnackPosition.BOTTOM,
+                          maxWidth: 0.5.sw,
+                        );
+                      }
+                    },
+                    facWidth: 0.376,
+                    facHeight: 0.1,
+                    text: lobbyState.nearLocation.choose[2],
+                  ),
+                  SizedBox(width: 20.w,),
+                  DoodleBtnWidget(
+                    tag: 'Ans3',
+                    onTapUpCallback: () {
+                      if(lobbyState.nearLocation.choose[3] == lobbyState.nearLocation.ans){
+                        Get.offNamed('/roulette');
+                      }
+                      else{
+                        Get.snackbar(
+                          '',
+                          '',
+                          animationDuration:
+                          const Duration(milliseconds: 500),
+                          titleText: Text(
+                            '答錯了',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          messageText: Text(
+                            '再試一次',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          padding:
+                          EdgeInsets.symmetric(vertical: 8.h),
+                          margin:
+                          EdgeInsets.symmetric(vertical: 18.h),
+                          borderRadius: 36.r,
+                          duration: const Duration(seconds: 2),
+                          backgroundColor: Colors.black38,
+                          snackPosition: SnackPosition.BOTTOM,
+                          maxWidth: 0.5.sw,
+                        );
+                      }
+                    },
+                    facWidth: 0.376,
+                    facHeight: 0.1,
+                    text: lobbyState.nearLocation.choose[3],
+                  ),
+                ],),
+              ],
+            )
+          )
         ],
       ),
     );
