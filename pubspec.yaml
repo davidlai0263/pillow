@@ -45,7 +45,6 @@ dependencies:
   flutter_spinning_wheel:
     git:
       url: https://github.com/mpeilun/flutter-spinning-wheel
-  cupertino_will_pop_scope: ^1.2.0
 
 dev_dependencies:
   flutter_test:

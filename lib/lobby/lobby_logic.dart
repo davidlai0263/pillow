@@ -167,8 +167,6 @@ class LobbyLogic extends GetxController
                             state.nearLocation.address,
                             state.nearLocation.coords);
                       } else {
-                        controller.stop();
-                        positionStream.pause();
                         introDialog();
                       }
                     },
@@ -320,8 +318,7 @@ class LobbyLogic extends GetxController
                 onTapUpCallback: () async {
                   if (Get.isSnackbarOpen) {
                     Get.closeAllSnackbars();
-                    await Future.delayed(
-                        const Duration(milliseconds: 550));
+                    await Future.delayed(const Duration(milliseconds: 550));
                   }
                   Get.back();
                 },
@@ -337,10 +334,8 @@ class LobbyLogic extends GetxController
               DoodleBtnWidget(
                 tag: 'introSure',
                 onTapUpCallback: () {
-                  Get.closeCurrentSnackbar();
                   if (state.challengeSave[state.nearLocation.index] == false) {
-                    controller.stop();
-                    positionStream.pause();
+                    Get.back();
                     Get.toNamed(RouteConfig.question);
                   } else {
                     Get.snackbar(
@@ -367,7 +362,7 @@ class LobbyLogic extends GetxController
                       padding: EdgeInsets.symmetric(vertical: 8.h),
                       margin: EdgeInsets.symmetric(vertical: 18.h),
                       borderRadius: 32.r,
-                      duration: const Duration(seconds: 2),
+                      duration: const Duration(milliseconds: 1500),
                       backgroundColor: Colors.black38,
                       snackPosition: SnackPosition.BOTTOM,
                       maxWidth: 0.45.sw,

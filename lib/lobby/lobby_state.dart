@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:pillow/component/data/site.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,7 +24,6 @@ class LobbyState {
       false,
       false
     ];
-
   }
 
   initData() async {
@@ -41,8 +41,8 @@ class LobbyState {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList(
         'challengeSave', _boolListToStringList(challengeSave));
+    debugPrint('saveChallenge');
   }
-
 
   _stringListToBoolList(List<String> stringList) {
     List<bool> boolList = [];
@@ -67,5 +67,4 @@ class LobbyState {
     }
     return stringList;
   }
-
 }

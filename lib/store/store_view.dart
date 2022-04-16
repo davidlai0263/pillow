@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:pillow/component/data/coupon.dart';
 import 'package:pillow/component/doodle_btn/btn_view.dart';
 import 'package:pillow/lobby/lobby_logic.dart';
+import 'package:pillow/route_config.dart';
 import 'package:pillow/store/store_state.dart';
 import 'store_logic.dart';
 
@@ -33,14 +36,27 @@ class StorePage extends StatelessWidget {
               onTapUpCallback: () async {
                 if (Get.isSnackbarOpen) {
                   Get.closeAllSnackbars();
-                  await Future.delayed(const Duration(milliseconds: 550));
+                  await Future.delayed(const Duration(milliseconds: 550), () {
+                    Get.put(LobbyLogic()).positionStream.resume();
+                    Get.back();
+                  });
+                } else {
+                  Get.back();
                 }
-                Get.put(LobbyLogic()).positionStream.resume();
-                Get.back();
               },
               facWidth: 0.245,
               facHeight: 0.07,
               isText: false,
+            ),
+          ),
+          Positioned(
+            top: 50.h,
+            right: 10.w,
+            child: TextButton(
+              onPressed: () {
+                Get.toNamed(RouteConfig.roulette);
+              },
+              child: const Text('Roulette'),
             ),
           ),
           Positioned(
@@ -181,9 +197,11 @@ class CouponWidget extends StatelessWidget {
                                     if (Get.isSnackbarOpen) {
                                       Get.closeAllSnackbars();
                                       await Future.delayed(
-                                          const Duration(milliseconds: 550));
+                                          const Duration(milliseconds: 550),
+                                          () => Get.back());
+                                    } else {
+                                      Get.back();
                                     }
-                                    Get.back();
                                   },
                                   text: '取消',
                                   textSize: 14,
@@ -231,7 +249,8 @@ class CouponWidget extends StatelessWidget {
                                       margin:
                                           EdgeInsets.symmetric(vertical: 18.h),
                                       borderRadius: 36.r,
-                                      duration: const Duration(seconds: 2),
+                                      duration:
+                                          const Duration(milliseconds: 1500),
                                       backgroundColor: Colors.black38,
                                       snackPosition: SnackPosition.BOTTOM,
                                       maxWidth: 0.5.sw,
@@ -312,9 +331,11 @@ class CouponWidget extends StatelessWidget {
                                     if (Get.isSnackbarOpen) {
                                       Get.closeAllSnackbars();
                                       await Future.delayed(
-                                          const Duration(milliseconds: 550));
+                                          const Duration(milliseconds: 550),
+                                          () => Get.back());
+                                    } else {
+                                      Get.back();
                                     }
-                                    Get.back();
                                   },
                                   text: '取消',
                                   textSize: 14,
@@ -331,9 +352,11 @@ class CouponWidget extends StatelessWidget {
                                     if (Get.isSnackbarOpen) {
                                       Get.closeAllSnackbars();
                                       await Future.delayed(
-                                          const Duration(milliseconds: 550));
+                                          const Duration(milliseconds: 550),
+                                          () => Get.back());
+                                    } else {
+                                      Get.back();
                                     }
-                                    Get.back();
                                     bool enough = state.credit.value >= c.point;
                                     if (state.credit.value > c.point) {
                                       int point = c.point;
@@ -370,7 +393,8 @@ class CouponWidget extends StatelessWidget {
                                       margin:
                                           EdgeInsets.symmetric(vertical: 18.h),
                                       borderRadius: 36.r,
-                                      duration: const Duration(seconds: 2),
+                                      duration:
+                                          const Duration(milliseconds: 1500),
                                       backgroundColor: Colors.black38,
                                       snackPosition: SnackPosition.BOTTOM,
                                       maxWidth: 0.5.sw,

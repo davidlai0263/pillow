@@ -16,133 +16,134 @@ class RoulettePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          Image.asset(
-            'assets/images/background.png',
-            width: 1.sw,
-            fit: BoxFit.cover,
-          ),
-          Positioned(
-            top: 57.5.h,
-            left: 10.w,
-            child: DoodleBtnWidget(
-              tag: 'rouletteBack',
-              onTapUpCallback: () {
-                if (Get.put(LobbyLogic()).state.challengeSave[Get.put(LobbyLogic()).state.nearLocation.index]) {
-                  Get.back();
-                  Get.put(LobbyLogic()).controller.repeat(reverse: true);
-                  Get.put(LobbyLogic()).positionStream.resume();
-                } else {
-                  Get.defaultDialog(
-                    title: '  確定退出 ？',
-                    radius: 24.r,
-                    titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
-                    titleStyle:
-                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 18.w),
-                    backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
-                    content: SizedBox(
-                      width: 0.62.sw,
-                      child: Column(
-                        children: [
-                          RichText(
-                              text: TextSpan(
-                            style: TextStyle(
-                                fontSize: 16.sp,
-                                letterSpacing: 0.9.sp,
-                                color: Colors.black),
-                            text: '您目前尚未抽獎，如退出將失去獲得積分的機會！',
-                          )),
-                          SizedBox(
-                            height: 14.h,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return WillPopScope(
+        child: Scaffold(
+          body: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                'assets/images/background.png',
+                width: 1.sw,
+                fit: BoxFit.cover,
+              ),
+              Positioned(
+                top: 57.5.h,
+                left: 10.w,
+                child: DoodleBtnWidget(
+                  tag: 'rouletteBack',
+                  onTapUpCallback: () {
+                    if (Get.put(LobbyLogic()).state.challengeSave[
+                        Get.put(LobbyLogic()).state.nearLocation.index]) {
+                      Get.back();
+                    } else {
+                      Get.defaultDialog(
+                        title: '  確定退出 ？',
+                        radius: 24.r,
+                        titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
+                        titleStyle: TextStyle(
+                            fontSize: 20.sp, fontWeight: FontWeight.bold),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 18.w),
+                        backgroundColor:
+                            Colors.yellow.shade300.withOpacity(0.85),
+                        content: SizedBox(
+                          width: 0.62.sw,
+                          child: Column(
                             children: [
-                              DoodleBtnWidget(
-                                tag: 'DiaCancelBack',
-                                onTapUpCallback: () {
-                                  Get.back();
-                                },
-                                text: '取消',
-                                textSize: 14,
-                                facWidth: 0.2,
-                                facHeight: 0.055,
-                                borderWidth: 2.5,
-                                borderRadius: 14,
-                                devWidth: 1.75,
-                                devHeight: 1.75,
+                              RichText(
+                                  text: TextSpan(
+                                style: TextStyle(
+                                    fontSize: 16.sp,
+                                    letterSpacing: 0.9.sp,
+                                    color: Colors.black),
+                                text: '您目前尚未抽獎，如退出將失去獲得積分的機會！',
+                              )),
+                              SizedBox(
+                                height: 14.h,
                               ),
-                              DoodleBtnWidget(
-                                tag: 'DiaSureBack',
-                                onTapUpCallback: () {
-                                  Get.put(LobbyLogic()).controller.repeat(reverse: true);
-                                  Get.put(LobbyLogic()).positionStream.resume();
-                                  Get.back();
-                                  Get.back();
-                                },
-                                text: '確定',
-                                textSize: 14,
-                                facWidth: 0.2,
-                                facHeight: 0.055,
-                                borderWidth: 2.5,
-                                borderRadius: 14,
-                                devWidth: 1.75,
-                                devHeight: 1.75,
-                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  DoodleBtnWidget(
+                                    tag: 'DiaCancelBack',
+                                    onTapUpCallback: () {
+                                      Get.back();
+                                    },
+                                    text: '取消',
+                                    textSize: 14,
+                                    facWidth: 0.2,
+                                    facHeight: 0.055,
+                                    borderWidth: 2.5,
+                                    borderRadius: 14,
+                                    devWidth: 1.75,
+                                    devHeight: 1.75,
+                                  ),
+                                  DoodleBtnWidget(
+                                    tag: 'DiaSureBack',
+                                    onTapUpCallback: () {
+                                      Get.back();
+                                      Get.back();
+                                    },
+                                    text: '確定',
+                                    textSize: 14,
+                                    facWidth: 0.2,
+                                    facHeight: 0.055,
+                                    borderWidth: 2.5,
+                                    borderRadius: 14,
+                                    devWidth: 1.75,
+                                    devHeight: 1.75,
+                                  ),
+                                ],
+                              )
                             ],
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                }
-                // Get.put(LobbyLogic());
-              },
-              facWidth: 0.245,
-              facHeight: 0.07,
-              isText: false,
-            ),
-          ),
-          Positioned(
-            top: 50.h,
-            right: 110.w,
-            child: DoodleBtnWidget(
-              onTapUpCallback: () {},
-              facWidth: 0.376,
-              facHeight: 0.085,
-              text: '抽獎轉盤',
-              activation: false,
-            ),
-          ),
-          Center(
-              child: AbsorbPointer(
-            absorbing: true,
-            child: SpinnerWheel(logic: logic),
-          )),
-          Positioned(
-            child: Container(
-              height: 65.r,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
+                          ),
+                        ),
+                      );
+                    }
+                    // Get.put(LobbyLogic());
+                  },
+                  facWidth: 0.245,
+                  facHeight: 0.07,
+                  isText: false,
+                ),
               ),
-              child: GestureDetector(
-                onTap: () {
-                  double random = Random().nextInt(1100) + 7100;
-                  debugPrint('$random');
-                  logic.isSpinning
-                      ? null
-                      : logic.wheelNotifier.sink.add(random);
-                },
+              Positioned(
+                top: 50.h,
+                right: 110.w,
+                child: DoodleBtnWidget(
+                  onTapUpCallback: () {},
+                  facWidth: 0.376,
+                  facHeight: 0.085,
+                  text: '抽獎轉盤',
+                  activation: false,
+                ),
               ),
-            ),
-          )
-        ],
-      ),
-    );
+              Center(
+                  child: AbsorbPointer(
+                absorbing: true,
+                child: SpinnerWheel(logic: logic),
+              )),
+              Positioned(
+                child: Container(
+                  height: 65.r,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      double random = Random().nextInt(1100) + 7100;
+                      debugPrint('$random');
+                      logic.isSpinning
+                          ? null
+                          : logic.wheelNotifier.sink.add(random);
+                    },
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        onWillPop: logic.onWillPop);
   }
 }
 
@@ -174,7 +175,10 @@ class SpinnerWheel extends StatelessWidget {
         debugPrint('point ${list[index - 1]}');
         storeState.credit.value += list[index - 1];
         storeState.saveCredit();
-        Get.put(LobbyLogic()).state.challengeSave[Get.put(LobbyLogic()).state.nearLocation.index] = true;
+        Get.put(LobbyLogic())
+                .state
+                .challengeSave[Get.put(LobbyLogic()).state.nearLocation.index] =
+            true;
         Get.put(LobbyLogic()).state.saveChallengeSave();
         Get.defaultDialog(
           title: '  中獎 ！',
@@ -214,8 +218,6 @@ class SpinnerWheel extends StatelessWidget {
               DoodleBtnWidget(
                 tag: 'sure',
                 onTapUpCallback: () {
-                  Get.put(LobbyLogic()).controller.repeat(reverse: true);
-                  Get.put(LobbyLogic()).positionStream.resume();
                   Get.back();
                   Get.back();
                 },
