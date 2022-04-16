@@ -34,8 +34,10 @@ class RoulettePage extends StatelessWidget {
                   onTapUpCallback: () {
                     if (Get.put(LobbyLogic()).state.challengeSave[
                         Get.put(LobbyLogic()).state.nearLocation.index]) {
+                      Get.closeAllSnackbars();
                       Get.back();
                     } else {
+                      Get.closeAllSnackbars();
                       Get.defaultDialog(
                         title: '  確定退出 ？',
                         radius: 24.r,

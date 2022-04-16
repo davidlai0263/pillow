@@ -31,15 +31,17 @@ class StorePage extends StatelessWidget {
             child: DoodleBtnWidget(
               tag: 'storeBack',
               onTapUpCallback: () async {
-                if (Get.isSnackbarOpen) {
-                  Get.closeAllSnackbars();
-                  await Future.delayed(const Duration(milliseconds: 550), () {
-                    Get.put(LobbyLogic()).positionStream.resume();
-                    Get.back();
-                  });
-                } else {
-                  Get.back();
-                }
+                // if (Get.isSnackbarOpen) {
+                //   Get.closeAllSnackbars();
+                //   await Future.delayed(const Duration(milliseconds: 550), () {
+                //     Get.put(LobbyLogic()).positionStream.resume();
+                //     Get.back();
+                //   });
+                // } else {
+                //   Get.back();
+                // }
+                Get.closeAllSnackbars();
+                Get.back();
               },
               facWidth: 0.245,
               facHeight: 0.07,
@@ -141,6 +143,7 @@ class CouponWidget extends StatelessWidget {
                       debugPrint('onPressCoupon${c.gift}');
                       Get.defaultDialog(
                         title: '${c.gift}元折價券',
+                        barrierDismissible: false,
                         radius: 24.r,
                         titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
                         titleStyle: TextStyle(
@@ -181,14 +184,16 @@ class CouponWidget extends StatelessWidget {
                                 DoodleBtnWidget(
                                   tag: 'shopCancel',
                                   onTapUpCallback: () async {
-                                    if (Get.isSnackbarOpen) {
-                                      Get.closeAllSnackbars();
-                                      await Future.delayed(
-                                          const Duration(milliseconds: 550),
-                                          () => Get.back());
-                                    } else {
-                                      Get.back();
-                                    }
+                                    // if (Get.isSnackbarOpen) {
+                                    //   Get.closeAllSnackbars();
+                                    //   await Future.delayed(
+                                    //       const Duration(milliseconds: 550),
+                                    //       () => Get.back());
+                                    // } else {
+                                    //   Get.back();
+                                    // }
+                                    Get.closeAllSnackbars();
+                                    Get.back();
                                   },
                                   text: '取消',
                                   textSize: 14,
@@ -202,6 +207,15 @@ class CouponWidget extends StatelessWidget {
                                 DoodleBtnWidget(
                                   tag: 'shopSure',
                                   onTapUpCallback: () async {
+                                    // if (Get.isSnackbarOpen) {
+                                    //   Get.closeAllSnackbars();
+                                    //   await Future.delayed(
+                                    //       const Duration(milliseconds: 550),
+                                    //           () => Get.back());
+                                    // } else {
+                                    // Get.back();
+                                    // }
+                                    Get.closeAllSnackbars();
                                     Get.back();
                                     bool enough = state.coupon[c.index] > 0;
                                     if (state.coupon[c.index] > 0) {
@@ -280,6 +294,7 @@ class CouponWidget extends StatelessWidget {
                     onTapUpCallback: () {
                       Get.defaultDialog(
                         title: '${c.gift}元折價券',
+                        barrierDismissible: false,
                         radius: 24.r,
                         titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
                         titleStyle: TextStyle(
@@ -315,14 +330,16 @@ class CouponWidget extends StatelessWidget {
                                 DoodleBtnWidget(
                                   tag: 'shopCancel',
                                   onTapUpCallback: () async {
-                                    if (Get.isSnackbarOpen) {
-                                      Get.closeAllSnackbars();
-                                      await Future.delayed(
-                                          const Duration(milliseconds: 550),
-                                          () => Get.back());
-                                    } else {
-                                      Get.back();
-                                    }
+                                    // if (Get.isSnackbarOpen) {
+                                    //   Get.closeAllSnackbars();
+                                    //   await Future.delayed(
+                                    //       const Duration(milliseconds: 550),
+                                    //       () => Get.back());
+                                    // } else {
+                                    //   Get.back();
+                                    // }
+                                    Get.closeAllSnackbars();
+                                    Get.back();
                                   },
                                   text: '取消',
                                   textSize: 14,
@@ -336,14 +353,16 @@ class CouponWidget extends StatelessWidget {
                                 DoodleBtnWidget(
                                   tag: 'shopSure',
                                   onTapUpCallback: () async {
-                                    if (Get.isSnackbarOpen) {
-                                      Get.closeAllSnackbars();
-                                      await Future.delayed(
-                                          const Duration(milliseconds: 550),
-                                          () => Get.back());
-                                    } else {
-                                      Get.back();
-                                    }
+                                    // if (Get.isSnackbarOpen) {
+                                    //   Get.closeAllSnackbars();
+                                    //   await Future.delayed(
+                                    //       const Duration(milliseconds: 550),
+                                    //       () => Get.back());
+                                    // } else {
+                                    //   Get.back();
+                                    // }
+                                    Get.closeAllSnackbars();
+                                    Get.back();
                                     bool enough = state.credit.value >= c.point;
                                     if (state.credit.value > c.point) {
                                       int point = c.point;

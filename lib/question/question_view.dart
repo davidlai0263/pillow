@@ -67,11 +67,6 @@ class QuestionPage extends StatelessWidget {
                     return DoodleBtnWidget(
                         tag: e,
                         onTapUpCallback: () async {
-                          times = times + 1;
-                          if (times == 2) {
-                            Get.back();
-                            quit = true;
-                          }
                           if (e == lobbyState.nearLocation.ans) {
                             Get.snackbar(
                               '',
@@ -106,6 +101,7 @@ class QuestionPage extends StatelessWidget {
                             );
                             Get.offNamed(RouteConfig.roulette);
                           } else {
+                            times = times + 1;
                             Get.defaultDialog(
                               title: quit ? '答錯過多次' : '答錯了',
                               radius: 24.r,
@@ -148,6 +144,10 @@ class QuestionPage extends StatelessWidget {
                                 ],
                               ),
                             );
+                          }
+                          if (times == 2) {
+                            Get.back();
+                            quit = true;
                           }
                         },
                         facWidth: 0.376,

@@ -145,7 +145,7 @@ class LobbyLogic extends GetxController
             Get.snackbar(
               '',
               '',
-              animationDuration: const Duration(milliseconds: 650),
+              animationDuration: const Duration(milliseconds: 500),
               forwardAnimationCurve: Curves.easeInOutBack,
               borderRadius: 28.r,
               titleText: Row(
@@ -317,10 +317,15 @@ class LobbyLogic extends GetxController
               DoodleBtnWidget(
                 tag: 'introCancel',
                 onTapUpCallback: () async {
-                  if (Get.isSnackbarOpen) {
-                    Get.closeAllSnackbars();
-                    await Future.delayed(const Duration(milliseconds: 550), () => Get.back());
-                  }
+                  // if (Get.isSnackbarOpen) {
+                  //   Get.closeAllSnackbars();
+                  //   await Future.delayed(const Duration(milliseconds: 550), () => Get.back());
+                  // }
+                  // else{
+                  //   Get.back();
+                  // }
+                  Get.closeAllSnackbars();
+                  Get.back();
                 },
                 text: '取消',
                 textSize: 14,
@@ -333,9 +338,17 @@ class LobbyLogic extends GetxController
               ),
               DoodleBtnWidget(
                 tag: 'introSure',
-                onTapUpCallback: () {
+                onTapUpCallback: () async{
+                  Get.closeAllSnackbars();
+                  Get.back();
                   if (state.challengeSave[state.nearLocation.index] == false) {
-                    Get.back();
+                    // if (Get.isSnackbarOpen) {
+                    //   Get.closeAllSnackbars();
+                    //   await Future.delayed(const Duration(milliseconds: 550), () => Get.back());
+                    // }
+                    // else{
+                    //   Get.back();
+                    // }
                     Get.toNamed(RouteConfig.question);
                   } else {
                     Get.snackbar(

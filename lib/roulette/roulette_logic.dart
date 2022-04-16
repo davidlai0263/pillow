@@ -15,6 +15,7 @@ class RouletteLogic extends GetxController {
   double generateRandomAngle() => Random().nextDouble() * pi * 2;
 
   Future<bool> onWillPop() async {
+    Get.closeAllSnackbars();
     final shouldPop = await Get.defaultDialog(
       title: '  確定退出 ？',
       radius: 24.r,
@@ -88,6 +89,7 @@ class RouletteLogic extends GetxController {
   void onClose() {
     Get.put(LobbyLogic()).controller.repeat(reverse: true);
     Get.put(LobbyLogic()).positionStream.resume();
+    Get.closeAllSnackbars();
     super.onClose();
   }
 
