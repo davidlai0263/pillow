@@ -17,7 +17,7 @@ class LobbyLogic extends GetxController
   final LobbyState state = LobbyState();
   final LocationSettings locationSettings = const LocationSettings(
     accuracy: LocationAccuracy.bestForNavigation,
-    distanceFilter: 50,
+    distanceFilter: 10,
   );
 
   late StreamSubscription<Position> positionStream;
@@ -72,7 +72,7 @@ class LobbyLogic extends GetxController
 
   @override
   Future<void> onInit() async {
-    debugPrint('onInitS');
+    debugPrint('LobbyOnInitS');
     permission = await Geolocator.requestPermission();
     permission = await Geolocator.checkPermission();
     debugPrint('permission: $permission');
@@ -145,6 +145,7 @@ class LobbyLogic extends GetxController
             Get.snackbar(
               '',
               '',
+              animationDuration: const Duration(milliseconds: 650),
               forwardAnimationCurve: Curves.easeInOutBack,
               borderRadius: 28.r,
               titleText: Row(
@@ -243,7 +244,7 @@ class LobbyLogic extends GetxController
         await Geolocator.openAppSettings();
       }
     }
-    debugPrint('onInitF');
+    debugPrint('lobbyOnInitF');
     super.onInit();
   }
 
@@ -318,9 +319,8 @@ class LobbyLogic extends GetxController
                 onTapUpCallback: () async {
                   if (Get.isSnackbarOpen) {
                     Get.closeAllSnackbars();
-                    await Future.delayed(const Duration(milliseconds: 550));
+                    await Future.delayed(const Duration(milliseconds: 550), () => Get.back());
                   }
-                  Get.back();
                 },
                 text: '取消',
                 textSize: 14,
@@ -387,8 +387,7 @@ class LobbyLogic extends GetxController
 
   @override
   void onReady() {
-    debugPrint('onReady');
-    update();
+    debugPrint('lobbyOnReady');
     super.onReady();
   }
 
@@ -396,7 +395,7 @@ class LobbyLogic extends GetxController
   void onClose() {
     controller.dispose();
     positionStream.cancel();
-    debugPrint('onClose');
+    debugPrint('lobbyOnClose');
     super.onClose();
   }
 }

@@ -9,19 +9,14 @@ class StoreLogic extends GetxController {
   @override
   Future<void> onInit() async {
     state.initData();
+    Get.put(LobbyLogic()).positionStream.pause();
     super.onInit();
   }
 
   @override
   void onReady() {
-    Get.put(LobbyLogic()).positionStream.pause();
     update();
     super.onReady();
-  }
-
-  void haveChange() {
-    state.initData();
-    update();
   }
 
   @override
@@ -29,6 +24,13 @@ class StoreLogic extends GetxController {
     Get.put(LobbyLogic()).positionStream.resume();
     super.onClose();
   }
+
+
+  void haveChange() {
+    state.initData();
+    update();
+  }
+
 }
 
 class CustomScroll extends ScrollBehavior {

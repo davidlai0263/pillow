@@ -44,9 +44,6 @@ class LobbyPage extends StatelessWidget {
             right: 10.w,
             child: DoodleBtnWidget(
               onTapUpCallback: () {
-                // logic.controller.stop();
-                logic.positionStream.pause();
-                Get.closeCurrentSnackbar();
                 Get.toNamed(RouteConfig.store);
               },
               facWidth: 0.33,
