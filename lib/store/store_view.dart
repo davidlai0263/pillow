@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:pillow/component/data/coupon.dart';
 import 'package:pillow/component/doodle_btn/btn_view.dart';
 import 'package:pillow/lobby/lobby_logic.dart';
-import 'package:pillow/route_config.dart';
 import 'package:pillow/store/store_state.dart';
 import 'store_logic.dart';
 
@@ -45,16 +44,6 @@ class StorePage extends StatelessWidget {
               facWidth: 0.245,
               facHeight: 0.07,
               isText: false,
-            ),
-          ),
-          Positioned(
-            top: 50.h,
-            right: 10.w,
-            child: TextButton(
-              onPressed: () {
-                Get.toNamed(RouteConfig.roulette);
-              },
-              child: const Text('Roulette'),
             ),
           ),
           Positioned(
