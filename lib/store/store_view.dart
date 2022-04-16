@@ -49,6 +49,15 @@ class StorePage extends StatelessWidget {
             ),
           ),
           Positioned(
+              top: 50.h,
+              right: 10.w,
+              child: TextButton(
+                child: const Text('Roulette'),
+                onPressed: () {
+                  Get.toNamed('/roulette');
+                },
+              )),
+          Positioned(
             top: 50.h,
             right: 110.w,
             child: DoodleBtnWidget(

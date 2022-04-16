@@ -77,12 +77,46 @@ class RouletteLogic extends GetxController {
     return shouldPop ?? false;
   }
 
-
   @override
   void onInit() {
     Get.put(LobbyLogic()).controller.stop();
     Get.put(LobbyLogic()).positionStream.pause();
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    Get.snackbar(
+      '',
+      '',
+      animationDuration: const Duration(milliseconds: 500),
+      titleText: Text(
+        '答對了',
+        style: TextStyle(
+          fontSize: 14.sp,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      messageText: Text(
+        '獲得抽獎機會',
+        style: TextStyle(
+          fontSize: 14.sp,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      padding: EdgeInsets.symmetric(vertical: 8.h),
+      margin: EdgeInsets.symmetric(vertical: 18.h),
+      borderRadius: 36.r,
+      duration: const Duration(milliseconds: 1500),
+      backgroundColor: Colors.black38,
+      snackPosition: SnackPosition.BOTTOM,
+      maxWidth: 0.5.sw,
+    );
+    super.onReady();
   }
 
   @override

@@ -10,6 +10,7 @@ class StoreLogic extends GetxController {
   Future<void> onInit() async {
     state.initData();
     Get.put(LobbyLogic()).positionStream.pause();
+    Get.closeAllSnackbars();
     super.onInit();
   }
 
@@ -25,12 +26,10 @@ class StoreLogic extends GetxController {
     super.onClose();
   }
 
-
   void haveChange() {
     state.initData();
     update();
   }
-
 }
 
 class CustomScroll extends ScrollBehavior {

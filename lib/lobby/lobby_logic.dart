@@ -73,6 +73,7 @@ class LobbyLogic extends GetxController
   @override
   Future<void> onInit() async {
     debugPrint('LobbyOnInitS');
+    Get.closeAllSnackbars();
     permission = await Geolocator.requestPermission();
     permission = await Geolocator.checkPermission();
     debugPrint('permission: $permission');
@@ -298,11 +299,11 @@ class LobbyLogic extends GetxController
               child: SingleChildScrollView(
                 child: Center(
                   child: Padding(
-                      padding: EdgeInsets.fromLTRB(10.w, 8.w, 10.w, 8.w),
+                      padding: EdgeInsets.fromLTRB(12.w, 8.w, 12.w, 8.w),
                       child: Text(
                         state.nearLocation.intro,
                         style: TextStyle(
-                            fontSize: 18.sp, wordSpacing: 1.sp, height: 1.5),
+                            fontSize: 18.sp, wordSpacing: 1.25.sp, height: 1.5),
                       )),
                 ),
               ),
@@ -338,7 +339,7 @@ class LobbyLogic extends GetxController
               ),
               DoodleBtnWidget(
                 tag: 'introSure',
-                onTapUpCallback: () async{
+                onTapUpCallback: () async {
                   Get.closeAllSnackbars();
                   Get.back();
                   if (state.challengeSave[state.nearLocation.index] == false) {
