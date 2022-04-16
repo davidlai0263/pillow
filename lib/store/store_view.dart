@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:pillow/component/data/coupon.dart';
 import 'package:pillow/component/doodle_btn/btn_view.dart';
 import 'package:pillow/lobby/lobby_logic.dart';
-import 'package:pillow/route_config.dart';
 import 'package:pillow/store/store_state.dart';
 import 'store_logic.dart';
 
@@ -27,15 +26,6 @@ class StorePage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Positioned(
-              right: 0,
-              top: 30,
-              child: TextButton(
-                onPressed: () {
-                  Get.toNamed(RouteConfig.roulette);
-                },
-                child: const Text('roulette'),
-              )),
-          Positioned(
             top: 57.5.h,
             left: 10.w,
             child: DoodleBtnWidget(
@@ -47,7 +37,6 @@ class StorePage extends StatelessWidget {
                 }
                 Get.put(LobbyLogic()).positionStream.resume();
                 Get.back();
-                // Get.put(LobbyLogic()).controller.repeat(reverse: true);
               },
               facWidth: 0.245,
               facHeight: 0.07,
@@ -221,7 +210,7 @@ class CouponWidget extends StatelessWidget {
                                       animationDuration:
                                           const Duration(milliseconds: 500),
                                       titleText: Text(
-                                        enough ? '  張數足夠 ：' : '  張數不足 ：',
+                                        enough ? '張數足夠：' : '張數不足：',
                                         style: TextStyle(
                                           fontSize: 14.sp,
                                           color: Colors.white,
@@ -360,7 +349,7 @@ class CouponWidget extends StatelessWidget {
                                       animationDuration:
                                           const Duration(milliseconds: 500),
                                       titleText: Text(
-                                        enough ? '  積分足夠 ：' : '  積分不足 ：',
+                                        enough ? '積分足夠：' : '積分不足：',
                                         style: TextStyle(
                                           fontSize: 14.sp,
                                           color: Colors.white,

@@ -91,45 +91,49 @@ class DoodleBtnWidget extends StatelessWidget {
                 child: GestureDetector(
                   onTapDown: activation
                       ? (tapDown) {
-                    logic.tap();
-                  }
+                          logic.tap();
+                        }
                       : null,
                   onTapUp: activation
                       ? (tapUp) async {
-                    logic.isDelay ? null : onTapUpCallback();
-                    logic.isDelay ? null : logic.delay(delayTime);
-                    isPopUp ? logic.tap() : null;
-                  }
+                          logic.isDelay ? null : onTapUpCallback();
+                          logic.isDelay ? null : logic.delay(delayTime);
+                          isPopUp ? logic.tap() : null;
+                        }
                       : null,
                   onTapCancel: activation
                       ? () {
-                    logic.tap();
-                  }
+                          logic.tap();
+                        }
                       : null,
                   child: AnimatedAlign(
                     alignment:
-                    (isStatusDown ? !logic.onTapDown : logic.onTapDown)
-                        ? Alignment.bottomRight
-                        : Alignment.topLeft,
+                        (isStatusDown ? !logic.onTapDown : logic.onTapDown)
+                            ? Alignment.bottomRight
+                            : Alignment.topLeft,
                     duration: const Duration(milliseconds: 100),
                     child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8.w),
                       width: (facWidth.sw - 5.h),
                       height: (facHeight.sh - 6.h),
                       child: Center(
                         child: isText
-                            ? Text(
-                          text,
-                          style: TextStyle(
-                            color: textColor,
-                            fontSize: textSize.sp,
-                            fontWeight: FontWeight.bold,
-                            height: 1.22,
-                          ),
-                        )
+                            ? FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  text,
+                                  style: TextStyle(
+                                    color: textColor,
+                                    fontSize: textSize.sp,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.22,
+                                  ),
+                                ),
+                              )
                             : Icon(
-                          icon,
-                          size: iconSize.r,
-                        ),
+                                icon,
+                                size: iconSize.r,
+                              ),
                       ),
                       decoration: BoxDecoration(
                         color: backgroundColor,

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pillow/component/doodle_btn/btn_view.dart';
 import 'package:flutter_spinning_wheel/flutter_spinning_wheel.dart';
+import 'package:pillow/lobby/lobby_logic.dart';
 import 'package:pillow/store/store_logic.dart';
 import 'roulette_logic.dart';
 
@@ -30,71 +31,75 @@ class RoulettePage extends StatelessWidget {
             child: DoodleBtnWidget(
               tag: 'rouletteBack',
               onTapUpCallback: () {
-                logic.isSpinning
-                    ? Get.back()
-                    : Get.defaultDialog(
-                        title: '  確定退出 ？',
-                        radius: 24.r,
-                        titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
-                        titleStyle: TextStyle(
-                            fontSize: 20.sp, fontWeight: FontWeight.bold),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 18.w),
-                        backgroundColor:
-                            Colors.yellow.shade300.withOpacity(0.85),
-                        content: SizedBox(
-                          width: 0.62.sw,
-                          child: Column(
-                            children: [
-                              RichText(
-                                  text: TextSpan(
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    letterSpacing: 0.9.sp,
-                                    color: Colors.black),
-                                text: '您目前尚未抽獎，如退出將失去獲得積分的機會！',
-                              )),
-                              SizedBox(
-                                height: 14.h,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  DoodleBtnWidget(
-                                    tag: 'DiaCancelBack',
-                                    onTapUpCallback: () {
-                                      Get.back();
-                                    },
-                                    text: '取消',
-                                    textSize: 14,
-                                    facWidth: 0.2,
-                                    facHeight: 0.055,
-                                    borderWidth: 2.5,
-                                    borderRadius: 14,
-                                    devWidth: 1.75,
-                                    devHeight: 1.75,
-                                  ),
-                                  DoodleBtnWidget(
-                                    tag: 'DiaSureBack',
-                                    onTapUpCallback: () {
-                                      Get.back();
-                                      Get.back();
-                                    },
-                                    text: '確定',
-                                    textSize: 14,
-                                    facWidth: 0.2,
-                                    facHeight: 0.055,
-                                    borderWidth: 2.5,
-                                    borderRadius: 14,
-                                    devWidth: 1.75,
-                                    devHeight: 1.75,
-                                  ),
-                                ],
-                              )
-                            ],
+                if (Get.put(LobbyLogic()).state.challengeSave[Get.put(LobbyLogic()).state.nearLocation.index]) {
+                  Get.back();
+                  Get.put(LobbyLogic()).controller.repeat(reverse: true);
+                  Get.put(LobbyLogic()).positionStream.resume();
+                } else {
+                  Get.defaultDialog(
+                    title: '  確定退出 ？',
+                    radius: 24.r,
+                    titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
+                    titleStyle:
+                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 18.w),
+                    backgroundColor: Colors.yellow.shade300.withOpacity(0.85),
+                    content: SizedBox(
+                      width: 0.62.sw,
+                      child: Column(
+                        children: [
+                          RichText(
+                              text: TextSpan(
+                            style: TextStyle(
+                                fontSize: 16.sp,
+                                letterSpacing: 0.9.sp,
+                                color: Colors.black),
+                            text: '您目前尚未抽獎，如退出將失去獲得積分的機會！',
+                          )),
+                          SizedBox(
+                            height: 14.h,
                           ),
-                        ),
-                      );
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              DoodleBtnWidget(
+                                tag: 'DiaCancelBack',
+                                onTapUpCallback: () {
+                                  Get.back();
+                                },
+                                text: '取消',
+                                textSize: 14,
+                                facWidth: 0.2,
+                                facHeight: 0.055,
+                                borderWidth: 2.5,
+                                borderRadius: 14,
+                                devWidth: 1.75,
+                                devHeight: 1.75,
+                              ),
+                              DoodleBtnWidget(
+                                tag: 'DiaSureBack',
+                                onTapUpCallback: () {
+                                  Get.put(LobbyLogic()).controller.repeat(reverse: true);
+                                  Get.put(LobbyLogic()).positionStream.resume();
+                                  Get.back();
+                                  Get.back();
+                                },
+                                text: '確定',
+                                textSize: 14,
+                                facWidth: 0.2,
+                                facHeight: 0.055,
+                                borderWidth: 2.5,
+                                borderRadius: 14,
+                                devWidth: 1.75,
+                                devHeight: 1.75,
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                }
                 // Get.put(LobbyLogic());
               },
               facWidth: 0.245,
@@ -169,6 +174,8 @@ class SpinnerWheel extends StatelessWidget {
         debugPrint('point ${list[index - 1]}');
         storeState.credit.value += list[index - 1];
         storeState.saveCredit();
+        Get.put(LobbyLogic()).state.challengeSave[Get.put(LobbyLogic()).state.nearLocation.index] = true;
+        Get.put(LobbyLogic()).state.saveChallengeSave();
         Get.defaultDialog(
           title: '  中獎 ！',
           radius: 32.r,
@@ -207,6 +214,8 @@ class SpinnerWheel extends StatelessWidget {
               DoodleBtnWidget(
                 tag: 'sure',
                 onTapUpCallback: () {
+                  Get.put(LobbyLogic()).controller.repeat(reverse: true);
+                  Get.put(LobbyLogic()).positionStream.resume();
                   Get.back();
                   Get.back();
                 },

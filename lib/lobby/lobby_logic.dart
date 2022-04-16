@@ -317,8 +317,12 @@ class LobbyLogic extends GetxController
             children: [
               DoodleBtnWidget(
                 tag: 'introCancel',
-                onTapUpCallback: () {
-                  Get.closeCurrentSnackbar();
+                onTapUpCallback: () async {
+                  if (Get.isSnackbarOpen) {
+                    Get.closeAllSnackbars();
+                    await Future.delayed(
+                        const Duration(milliseconds: 550));
+                  }
                   Get.back();
                 },
                 text: '取消',
@@ -333,10 +337,42 @@ class LobbyLogic extends GetxController
               DoodleBtnWidget(
                 tag: 'introSure',
                 onTapUpCallback: () {
-                  controller.stop();
-                  positionStream.pause();
                   Get.closeCurrentSnackbar();
-                  Get.toNamed(RouteConfig.question);
+                  if (state.challengeSave[state.nearLocation.index] == false) {
+                    controller.stop();
+                    positionStream.pause();
+                    Get.toNamed(RouteConfig.question);
+                  } else {
+                    Get.snackbar(
+                      '',
+                      '',
+                      animationDuration: const Duration(milliseconds: 500),
+                      titleText: Text(
+                        '挑戰完成：',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      messageText: Text(
+                        '請前往下個地點。',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 8.h),
+                      margin: EdgeInsets.symmetric(vertical: 18.h),
+                      borderRadius: 32.r,
+                      duration: const Duration(seconds: 2),
+                      backgroundColor: Colors.black38,
+                      snackPosition: SnackPosition.BOTTOM,
+                      maxWidth: 0.45.sw,
+                    );
+                  }
                 },
                 text: '挑戰',
                 textSize: 14,
