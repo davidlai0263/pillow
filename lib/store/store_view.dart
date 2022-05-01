@@ -52,7 +52,7 @@ class StorePage extends StatelessWidget {
               top: 50.h,
               right: 10.w,
               child: TextButton(
-                child: const Text('Roulette'),
+                child: const Text('DEBUG'),
                 onPressed: () {
                   Get.toNamed('/roulette');
                 },

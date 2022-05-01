@@ -357,7 +357,7 @@ class LobbyLogic extends GetxController
                       '',
                       animationDuration: const Duration(milliseconds: 500),
                       titleText: Text(
-                        '挑戰完成：',
+                        '挑戰已完成：',
                         style: TextStyle(
                           fontSize: 14.sp,
                           color: Colors.white,
