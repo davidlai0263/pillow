@@ -22,6 +22,7 @@ class LobbyState {
       false,
       false,
       false,
+      false,
       false
     ];
   }

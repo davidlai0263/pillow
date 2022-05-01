@@ -120,4 +120,14 @@ List<Site> siteMap = [
       coords: Coords(24.78053106277951, 121.6962255999825),
       intro: '鄰近望龍碑，蘭陽老媽媽手工黑豆醬油，專門做無毒醬油與豆腐乳，以及原製產品。並有餐廳可提供用餐。',
       imagePath: 'assets/images/old_mother_sauce.jpg'),
+  Site(
+      index: 9,
+      name: '國立宜蘭大學',
+      address: '宜蘭市神農路一段1號',
+      qus: '宜蘭大學在哪裡？',
+      choose: ['宜蘭', '台北', '台中', '台南'],
+      ans: '宜蘭',
+      coords: Coords(24.7462462, 121.7477007),
+      intro: '國立宜蘭大學，簡稱宜蘭大學、宜大、NIU，是一所位於臺灣省宜蘭縣的國立大學。',
+      imagePath: 'assets/images/school.jpg'),
 ];
