@@ -9,9 +9,7 @@ import 'lobby_logic.dart';
 
 class LobbyPage extends StatelessWidget {
   final logic = Get.put(LobbyLogic());
-  final state = Get
-      .find<LobbyLogic>()
-      .state;
+  final state = Get.find<LobbyLogic>().state;
 
   LobbyPage({Key? key}) : super(key: key);
 
@@ -66,7 +64,7 @@ class LobbyPage extends StatelessWidget {
                   )),
               GestureDetector(
                 onTap: () {
-                  if(state.nearLocation.distance <= 50) {
+                  if (state.nearLocation.distance <= 50) {
                     Get.closeAllSnackbars();
                     logic.introDialog();
                   }
@@ -122,27 +120,25 @@ class LobbyPage extends StatelessWidget {
                               height: 1.5,
                             ),
                             children: siteMap
-                                .map((map) =>
-                                TextSpan(children: [
-                                  TextSpan(
-                                      text: '${map.name}：',
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  TextSpan(
-                                      text: map.address,
-                                      style: const TextStyle(
-                                          color: Color(0xff50acff),
-                                          decoration:
-                                          TextDecoration.underline),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () =>
-                                            logic.openMapsSheet(
-                                              context,
-                                              map.name,
-                                              map.address,
-                                              map.coords,
-                                            ))
-                                ]))
+                                .map((map) => TextSpan(children: [
+                                      TextSpan(
+                                          text: '${map.name}：',
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      TextSpan(
+                                          text: map.address,
+                                          style: const TextStyle(
+                                              color: Color(0xff50acff),
+                                              decoration:
+                                                  TextDecoration.underline),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () => logic.openMapsSheet(
+                                                  context,
+                                                  map.name,
+                                                  map.address,
+                                                  map.coords,
+                                                ))
+                                    ]))
                                 .toList(),
                           ),
                         )),

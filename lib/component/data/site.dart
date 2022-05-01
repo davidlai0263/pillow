@@ -101,7 +101,7 @@ List<Site> siteMap = [
       imagePath: 'assets/images/wang_long_pi.jpg'),
   Site(
       index: 7,
-      name: '豬龍寨 波的波可窯烤披薩',
+      name: '波的波可窯烤披薩',
       address: '員山鄉坡城路38號\n',
       qus: '豬籠寨是由什麼改建而成的?',
       choose: ['員工宿舍', '豬舍', '雞舍', '餐廳'],
