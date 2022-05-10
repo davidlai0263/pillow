@@ -45,6 +45,7 @@ dependencies:
   flutter_spinning_wheel:
     git:
       url: https://github.com/mpeilun/flutter-spinning-wheel
+  flutter_inappwebview: ^5.4.3+7
 
 dev_dependencies:
   flutter_test:
