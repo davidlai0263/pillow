@@ -1,10 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pillow/lobby/lobby_logic.dart';
-import 'question_state.dart';
 
 class QuestionLogic extends GetxController {
-  final QuestionState state = QuestionState();
-
   @override
   void onInit() {
     Get.put(LobbyLogic()).controller.stop();

@@ -4,11 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pillow/component/doodle_btn/btn_view.dart';
 import 'package:pillow/lobby/lobby_logic.dart';
-import 'roulette_state.dart';
 import 'dart:async';
 
 class RouletteLogic extends GetxController {
-  final RouletteState state = RouletteState();
   final StreamController dividerController = StreamController<int>();
   final wheelNotifier = StreamController<double>();
   bool isSpinning = false;
@@ -126,13 +124,4 @@ class RouletteLogic extends GetxController {
     Get.closeAllSnackbars();
     super.onClose();
   }
-
-  // @override
-  // void onReady() {
-  //   ModalRoute.of(Get.context!)!.addScopedWillPopCallback(preventExit);
-  //   super.onReady();
-  // }
-  //
-  //
-  // Future<bool> preventExit() async => false;
 }

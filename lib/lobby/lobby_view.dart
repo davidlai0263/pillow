@@ -79,7 +79,7 @@ class LobbyPage extends StatelessWidget {
                         return Text(
                           (state.nearLocation.distance <= 50)
                               ? '點擊前往「${state.nearLocation.name}」挑戰'
-                              : '請前往以下地點進行挑戰',
+                              : '可點擊下方地點查看路線',
                           style: TextStyle(
                             height: 1.265,
                             letterSpacing: 1.25.sp,
@@ -115,16 +115,19 @@ class LobbyPage extends StatelessWidget {
                           text: TextSpan(
                             style: TextStyle(
                               color: const Color(0xfff0f0f0),
-                              fontSize: 17.sp,
+                              fontSize: 16.sp,
                               letterSpacing: 0.9,
                               height: 1.5,
                             ),
                             children: siteMap
                                 .map((map) => TextSpan(children: [
                                       TextSpan(
-                                          text: '${map.name}：',
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold)),
+                                        text: map.name,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const TextSpan(text: '：'),
                                       TextSpan(
                                           text: map.address,
                                           style: const TextStyle(

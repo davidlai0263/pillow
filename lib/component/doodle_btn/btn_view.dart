@@ -42,11 +42,11 @@ class DoodleBtnWidget extends StatelessWidget {
     this.facWidth = 0.365,
     this.facHeight = 0.088,
     this.text = '',
-    this.textSize = 25.0,
+    this.textSize = 24.0,
     this.textColor = const Color(0xFF000000),
     this.textSpacing = 1,
     this.icon = Icons.arrow_back_rounded,
-    this.iconSize = 42.0,
+    this.iconSize = 37.5,
     this.isText = true,
     this.activation = true,
     this.devWidth = 0,
@@ -64,8 +64,8 @@ class DoodleBtnWidget extends StatelessWidget {
           right: 0,
           bottom: 0,
           child: Container(
-            width: (facWidth.sw - 5.h),
-            height: (facHeight.sh - 6.h),
+            width: (facWidth.sw - 4.5.h),
+            height: (facHeight.sh - 5.5.h),
             decoration: BoxDecoration(
               image: const DecorationImage(
                   fit: BoxFit.cover,
@@ -114,8 +114,8 @@ class DoodleBtnWidget extends StatelessWidget {
                     duration: const Duration(milliseconds: 100),
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 8.w),
-                      width: (facWidth.sw - 5.h),
-                      height: (facHeight.sh - 6.h),
+                      width: (facWidth.sw - 4.5.h),
+                      height: (facHeight.sh - 5.5.h),
                       child: Center(
                         child: isText
                             ? FittedBox(
@@ -132,7 +132,7 @@ class DoodleBtnWidget extends StatelessWidget {
                               )
                             : Icon(
                                 icon,
-                                size: iconSize.r,
+                                size: iconSize.h,
                               ),
                       ),
                       decoration: BoxDecoration(

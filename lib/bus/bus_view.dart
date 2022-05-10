@@ -27,24 +27,6 @@ class BusPage extends StatelessWidget {
         ),
         Positioned(
           top: 57.5.h,
-          right: 10.w,
-          child: DoodleBtnWidget(
-            tag: '公車動態',
-            onTapUpCallback: () {
-              logic.webView.openUrlRequest(
-                  urlRequest: URLRequest(
-                      url: Uri.parse(
-                          logic.getBusTimeTable(logic.busSheet.value))),
-                  options: logic.options);
-            },
-            facWidth: 0.245,
-            facHeight: 0.07,
-            text: '公車動態',
-            isText: true,
-          ),
-        ),
-        Positioned(
-          top: 57.5.h,
           left: 10.w,
           child: DoodleBtnWidget(
             tag: '返回',
@@ -57,14 +39,21 @@ class BusPage extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 50.h,
-          right: 110.w,
+          top: 57.5.h,
+          right: 10.w,
           child: DoodleBtnWidget(
-            onTapUpCallback: () {},
-            facWidth: 0.365,
-            facHeight: 0.085,
-            text: '公車時刻',
-            activation: false,
+            tag: '公車動態',
+            onTapUpCallback: () {
+              logic.webView.openUrlRequest(
+                  urlRequest: URLRequest(
+                      url: Uri.parse(
+                          logic.getBusTimeTable(logic.busSheet.value))),
+                  options: logic.options);
+            },
+            facWidth: 0.33,
+            facHeight: 0.07,
+            text: '公車動態',
+            isText: true,
           ),
         ),
         Positioned(
@@ -273,20 +262,17 @@ class BusPage extends StatelessWidget {
                     SizedBox(
                       height: 1.h,
                     ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxHeight: 0.57.sh,
-                        ),
-                        child: ScrollConfiguration(
-                          behavior: CustomScroll(),
-                          child: SingleChildScrollView(
-                            child: Image.asset(
-                              'assets/images/bus${logic.busSheet}.png',
-                              width: 0.9.sw,
-                              fit: BoxFit.contain,
-                            ),
+                    Container(
+                      constraints: BoxConstraints(
+                        maxHeight: 0.5.sh,
+                      ),
+                      child: ScrollConfiguration(
+                        behavior: CustomScroll(),
+                        child: SingleChildScrollView(
+                          child: Image.asset(
+                            'assets/images/bus${logic.busSheet}.png',
+                            width: 0.9.sw,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),

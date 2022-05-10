@@ -10,7 +10,6 @@ import 'roulette_logic.dart';
 
 class RoulettePage extends StatelessWidget {
   final logic = Get.put(RouletteLogic());
-  final state = Get.find<RouletteLogic>().state;
 
   RoulettePage({Key? key}) : super(key: key);
 
@@ -76,7 +75,7 @@ class RoulettePage extends StatelessWidget {
                                     facWidth: 0.2,
                                     facHeight: 0.055,
                                     borderWidth: 2.5,
-                                    borderRadius: 14,
+                                    borderRadius: 12,
                                     devWidth: 1.75,
                                     devHeight: 1.75,
                                   ),
@@ -91,7 +90,7 @@ class RoulettePage extends StatelessWidget {
                                     facWidth: 0.2,
                                     facHeight: 0.055,
                                     borderWidth: 2.5,
-                                    borderRadius: 14,
+                                    borderRadius: 12,
                                     devWidth: 1.75,
                                     devHeight: 1.75,
                                   ),
@@ -133,10 +132,41 @@ class RoulettePage extends StatelessWidget {
                   ),
                   child: GestureDetector(
                     onTap: () {
+                      Get.closeAllSnackbars();
                       double random = Random().nextInt(1100) + 7100;
                       debugPrint('$random');
                       logic.isSpinning
-                          ? null
+                          ? Get.snackbar(
+                              '',
+                              '',
+                              animationDuration:
+                                  const Duration(milliseconds: 500),
+                              titleText: Text(
+                                '已抽獎',
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              messageText: Text(
+                                '請關閉此頁面',
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: 8.h),
+                              margin: EdgeInsets.symmetric(vertical: 18.h),
+                              borderRadius: 36.r,
+                              duration: const Duration(milliseconds: 1500),
+                              backgroundColor: Colors.black38,
+                              snackPosition: SnackPosition.BOTTOM,
+                              maxWidth: 0.5.sw,
+                            )
                           : logic.wheelNotifier.sink.add(random);
                     },
                   ),
@@ -184,6 +214,7 @@ class SpinnerWheel extends StatelessWidget {
         Get.put(LobbyLogic()).state.saveChallengeSave();
         Get.defaultDialog(
           title: '  中獎 ！',
+          barrierDismissible: false,
           radius: 32.r,
           titlePadding: EdgeInsets.fromLTRB(.0, 14, .0, 8.h),
           titleStyle: TextStyle(
@@ -228,7 +259,7 @@ class SpinnerWheel extends StatelessWidget {
                 facWidth: 0.2,
                 facHeight: 0.055,
                 borderWidth: 2,
-                borderRadius: 14,
+                borderRadius: 12,
                 devWidth: 1.75,
                 devHeight: 1.75,
               )

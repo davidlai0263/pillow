@@ -31,15 +31,6 @@ class StorePage extends StatelessWidget {
             child: DoodleBtnWidget(
               tag: 'storeBack',
               onTapUpCallback: () async {
-                // if (Get.isSnackbarOpen) {
-                //   Get.closeAllSnackbars();
-                //   await Future.delayed(const Duration(milliseconds: 550), () {
-                //     Get.put(LobbyLogic()).positionStream.resume();
-                //     Get.back();
-                //   });
-                // } else {
-                //   Get.back();
-                // }
                 Get.closeAllSnackbars();
                 Get.back();
               },
@@ -193,14 +184,6 @@ class CouponWidget extends StatelessWidget {
                                 DoodleBtnWidget(
                                   tag: 'shopCancel',
                                   onTapUpCallback: () async {
-                                    // if (Get.isSnackbarOpen) {
-                                    //   Get.closeAllSnackbars();
-                                    //   await Future.delayed(
-                                    //       const Duration(milliseconds: 550),
-                                    //       () => Get.back());
-                                    // } else {
-                                    //   Get.back();
-                                    // }
                                     Get.closeAllSnackbars();
                                     Get.back();
                                   },
@@ -209,21 +192,13 @@ class CouponWidget extends StatelessWidget {
                                   facWidth: 0.2,
                                   facHeight: 0.055,
                                   borderWidth: 2.5,
-                                  borderRadius: 14,
-                                  devWidth: 1.5,
-                                  devHeight: 1.5,
+                                  borderRadius: 12,
+                                  devWidth: 1.25,
+                                  devHeight: 1.25,
                                 ),
                                 DoodleBtnWidget(
                                   tag: 'shopSure',
                                   onTapUpCallback: () async {
-                                    // if (Get.isSnackbarOpen) {
-                                    //   Get.closeAllSnackbars();
-                                    //   await Future.delayed(
-                                    //       const Duration(milliseconds: 550),
-                                    //           () => Get.back());
-                                    // } else {
-                                    // Get.back();
-                                    // }
                                     Get.closeAllSnackbars();
                                     Get.back();
                                     bool enough = state.coupon[c.index] > 0;
@@ -271,9 +246,9 @@ class CouponWidget extends StatelessWidget {
                                   facWidth: 0.2,
                                   facHeight: 0.055,
                                   borderWidth: 2.5,
-                                  borderRadius: 14,
-                                  devWidth: 1.5,
-                                  devHeight: 1.5,
+                                  borderRadius: 12,
+                                  devWidth: 1.25,
+                                  devHeight: 1.25,
                                 ),
                               ],
                             )
@@ -355,21 +330,13 @@ class CouponWidget extends StatelessWidget {
                                   facWidth: 0.2,
                                   facHeight: 0.055,
                                   borderWidth: 2.5,
-                                  borderRadius: 14,
-                                  devWidth: 1.5,
-                                  devHeight: 1.5,
+                                  borderRadius: 12,
+                                  devWidth: 1.25,
+                                  devHeight: 1.25,
                                 ),
                                 DoodleBtnWidget(
                                   tag: 'shopSure',
                                   onTapUpCallback: () async {
-                                    // if (Get.isSnackbarOpen) {
-                                    //   Get.closeAllSnackbars();
-                                    //   await Future.delayed(
-                                    //       const Duration(milliseconds: 550),
-                                    //       () => Get.back());
-                                    // } else {
-                                    //   Get.back();
-                                    // }
                                     Get.closeAllSnackbars();
                                     Get.back();
                                     bool enough = state.credit.value >= c.point;
@@ -420,9 +387,9 @@ class CouponWidget extends StatelessWidget {
                                   facWidth: 0.2,
                                   facHeight: 0.055,
                                   borderWidth: 2.5,
-                                  borderRadius: 14,
-                                  devWidth: 1.5,
-                                  devHeight: 1.5,
+                                  borderRadius: 12,
+                                  devWidth: 1.25,
+                                  devHeight: 1.25,
                                 ),
                               ],
                             )
@@ -436,8 +403,8 @@ class CouponWidget extends StatelessWidget {
                     facWidth: 0.21,
                     facHeight: 0.055,
                     borderRadius: 12,
-                    devWidth: 1.5,
-                    devHeight: 1.5,
+                    devWidth: 1.25,
+                    devHeight: 1.25,
                   ),
                   padding
                       ? SizedBox(

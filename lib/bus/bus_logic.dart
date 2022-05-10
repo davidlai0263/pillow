@@ -27,7 +27,8 @@ class BusLogic extends GetxController {
 
   final BusInAppBrowser webView = BusInAppBrowser();
   var options = InAppBrowserClassOptions(
-      crossPlatform: InAppBrowserOptions(hideUrlBar: false),
+      crossPlatform: InAppBrowserOptions(
+          hideUrlBar: false, toolbarTopBackgroundColor: Colors.white),
       inAppWebViewGroupOptions: InAppWebViewGroupOptions(
           crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
 

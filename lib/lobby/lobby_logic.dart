@@ -27,7 +27,7 @@ class LobbyLogic extends GetxController
       context, String title, String description, Coords coords) async {
     try {
       final availableMaps = await MapLauncher.installedMaps;
-
+      Get.closeAllSnackbars();
       Get.bottomSheet(
           SafeArea(
             child: SingleChildScrollView(
@@ -179,8 +179,8 @@ class LobbyLogic extends GetxController
                     facHeight: 0.05,
                     textSize: 14,
                     borderWidth: 2,
-                    devWidth: 2.25,
-                    devHeight: 2.25,
+                    devWidth: 2,
+                    devHeight: 2,
                     borderRadius: 12,
                     backgroundColor: const Color(0xffacacac),
                   )
@@ -318,13 +318,6 @@ class LobbyLogic extends GetxController
               DoodleBtnWidget(
                 tag: 'introCancel',
                 onTapUpCallback: () async {
-                  // if (Get.isSnackbarOpen) {
-                  //   Get.closeAllSnackbars();
-                  //   await Future.delayed(const Duration(milliseconds: 550), () => Get.back());
-                  // }
-                  // else{
-                  //   Get.back();
-                  // }
                   Get.closeAllSnackbars();
                   Get.back();
                 },
@@ -333,9 +326,9 @@ class LobbyLogic extends GetxController
                 facWidth: 0.2,
                 facHeight: 0.055,
                 borderWidth: 2.5,
-                borderRadius: 14,
-                devWidth: 1.5,
-                devHeight: 1.5,
+                borderRadius: 12,
+                devWidth: 1.25,
+                devHeight: 1.25,
               ),
               DoodleBtnWidget(
                 tag: 'introSure',
@@ -343,13 +336,6 @@ class LobbyLogic extends GetxController
                   Get.closeAllSnackbars();
                   Get.back();
                   if (state.challengeSave[state.nearLocation.index] == false) {
-                    // if (Get.isSnackbarOpen) {
-                    //   Get.closeAllSnackbars();
-                    //   await Future.delayed(const Duration(milliseconds: 550), () => Get.back());
-                    // }
-                    // else{
-                    //   Get.back();
-                    // }
                     Get.toNamed(RouteConfig.question);
                   } else {
                     Get.snackbar(
@@ -388,9 +374,9 @@ class LobbyLogic extends GetxController
                 facWidth: 0.2,
                 facHeight: 0.055,
                 borderWidth: 2.5,
-                borderRadius: 14,
-                devWidth: 1.5,
-                devHeight: 1.5,
+                borderRadius: 12,
+                devWidth: 1.25,
+                devHeight: 1.25,
               ),
             ],
           )
@@ -409,6 +395,7 @@ class LobbyLogic extends GetxController
   void onClose() {
     controller.dispose();
     positionStream.cancel();
+    Get.closeAllSnackbars();
     debugPrint('lobbyOnClose');
     super.onClose();
   }

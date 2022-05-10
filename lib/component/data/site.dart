@@ -112,7 +112,7 @@ List<Site> siteMap = [
       imagePath: 'assets/images/pig_pizza.jpg'),
   Site(
       index: 8,
-      name: '蘭陽老媽媽手工黑豆醬油',
+      name: '蘭陽老媽媽手工醬油行',
       address: '員山鄉坡城路68號\n',
       qus: '蘭陽老媽媽的醬油是由什麼製作而成？',
       choose: ['酢', '黑豆', '黃豆', '大豆'],
