@@ -21,7 +21,8 @@ class BusLogic extends GetxController {
   var busTime = true;
   var busRoute = true;
   var busID = 0;
-  var timeTableUrl = '';
+  var timeTableUrl =
+      'https://www.taiwanbus.tw/eBUSPage/Query/QueryResult.aspx?rno=07550&rn=1652160864062';
   var sheetTitle = '755 - 去程 - 上午'.obs;
 
   final BusInAppBrowser webView = BusInAppBrowser();
@@ -69,7 +70,8 @@ class BusLogic extends GetxController {
             'https://www.taiwanbus.tw/eBUSPage/Query/QueryResult.aspx?rno=00150&rn=1652160927402';
         return timeTableUrl;
       default:
-        timeTableUrl = 'https://www.taiwanbus.tw/eBUSPage/default.aspx';
+        timeTableUrl =
+            'https://www.taiwanbus.tw/eBUSPage/Query/QueryResult.aspx?rno=07550&rn=1652160864062';
         return timeTableUrl;
     }
   }
