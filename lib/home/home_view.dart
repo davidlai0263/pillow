@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
           Positioned(
             bottom: 150.h,
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: 0.35.sh),
+              constraints: BoxConstraints(maxHeight: 0.4.sh),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -69,6 +69,14 @@ class HomePage extends StatelessWidget {
                       Get.toNamed(RouteConfig.lobby);
                     },
                     text: '開始遊戲',
+                    isText: true,
+                  ),
+                  DoodleBtnWidget(
+                    tag: '旅遊行程',
+                    onTapUpCallback: () {
+                      Get.toNamed(RouteConfig.itinerary);
+                    },
+                    text: '旅遊行程',
                     isText: true,
                   ),
                 ],

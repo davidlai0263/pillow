@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'bus/bus_view.dart';
+import 'itinerary/itinerary_view.dart';
 import 'lobby/lobby_view.dart';
 import 'question/question_view.dart';
 import 'roulette/roulette_view.dart';
@@ -16,6 +17,7 @@ class RouteConfig {
   static const String myCoupon = '/myCoupon'; //我的折價券
   static const String question = '/question'; //答題頁面
   static const String roulette = '/roulette'; //抽獎輪盤
+  static const String itinerary = '/itinerary'; //旅遊行程
 
   static final List<GetPage> getPages = [
     GetPage(
@@ -51,6 +53,11 @@ class RouteConfig {
     GetPage(
       name: roulette,
       page: () => RoulettePage(),
+      transition: Transition.circularReveal,
+    ),
+    GetPage(
+      name: itinerary,
+      page: () => ItineraryPage(),
       transition: Transition.circularReveal,
     ),
   ];

@@ -16,6 +16,7 @@ class RoulettePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+        onWillPop: logic.onWillPop,
         child: Scaffold(
           body: Stack(
             alignment: Alignment.center,
@@ -174,8 +175,7 @@ class RoulettePage extends StatelessWidget {
               )
             ],
           ),
-        ),
-        onWillPop: logic.onWillPop);
+        ));
   }
 }
 
