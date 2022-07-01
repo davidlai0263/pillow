@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
                   DoodleBtnWidget(
                     tag: '旅遊行程',
                     onTapUpCallback: () {
-                      Get.toNamed(RouteConfig.itinerary);
+                      Get.toNamed(RouteConfig.tour);
                     },
                     text: '旅遊行程',
                     isText: true,
