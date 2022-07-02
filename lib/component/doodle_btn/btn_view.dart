@@ -116,6 +116,16 @@ class DoodleBtnWidget extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 8.w),
                       width: (facWidth.sw - 4.5.h),
                       height: (facHeight.sh - 5.5.h),
+                      decoration: BoxDecoration(
+                        color: backgroundColor,
+                        border: Border.all(
+                          width: borderWidth.r,
+                          color: borderColor,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(borderRadius.r),
+                        ),
+                      ),
                       child: Center(
                         child: isText
                             ? FittedBox(
@@ -134,16 +144,6 @@ class DoodleBtnWidget extends StatelessWidget {
                                 icon,
                                 size: iconSize.h,
                               ),
-                      ),
-                      decoration: BoxDecoration(
-                        color: backgroundColor,
-                        border: Border.all(
-                          width: borderWidth.r,
-                          color: borderColor,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(borderRadius.r),
-                        ),
                       ),
                     ),
                   ),

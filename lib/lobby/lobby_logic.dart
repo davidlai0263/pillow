@@ -138,10 +138,9 @@ class LobbyLogic extends GetxController
           debugPrint(
               '最近地點:${state.nearLocation.name} 距離:${state.nearLocation.distance}');
           update();
-          //cooldown
+          //coolDown
           debugPrint(
-              DateTime.now().difference(state.cooldown).inSeconds.toString() +
-                  '秒');
+              '${DateTime.now().difference(state.cooldown).inSeconds}秒');
           if (DateTime.now().difference(state.cooldown).inSeconds > 8) {
             Get.snackbar(
               '',

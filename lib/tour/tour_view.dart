@@ -26,7 +26,7 @@ class _TourPageState extends State<TourPage> {
             width: 1.sw,
             fit: BoxFit.cover,
           ),
-          Image.asset('assets/images/tour/錦普觀光果園-採果體驗.jpg')
+          Image.asset('assets/images/tour/leisure_farm_pen.jpg')
         ],
       ),
     );

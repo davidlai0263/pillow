@@ -61,10 +61,13 @@ class RulesPage extends StatelessWidget {
                     width: 0.95.sw,
                     fit: BoxFit.contain,
                   )),
+              SizedBox(
+                height: 10.h,
+              ),
               Container(
                 margin: EdgeInsets.fromLTRB(0.05.sw, .0, 0.05.sw, 50.h),
                 constraints: BoxConstraints(
-                  maxHeight: 0.325.sh,
+                  maxHeight: 0.345.sh,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(12.r)),
