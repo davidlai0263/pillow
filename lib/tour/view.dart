@@ -40,9 +40,20 @@ class TourPage extends StatelessWidget {
                           child: Stack(
                             alignment: Alignment.center,
                             children: <Widget>[
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(15.0),
-                                child: Image.asset(info.schedule[0].imgUrl,),
+                              Container(
+                                decoration: const BoxDecoration(
+                                    boxShadow: <BoxShadow>[
+                                      BoxShadow(
+                                          color: Colors.black54,
+                                          blurRadius: 15.0,
+                                          offset: Offset(0.0, 0.75)
+                                      )
+                                    ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  child: Image.asset(info.schedule[0].imgUrl,),
+                                ),
                               ),
                               Positioned(
                                 bottom: 20.h,
