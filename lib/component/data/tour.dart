@@ -15,12 +15,14 @@ class Attraction {
   final String name;
   final String price;
   final List<ScheduleItem> schedule;
+  final String suggest;
   final String imgUrl;
 
   Attraction(
       {required this.name,
       required this.price,
       required this.schedule,
+      required this.suggest,
       required this.imgUrl});
 }
 
@@ -28,6 +30,7 @@ List<Attraction> attractionMap = [
   Attraction(
       name: 'Hot Pizza',
       price: '799元/每人',
+      suggest: '建議2~4人',
       schedule: [
         ScheduleItem(
             title: '菌寶貝博物館',
@@ -40,7 +43,7 @@ List<Attraction> attractionMap = [
             intro: '窯烤Pizza DIY+飲料',
             imgUrl: 'assets/images/tour/pig_pizza_PIZZA DIY2.jpg'),
         ScheduleItem(
-              title: '望龍埤生態自由行',
+            title: '望龍埤生態自由行',
             time: '13-00',
             intro: '自由活動',
             imgUrl: 'assets/images/icon.jpg'),
@@ -59,17 +62,18 @@ List<Attraction> attractionMap = [
   Attraction(
       name: '桶仔雞',
       price: '899元/每人',
+      suggest: '建議2~4人',
       schedule: [
         ScheduleItem(
             title: '波的農場',
             time: '10-00',
             intro: '食蟲植物、雨林生態、深度之旅',
-            imgUrl: 'assets/images/tour/bos_farm_plant.JPG'),
+            imgUrl: 'assets/images/tour/bos_farm_plant.jpg'),
         ScheduleItem(
             title: '老媽媽手工醬油',
             time: '12-00',
             intro: '豆腐乳桶仔雞套餐',
-            imgUrl: 'assets/images/old_mother_sauce_chicken.JPG'),
+            imgUrl: 'assets/images/old_mother_sauce_chicken.jpg'),
         ScheduleItem(
             title: '錦普觀光果園',
             time: '13-30',
@@ -79,7 +83,7 @@ List<Attraction> attractionMap = [
             title: '橘之鄉蜜餞形象館',
             time: '15-00',
             intro: '金棗蜜餞DIY',
-            imgUrl: 'assets/images/candied_fruit_DIY.JPG'),
+            imgUrl: 'assets/images/candied_fruit_DIY.jpg'),
         ScheduleItem(
             title: '賦歸',
             time: '16-00',
