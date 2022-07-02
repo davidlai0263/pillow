@@ -70,18 +70,29 @@ class TourPage extends StatelessWidget {
                               alignment: Alignment.center,
                               children: <Widget>[
                                 Container(
+                                  foregroundDecoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        colors: [
+                                          Colors.black.withOpacity(0.5),
+                                          Colors.transparent,
+                                        ],
+                                      )),
                                   decoration: const BoxDecoration(
-                                      boxShadow: <BoxShadow>[
-                                        BoxShadow(
-                                            color: Colors.black54,
-                                            blurRadius: 15.0,
-                                            offset: Offset(0.0, 0.75)
-                                        )
-                                      ],
+                                    boxShadow: <BoxShadow>[
+                                      BoxShadow(
+                                          color: Colors.black54,
+                                          blurRadius: 15.0,
+                                          offset: Offset(0.0, 0.75))
+                                    ],
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(15.0),
-                                    child: Image.asset(info.schedule[0].imgUrl,),
+                                    child: Image.asset(
+                                      info.schedule[0].imgUrl,
+                                    ),
                                   ),
                                 ),
                                 Positioned(
@@ -90,9 +101,8 @@ class TourPage extends StatelessWidget {
                                     info.name,
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
-                                      fontSize: 40,
-                                      color: Colors.white
-                                    ),
+                                        fontSize: 40,
+                                        color: Colors.white),
                                   ),
                                 ),
                               ],
