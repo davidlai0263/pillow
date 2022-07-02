@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pillow/tour/tour_view.dart';
+import 'package:pillow/tour/view.dart';
 import 'bus/bus_view.dart';
 import 'lobby/lobby_view.dart';
 import 'question/question_view.dart';
