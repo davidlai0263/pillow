@@ -1,5 +1,5 @@
-class TourrState {
-  TourrState() {
+class TourState {
+  TourState() {
     ///Initialize variables
   }
 }

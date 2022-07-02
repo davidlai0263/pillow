@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'logic.dart';
 
 class TourPage extends StatelessWidget {
-  final logic = Get.put(TourrLogic());
-  final state = Get.find<TourrLogic>().state;
+  final logic = Get.put(TourLogic());
+  final state = Get.find<TourLogic>().state;
 
   TourPage({Key? key}) : super(key: key);
 
