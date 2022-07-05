@@ -15,12 +15,14 @@ class Attraction {
   final String name;
   final String price;
   final List<ScheduleItem> schedule;
+  final String suggest;
   final String imgUrl;
 
   Attraction(
       {required this.name,
       required this.price,
       required this.schedule,
+      required this.suggest,
       required this.imgUrl});
 }
 
@@ -28,6 +30,7 @@ List<Attraction> attractionMap = [
   Attraction(
       name: 'Hot Pizza',
       price: '799元/每人',
+      suggest: '建議2~4人',
       schedule: [
         ScheduleItem(
             title: '菌寶貝博物館',
@@ -40,7 +43,7 @@ List<Attraction> attractionMap = [
             intro: '窯烤Pizza DIY+飲料',
             imgUrl: 'assets/images/tour/pig_pizza_PIZZA DIY2.jpg'),
         ScheduleItem(
-              title: '望龍埤生態自由行',
+            title: '望龍埤生態自由行',
             time: '13-00',
             intro: '自由活動',
             imgUrl: 'assets/images/icon.jpg'),
@@ -59,6 +62,7 @@ List<Attraction> attractionMap = [
   Attraction(
       name: '桶仔雞',
       price: '899元/每人',
+      suggest: '建議2~4人',
       schedule: [
         ScheduleItem(
             title: '波的農場',
