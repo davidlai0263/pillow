@@ -17,13 +17,16 @@ class Attraction {
   final List<ScheduleItem> schedule;
   final String suggest;
   final String imgUrl;
+  final String coverUrl;
 
   Attraction(
       {required this.name,
       required this.price,
       required this.schedule,
       required this.suggest,
-      required this.imgUrl});
+      required this.imgUrl,
+      required this.coverUrl,
+      });
 }
 
 List<Attraction> attractionMap = [
@@ -41,24 +44,25 @@ List<Attraction> attractionMap = [
             title: '波的波可窯烤PIZZA',
             time: '12-00',
             intro: '窯烤Pizza DIY+飲料',
-            imgUrl: 'assets/images/tour/pig_pizza_PIZZA DIY2.jpg'),
+            imgUrl: 'assets/images/tour/pig_pizza_PIZZADIY2.jpg'),
         ScheduleItem(
             title: '望龍埤生態自由行',
             time: '13-00',
             intro: '自由活動',
-            imgUrl: 'assets/images/icon.jpg'),
+            imgUrl: ''),
         ScheduleItem(
             title: '枕頭山休閒農業區遊客中心',
             time: '14-00',
             intro: '果樹全利用-果枝永恆筆DIY',
-            imgUrl: 'assets/images/leisure_farm_pen.jpg'),
+            imgUrl: 'assets/images/tour/leisure_farm_pen.jpg'),
         ScheduleItem(
             title: '賦歸',
             time: '15-30',
             intro: '--',
-            imgUrl: 'assets/images/icon.jpg'),
+            imgUrl: 'assets/images/tour/wang_long_pi_lake.jpg'),
       ],
-      imgUrl: 'assets/images/icon.jpg'),
+      coverUrl: 'assets/images/tour/mushroom_museum_DIY.jpg',
+      imgUrl: 'assets/images/tour/pig_pizza_PIZZADIY.jpg'),
   Attraction(
       name: '桶仔雞',
       price: '899元/每人',
@@ -73,22 +77,23 @@ List<Attraction> attractionMap = [
             title: '老媽媽手工醬油',
             time: '12-00',
             intro: '豆腐乳桶仔雞套餐',
-            imgUrl: 'assets/images/old_mother_sauce_chicken.jpg'),
+            imgUrl: 'assets/images/tour/old_mother_sauce_chicken.jpg'),
         ScheduleItem(
             title: '錦普觀光果園',
             time: '13-30',
             intro: '季節採果體驗',
-            imgUrl: 'assets/images/orchard_pick.jpg'),
+            imgUrl: 'assets/images/tour/orchard_pick.jpg'),
         ScheduleItem(
             title: '橘之鄉蜜餞形象館',
             time: '15-00',
             intro: '金棗蜜餞DIY',
-            imgUrl: 'assets/images/candied_fruit_DIY.jpg'),
+            imgUrl: 'assets/images/tour/candied_fruit_DIY.jpg'),
         ScheduleItem(
             title: '賦歸',
             time: '16-00',
             intro: '--',
-            imgUrl: 'assets/images/icon.jpg'),
+            imgUrl: ''),
       ],
-      imgUrl: 'assets/images/icon.jpg'),
+      coverUrl: 'assets/images/tour/bos_farm_plant3.jpg',
+      imgUrl: 'assets/images/tour/old_mother_sauce_chicken.jpg'),
 ];
