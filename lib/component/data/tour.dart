@@ -64,12 +64,12 @@ List<Attraction> attractionMap = [
             title: '波的農場',
             time: '10-00',
             intro: '食蟲植物、雨林生態、深度之旅',
-            imgUrl: 'assets/images/tour/bos_farm_plant.JPG'),
+            imgUrl: 'assets/images/tour/bos_farm_plant.jpg'),
         ScheduleItem(
             title: '老媽媽手工醬油',
             time: '12-00',
             intro: '豆腐乳桶仔雞套餐',
-            imgUrl: 'assets/images/old_mother_sauce_chicken.JPG'),
+            imgUrl: 'assets/images/old_mother_sauce_chicken.jpg'),
         ScheduleItem(
             title: '錦普觀光果園',
             time: '13-30',
@@ -79,7 +79,7 @@ List<Attraction> attractionMap = [
             title: '橘之鄉蜜餞形象館',
             time: '15-00',
             intro: '金棗蜜餞DIY',
-            imgUrl: 'assets/images/candied_fruit_DIY.JPG'),
+            imgUrl: 'assets/images/candied_fruit_DIY.jpg'),
         ScheduleItem(
             title: '賦歸',
             time: '16-00',

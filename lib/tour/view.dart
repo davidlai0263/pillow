@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../route_config.dart';
 import 'logic.dart';
 
 class TourPage extends StatelessWidget {
@@ -21,7 +22,7 @@ class TourPage extends StatelessWidget {
             width: 1.sw,
             fit: BoxFit.cover,
           ),
-          Image.asset('assets/images/tour/pig_pizza_PIZZA DIY2.jpg')
+          TextButton(onPressed: () {Get.toNamed(RouteConfig.travel);}, child: const Text('press'))
         ],
       ),
     );

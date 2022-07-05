@@ -241,6 +241,11 @@ class BusPage extends StatelessWidget {
                   children: [
                     Container(
                       width: 0.7.sw,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 1.5.r),
+                        borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                        color: Colors.orangeAccent,
+                      ),
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 5.h),
                         child: Center(
@@ -252,11 +257,6 @@ class BusPage extends StatelessWidget {
                             letterSpacing: 1.sp,
                           ),
                         )),
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 1.5.r),
-                        borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                        color: Colors.orangeAccent,
                       ),
                     ),
                     SizedBox(

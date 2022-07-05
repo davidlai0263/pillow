@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
+              theme: ThemeData(
+                useMaterial3: true,
+              ),
               debugShowCheckedModeBanner: false,
               initialRoute: RouteConfig.home,
               getPages: RouteConfig.getPages);
