@@ -34,7 +34,7 @@ List<Attraction> attractionMap = [
       name: 'Hot Pizza',
       price: '799元/每人',
       suggest: '建議2~4人',
-      schedule: [
+      schedule: <ScheduleItem>[
         ScheduleItem(
             title: '菌寶貝博物館',
             time: '10-00',
@@ -49,7 +49,7 @@ List<Attraction> attractionMap = [
             title: '望龍埤生態自由行',
             time: '13-00',
             intro: '自由活動',
-            imgUrl: ''),
+            imgUrl: 'assets/images/tour/wang_long_pi_lake.jpg'),
         ScheduleItem(
             title: '枕頭山休閒農業區遊客中心',
             time: '14-00',
@@ -58,8 +58,8 @@ List<Attraction> attractionMap = [
         ScheduleItem(
             title: '賦歸',
             time: '15-30',
-            intro: '--',
-            imgUrl: 'assets/images/tour/wang_long_pi_lake.jpg'),
+            intro: '',
+            imgUrl: ''),
       ],
       coverUrl: 'assets/images/tour/mushroom_museum_DIY.jpg',
       imgUrl: 'assets/images/tour/pig_pizza_PIZZADIY.jpg'),
@@ -91,7 +91,7 @@ List<Attraction> attractionMap = [
         ScheduleItem(
             title: '賦歸',
             time: '16-00',
-            intro: '--',
+            intro: '',
             imgUrl: ''),
       ],
       coverUrl: 'assets/images/tour/bos_farm_plant3.jpg',

@@ -46,6 +46,7 @@ dependencies:
     git:
       url: https://github.com/mpeilun/flutter-spinning-wheel
   flutter_inappwebview: ^5.4.3+7
+  timeline_tile: ^2.0.0
 
 dev_dependencies:
   flutter_test:
