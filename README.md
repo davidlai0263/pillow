@@ -10,6 +10,9 @@
 # 畫面
 
 ![投影片1](https://user-images.githubusercontent.com/86880683/225528184-4b4bd503-02c7-4528-a246-464c5f433ce3.JPG)
+提供公車資訊時刻表、地址方便前往，點擊地址會自動開啟地圖並使用Google MAP導航到目的地，  
+會根據目前位置顯示距離最近的點距離多少公尺，小於50公尺點擊查看即可觀看園區介紹，  
+並且只要正確回答問題便能獲得點數。
 
 
 ![投影片2](https://user-images.githubusercontent.com/86880683/225528192-b77e5fc6-9735-4bcd-929c-107cbc94e1df.JPG)
