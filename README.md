@@ -1,4 +1,4 @@
-<img width="64" src="https://user-images.githubusercontent.com/86880683/225525139-398e19bd-f804-4034-a7b6-58f4ec2e8058.png" align="left" />
+<img style="width:64px" src="https://user-images.githubusercontent.com/13403218/228754926-eaafdc55-3bb7-478c-9620-aa3d61f29d2a.png" />
 
 # 翻轉枕頭山-旅遊休憩APP
 
