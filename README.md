@@ -1,6 +1,6 @@
 <img style="width:64px" src="https://user-images.githubusercontent.com/13403218/228835621-482b2ea0-cbf3-4246-9d65-8a4297fecc54.png" />
 
-# 翻轉枕頭山-旅遊休憩APP![pillow]
+# 翻轉枕頭山-旅遊休憩APP
 
 使用Flutter開發、GeoLocator獲取GPS資訊、GetX進行狀態管理、畫面全螢幕、自適應  
 這是一個邊旅遊邊玩遊戲拿獎品的APP，內容販售枕頭山休憩園區兩種方案的旅遊行程。  
